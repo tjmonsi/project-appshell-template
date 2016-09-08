@@ -20,6 +20,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 
 <!-- Adding global styles here and the polymer-bootstrap here-->
 <link rel="import" href="../bower_components/polymer-bootstrap/polymer-bootstrap.html">
@@ -29,8 +31,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style is="custom-style" include="global-styles polymer-bootstrap">
       :host {
-        --app-primary-color: #4285f4;
-        --app-secondary-color: black;
+        --app-primary-color: #5E4485;
+        --app-secondary-color: white;
 
         display: block;
       }
@@ -42,8 +44,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         pattern="/:page"
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
+        
+    <app-scrollpos-control selected="{{page}}"></app-scrollpos-control>
 
-    <app-drawer-layout fullbleed>
+    <iron-media-query
+      query="[[_computeMediaQuery()]]"
+      on-query-matches-changed="_onQueryMatchesChanged"></iron-media-query>
+
+    <app-drawer-layout force-narrow fullbleed id="main-app-drawer-layout">
       <!-- Drawer content -->
       <app-drawer>
         <app-toolbar>Menu</app-toolbar>
@@ -106,7 +114,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _showPage404: function() {
         this.page = 'page-404';
-      }
+      },
+      
+      _computeMediaQuery: function() {
+        return '(max-width: ' + this.$$('#main-app-drawer-layout').responsiveWidth + ')';
+      },
+
+      _onQueryMatchesChanged: function(e) {
+      },
     });
   </script>
 </dom-module>
