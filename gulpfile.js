@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat-util');
-var file = require('gulp-file');
 var polymer = '../../bower_components/polymer/polymer.html';
 var files = ['src/css/**/*.sass', 'src/css/**/*.scss'];
 
