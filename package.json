@@ -20,6 +20,10 @@
   },
   "homepage": "https://github.com/tjmonsi/project-appshell-bootstrap#readme",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "eslint": "^3.4.0",
+    "eslint-plugin-html": "^1.5.2",
+    "gulp": "^3.9.1",
+    "gulp-concat-util": "^0.5.5",
+    "gulp-sass": "^2.3.2"
   }
 }
