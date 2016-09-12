@@ -1,0 +1,146 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../css/global-styles.html">
+
+<dom-module id="core-shell">
+  <template>
+    <style is="custom-style" include="global-styles polymer-bootstrap">
+      :host {
+        --app-primary-color: #5E4485;
+        --app-secondary-color: white;
+
+        display: block;
+      }
+    </style>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"></app-route>
+        
+    <app-scrollpos-control selected="{{page}}"></app-scrollpos-control>
+
+    <iron-media-query
+      query="[[_computeMediaQuery()]]"
+      on-query-matches-changed="_onQueryMatchesChanged"></iron-media-query>
+
+    <app-drawer-layout force-narrow fullbleed id="core-drawer-layout">
+      <!-- Drawer content -->
+      <app-drawer id="core-drawer">
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout has-scrolling-region id="core-header-layout">
+
+        <app-header condenses reveals effects="waterfall" id="core-header">
+          <app-toolbar id="core-toolbar">
+            <paper-icon-button icon="menu" drawer-toggle id="core-drawer-toggle"></paper-icon-button>
+          </app-toolbar>
+        </app-header>
+
+        <iron-pages
+            selected="[[page]]"
+            attr-for-selected="name"
+            fallback-selection="[[default404]]"
+            role="main"
+            id="core-content">
+          <page-404 name="[[default404]]" id="[[default404]]"></page-404>
+        </iron-pages>
+      </app-header-layout>
+    </app-drawer-layout>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'core-shell',
+
+      properties: {
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          notify: true,
+          observer: '_pageChanged'
+        },
+        defaultView: {
+          type: String,
+          value: 'my-view1'
+        },
+        default404: {
+          type: String,
+          value: 'page-404'
+        }
+      },
+
+      observers: [
+        '_routePageChanged(routeData.page)'
+      ],
+      
+      attached: function() {
+        var elements = Polymer.dom(this).getEffectiveChildNodes();
+        for (var i in elements) {
+          if (elements[i].tagName === 'CORE-DRAWER' || elements[i].getAttribute('name') === 'core-drawer') {
+            this.$$('#core-drawer').appendChild(elements[i]);
+          } else if (elements[i].tagName === 'CORE-HEADER' || elements[i].getAttribute('name') === 'core-header') {
+            this.$$('#core-header').appendChild(elements[i]);
+          } else if (elements[i].tagName === 'CORE-TOOLBAR' || elements[i].getAttribute('name') === 'core-toolbar') {
+            this.$$('#core-toolbar').appendChild(elements[i]);
+          } else if (elements[i].getAttribute('name') === 'core-content') {
+            var pages = Polymer.dom(elements[i]).getEffectiveChildNodes();
+            for (var j in pages) {
+              this.$$('#core-content').appendChild(pages[j]);
+            }
+            
+          }
+        }
+      },
+
+      _routePageChanged: function(page) {
+        this.page = page || this.defaultView;
+      },
+
+      _pageChanged: function(page) {
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl('../pages/' + page + '.html');
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      },
+
+      _showPage404: function() {
+        this.page = this.default404;
+      },
+      
+      _computeMediaQuery: function() {
+        return '(max-width: ' + this.$$('#core-drawer-layout').responsiveWidth + ')';
+      },
+
+      _onQueryMatchesChanged: function(e) {
+      },
+    });
+  </script>
+</dom-module>
