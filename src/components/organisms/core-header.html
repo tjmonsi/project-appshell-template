@@ -10,11 +10,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!-- Adding global styles here and the polymer-bootstrap here-->
 <link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
-<link rel="import" href="../../css/global-styles.html">
+<link rel="import" href="../../core-styles.html">
 
-<dom-module id="core-toolbar">
+<dom-module id="core-header">
   <template>
-    <style is="custom-style" include="global-styles polymer-bootstrap">
+    <style is="custom-style" include="core-styles polymer-bootstrap">
       :host {
         display: block;
       }
@@ -26,7 +26,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     Polymer({
-      is: 'core-toolbar',
+      is: 'core-header',
 
       properties: {
       },

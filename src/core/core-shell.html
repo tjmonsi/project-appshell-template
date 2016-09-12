@@ -25,11 +25,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!-- Adding global styles here and the polymer-bootstrap here-->
 <link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
-<link rel="import" href="../css/global-styles.html">
+<link rel="import" href="../core-styles.html">
 
 <dom-module id="core-shell">
   <template>
-    <style is="custom-style" include="global-styles polymer-bootstrap">
+    <style is="custom-style" include="core-styles polymer-bootstrap">
       :host {
         --app-primary-color: #5E4485;
         --app-secondary-color: white;
@@ -59,8 +59,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <!-- Main content -->
       <app-header-layout has-scrolling-region id="core-header-layout">
 
-        <app-header condenses reveals effects="waterfall" id="core-header">
-          <app-toolbar id="core-toolbar">
+        <app-header condenses reveals effects="waterfall">
+          <app-toolbar id="core-header">
             <paper-icon-button icon="menu" drawer-toggle id="core-drawer-toggle"></paper-icon-button>
           </app-toolbar>
         </app-header>
@@ -109,8 +109,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.$$('#core-drawer').appendChild(elements[i]);
           } else if (elements[i].tagName === 'CORE-HEADER' || elements[i].getAttribute('name') === 'core-header') {
             this.$$('#core-header').appendChild(elements[i]);
-          } else if (elements[i].tagName === 'CORE-TOOLBAR' || elements[i].getAttribute('name') === 'core-toolbar') {
-            this.$$('#core-toolbar').appendChild(elements[i]);
+//           } else if (elements[i].tagName === 'CORE-TOOLBAR' || elements[i].getAttribute('name') === 'core-toolbar') {
+//             this.$$('#core-toolbar').appendChild(elements[i]);
           } else if (elements[i].getAttribute('name') === 'core-content') {
             var pages = Polymer.dom(elements[i]).getEffectiveChildNodes();
             for (var j in pages) {
