@@ -1,4 +1,32 @@
-# Polymer App Toolbox - Starter Kit
+
+# Appshell Thempate based on Polymer App Starter Kit with Bootstrap
+
+-------------------------------------
+
+## Project Structure
+
+```
+/images             -- image assets
+/fonts              -- fonts for app
+/src                -- root directory 
+  /sass             -- styling compiled for core-styles.html
+  /pages            -- any pages needed to route view
+  /components       -- holds all atomic design structure
+    /organisms
+    /molecules
+    /atoms
+  core-app.html     -- root shell contains layout with drawer and header that routes to pages
+  core-style.html   -- global css for app
+/test
+index.html
+bower.json
+package.json
+polymer.json
+
+```
+
+
+-------------------------------------
 
 [![Build Status](https://travis-ci.org/PolymerElements/polymer-starter-kit.svg?branch=master)](https://travis-ci.org/PolymerElements/polymer-starter-kit)
 

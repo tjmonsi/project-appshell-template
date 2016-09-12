@@ -1,0 +1,51 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="./core/core-shell.html">
+<link rel="import" href="./components/organisms/core-drawer.html">
+<link rel="import" href="./components/organisms/core-header.html">
+
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="./core-styles.html">
+
+<dom-module id="core-app">
+  <template strip-whitespace>
+    <style is="custom-style" include="core-styles polymer-bootstrap">
+      :host {
+        display: block;
+      }
+    </style>
+
+    <core-shell id="core-shell" page="[[page]]">
+      <core-drawer name="core-drawer" page="[[page]]"></core-drawer>
+      <core-header name="core-header" page="[[page]]"></core-header>
+      <div name="core-content">
+        <my-view1 name="my-view1"></my-view1>
+        <my-view2 name="my-view2"></my-view2>
+        <my-view3 name="my-view3"></my-view3>
+      </div>
+    </core-shell>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'core-app',
+
+      properties: {
+        page: {
+          type: String,
+          reflectToAttribute: true   
+        }
+      }
+    });
+  </script>
+</dom-module>

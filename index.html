@@ -45,6 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="msapplication-TileImage" content="/images/manifest/icon-144x144.png">
     <meta name="msapplication-TileColor" content="#3f51b5">
     <meta name="msapplication-tap-highlight" content="no">
+    <!-- Add all necessary scripts for running bootstrap all over the app here -->
 
     <script>
       // Setup Polymer options
@@ -92,7 +93,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </script>
 
-    <link rel="import" href="/src/my-app.html">
+<!--     <link rel="import" href="/src/app-shell.html"> -->
+    <link rel="import" href="/src/core-app.html">
 
     <style>
       body {
@@ -102,10 +104,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         min-height: 100vh;
         background-color: #eeeeee;
       }
+      
+      /* add this for glyph icons in bootstrap */
+      @font-face {
+        font-family: 'Glyphicons Halflings';
+      
+        src: url('../fonts/glyphicons-halflings-regular.eot');
+        src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+      }
     </style>
   </head>
   <body>
-    <my-app></my-app>
+<!--     <app-shell></app-shell> -->
+    <core-app></core-app>
     <!-- Built with love using Polymer Starter Kit -->
   </body>
 </html>
