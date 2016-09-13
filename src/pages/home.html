@@ -13,6 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../core-styles.html">
 
 <link rel="import" href="../components/organisms/hero-carousel.html">
+<link rel="import" href="../components/organisms/opt-in-section.html">
 
 <dom-module id="home-page">
   <template>
@@ -23,6 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <hero-carousel heroes="[[heroes]]" carousel-index="[[carouselIndex]]"></hero-carousel>
+    <opt-in-section text="[[optInText]]" button-text="[[optInButtonText]]" cta="[[cta]]"></opt-in-section>
 
   </template>
 
@@ -31,6 +33,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'home-page',
       
       properties: {
+        cta: {
+          type: String,
+          value: '#'
+        },
+        optInText: {
+          type: String,
+          value: 'Get the full Grazie experience with updates with the latest offers and events.'
+        },
+        optInButtonText: {
+          type: String,
+          value: 'Join us'
+        },
         carouselIndex: {
           type: Number,
           value: 0
