@@ -8,40 +8,49 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="./core/core-shell.html">
-<link rel="import" href="./components/organisms/navigation-header.html">
-
-
 <!-- Adding global styles here and the polymer-bootstrap here-->
-<link rel="import" href="../bower_components/polymer-bootstrap/polymer-bootstrap.html">
-<link rel="import" href="./core-styles.html">
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../core-styles.html">
 
-<dom-module id="core-app">
-  <template strip-whitespace>
+<dom-module id="clickable-logo">
+  <template>
     <style is="custom-style" include="core-styles polymer-bootstrap">
       :host {
         display: block;
       }
     </style>
-
-    <core-shell id="core-shell" page="[[page]]" default-page="home">
-      <navigation-header name="core-header" page="[[page]]"></navigation-header>
-      <div name="core-content">
-        <home-page name="home"></home-page>
-      </div>
-    </core-shell>
+    
+    <a href="[[logo-url]]" class$="clickable-logo-anchor [[anchorClass]]">
+      <img 
+        class$="clickable-logo-image [[imageClass]]" 
+        src="[[logo-image]]"
+      />
+    </a>
+      
   </template>
 
   <script>
     Polymer({
-      is: 'core-app',
+      is: 'clickable-logo',
 
       properties: {
-        page: {
+        logoUrl: {
           type: String,
-          reflectToAttribute: true   
+          value: '/'
+        },
+        logoImage: {
+          type: String,
+          value: '/images/placeholders/logo.png'
+        },
+        anchorClass: {
+          type: String
+        },
+        imageClass: {
+          type: String
         }
-      }
+      },
+
     });
   </script>
 </dom-module>

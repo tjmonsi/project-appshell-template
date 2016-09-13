@@ -1,0 +1,67 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../core-styles.html">
+
+<link rel="import" href="../atoms/nav-item.html">
+
+<dom-module id="nav-list">
+  <template>
+    <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+      }
+    </style>
+    
+    <div class="horizontal layout">
+      <template is="dom-repeat" items="[[menu]]">
+        <nav-item
+          href$="[[item.url]]"
+          name$="[[item.name]]"
+          page$="[[page]]"
+          scroll-progress="[[scrollProgress]]"
+        >
+          [[item.label]]
+        </nav-item>
+      </template>
+    </div>
+      
+  </template>
+
+  <script>
+    Polymer({
+      is: 'nav-list',
+
+      properties: {
+        scrollProgress: {
+          type: Number
+        },
+        menu: {
+          type: Array,
+          value: function() {
+            return [
+              {
+                label: 'Home',
+                name: 'home',
+                url: '#'
+              }  
+            ]
+          }
+        }
+      },
+
+    });
+  </script>
+</dom-module>

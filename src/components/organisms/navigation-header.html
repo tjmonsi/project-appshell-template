@@ -1,0 +1,118 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../core-styles.html">
+
+<link rel="import" href="../atoms/clickable-logo.html">
+<link rel="import" href="../molecules/nav-list.html">
+<link rel="import" href="../molecules/right-toolbar.html">
+
+<dom-module id="navigation-header">
+  <template>
+    <style is="custom-style" include="core-styles polymer-bootstrap">
+      :host {
+        display: block;
+      }
+    </style>
+
+    <app-toolbar id="navigation-header">
+      <clickable-logo
+        main-title
+        logo-url="/"
+        logo-image="/images/placeholders/logo.png"
+      ></clickable-logo>
+      <nav-list
+        menu="[[menu]]"
+        page="[[page]]"
+        scroll-progress="[[scrollProgress]]"
+      ></nav-list>
+      <right-toolbar
+        toolset="[[toolset]]"
+        scroll-progress="[[scrollProgress]]"
+      ></right-toolbar>
+    </app-toolbar>
+      
+  </template>
+
+  <script>
+    Polymer({
+      is: 'navigation-header',
+
+      properties: {
+        scrollProgress: {
+          type: Number,
+          value: 0
+        },
+        page: {
+          type: String,
+          reflectToAttribute: true
+        },
+        menu: {
+          type: Array,
+          value: function() {
+            return [
+              {
+                label: 'Home',
+                name: 'home',
+                url: '/'
+              },
+              {
+                label: 'About',
+                name: 'about',
+                url: '#'
+              },
+              {
+                label: 'Menu',
+                name: 'menu',
+                url: '#'
+              },
+              {
+                label: 'Booking',
+                name: 'booking',
+                url: '#'
+              },
+              {
+                label: 'Order',
+                name: 'order',
+                url: '#'
+              },
+              {
+                label: 'Loyalty',
+                name: 'loyalty',
+                url: '#'
+              }
+            ];
+          }
+        },
+        toolset: {
+          type: Array,
+          value: function() {
+            return [
+              {
+                label: 'Facebook',
+                url: '#',
+                icon: '/images/assets/facebook_default@2x.png'
+              },
+              {
+                label: 'Twitter',
+                url: '#',
+                icon: '/images/assets/twitter_F@2x.png'
+              }
+            ];
+          }
+        }
+      }
+    });
+  </script>
+</dom-module>

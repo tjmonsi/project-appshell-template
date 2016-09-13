@@ -25,6 +25,96 @@ polymer.json
 
 ```
 
+## Atomic Structure
+
+```
+SECTION: HEADER
+    Molecules:
+    
+    Hero Block
+    
+    Hero Image — sass
+    Hero Title — sass
+    Hero Lead — sass
+    Hero Divider — sass
+    Icon Button — sass
+    Carousel
+    
+    router — component
+    thumbs — component + sass
+    
+SECTION: OPT IN
+    Molecules:
+    
+    Parallax Block (app-box)
+    
+    background colour (attribute) - component + attribute
+    Atoms:
+    
+    Opt in Body
+    Outline Button
+    
+SECTION: LOCATION
+    Molecules:
+    
+    Title 
+    
+    H1
+    Paragraph Lead
+    Nav Tab
+    
+    route
+    H3
+    Map Embed
+    
+    google integration attributes
+    
+CTA List
+
+    icon
+    paragraph body
+    
+HOURS list
+
+    paragraph body
+    layout
+    
+    
+    Atom:
+    
+    List Headings H3
+
+
+
+SECTION: QUOTE SECTION
+
+    Molecules
+    
+    Parallax Block
+    
+    Quote Block
+    
+    Citation
+    Reference
+    Icon
+    Atom
+    
+    Link button
+
+
+SECTION: GALLERY
+Molecules:
+
+Video Block
+
+Icon overlay
+lightbox
+Image Block
+
+Icon overlay
+lightbox
+```
+
 
 -------------------------------------
 

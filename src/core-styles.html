@@ -3,27 +3,6 @@
 <dom-module id="core-styles">
 <template>
 <style>
-app-header {
-  color: #fff;
-  background-color: var(--app-primary-color); }
-
-app-header paper-icon-button {
-  --paper-icon-button-ink-color: white; }
-
-.drawer-list {
-  margin: 0 20px; }
-
-.drawer-list a {
-  display: block;
-  padding: 0 16px;
-  text-decoration: none;
-  color: black;
-  line-height: 40px; }
-
-.drawer-list a.iron-selected {
-  color: black;
-  font-weight: bold; }
-
 .card {
   margin: 24px;
   padding: 16px;
@@ -53,6 +32,96 @@ h1 {
   .my-view2 .row div {
     border: 1px solid gray;
     padding: 5px; }
+
+:host .clickable-logo-image {
+  width: 179px;
+  height: 80px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  margin-left: 186px; }
+
+
+:host .hero-carousel-buttons {
+  height: 1015px; }
+
+:host .hero-carousel-nav-button {
+  cursor: pointer;
+  background-color: #9B9B9B;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  margin-bottom: 65px; }
+  :host .hero-carousel-nav-button.hero-carousel-nav-button-active {
+    background-color: #ffffff; }
+
+:host .hero-cta-arrow-down {
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  bottom: 119px; }
+
+:host .hero-divider {
+  border-top: 2px solid #FFFFFF;
+  width: 276px;
+  height: 24px;
+  margin-top: 55px;
+  margin-bottom: 50px; }
+
+:host .hero-lead {
+  font-family: 'ProximaNova-Regular';
+  font-size: 32px;
+  color: #FFFFFF;
+  letter-spacing: 0px;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  width: 700px; }
+
+:host h1.hero-title {
+  font-size: 50px;
+  color: #FFFFFF;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5); }
+
+:host .nav-item {
+  color: #FFFFFF;
+  margin-right: 11px;
+  margin-left: 11px;
+  text-transform: uppercase; }
+  :host .nav-item.nav-item-active {
+    color: #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+    font-weight: bold; }
+  :host .nav-item:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+    border-bottom: 1px solid #FFFFFF; }
+  :host .nav-item.nav-item-dark {
+    color: #000000; }
+    :host .nav-item.nav-item-dark.nav-item-active {
+      color: #000000;
+      border-bottom: 1px solid #000000; }
+
+:host .right-toolbar-icon {
+  color: #ffffff;
+  margin-right: 27px; }
+
+:host right-toolbar {
+  margin-left: 37px;
+  margin-right: 96px; }
+
+:host .image-background-container {
+  height: 1015px; }
+  :host .image-background-container .image-background {
+    width: 100%;
+    height: 1015px; }
+
+:host .hero-text-container {
+  text-align: center;
+  margin-top: 0px;
+  padding-top: 327px; }
+
+:host {
+  --navigation-header-rear-background: #ffffff; }
+
+:host #navigation-header {
+  height: 128px; }
 
 </style>
 </template>

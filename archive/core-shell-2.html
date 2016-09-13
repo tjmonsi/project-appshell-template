@@ -10,9 +10,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../../bower_components/app-layout/app-box/app-box.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/app-route/app-location.html">
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
@@ -29,30 +31,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style is="custom-style" include="core-styles polymer-bootstrap">
       :host {
+        --app-primary-color: #5E4485;
+        --app-secondary-color: white;
+
         display: block;
-      }
-      
-      app-header {
-        @apply(--layout-fixed-top);
-      }
-      
-      app-header {
-        background-color: var(--navigation-header-background);
-        color: var(--navigation-header-color);
-        border-color: var(--navigation-header-color);
-        --app-header-background-rear-layer: {
-          background-color: var(--navigation-header-rear-background);
-          color: var(--navigation-header-rear-color);
-          border-color: var(--navigation-header-rear-color);
-        };
-      }
-      
-      app-box {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
       }
     </style>
 
@@ -63,22 +45,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
         
-    <app-box
-      effects="parallax-background"
-      effects-config='{"parallax-background": {"scalar": -0.5}}'></app-box>
-    
-    <iron-pages
-        selected="[[page]]"
-        attr-for-selected="name"
-        fallback-selection="[[default404]]"
-        role="main"
-        id="core-content">
-      <page-404 name="[[default404]]" id="[[default404]]"></page-404>
-    </iron-pages>
-    
-    <app-header fixed id="core-header">
-    </app-header>
-    
+    <app-scrollpos-control selected="{{page}}"></app-scrollpos-control>
+
+    <iron-media-query
+      query="[[_computeMediaQuery()]]"
+      on-query-matches-changed="_onQueryMatchesChanged"></iron-media-query>
+
+    <app-drawer-layout force-narrow fullbleed id="core-drawer-layout">
+      <!-- Drawer content -->
+      <app-drawer id="core-drawer">
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout has-scrolling-region id="core-header-layout">
+
+        <app-header condenses reveals effects="waterfall">
+          <!--<app-toolbar id="core-header">-->
+          <!--  <paper-icon-button icon="menu" drawer-toggle id="core-drawer-toggle"></paper-icon-button>-->
+          <!--</app-toolbar>-->
+        </app-header>
+
+        <iron-pages
+            selected="[[page]]"
+            attr-for-selected="name"
+            fallback-selection="[[default404]]"
+            role="main"
+            id="core-content">
+          <page-404 name="[[default404]]" id="[[default404]]"></page-404>
+        </iron-pages>
+      </app-header-layout>
+    </app-drawer-layout>
   </template>
 
   <script>
@@ -92,17 +88,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           notify: true,
           observer: '_pageChanged'
         },
-        defaultPage: {
+        defaultView: {
           type: String,
-          value: 'home'
+          value: 'my-view1'
         },
         default404: {
           type: String,
           value: 'page-404'
-        },
-        scrollProgress: {
-          type: Number,
-          value: 0
         }
       },
 
@@ -112,46 +104,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
       attached: function() {
         var elements = Polymer.dom(this).getEffectiveChildNodes();
+        
         for (var i in elements) {
+          
           if ((elements[i].tagName && elements[i].tagName === 'CORE-DRAWER') || (elements[i].getAttribute && elements[i].getAttribute('name') === 'core-drawer')) {
-            // this.$$('#core-drawer').appendChild(elements[i]);
+            this.$$('#core-drawer').appendChild(elements[i]);
           } else if ((elements[i].tagName && elements[i].tagName === 'CORE-HEADER') || (elements[i].getAttribute && elements[i].getAttribute('name') === 'core-header')) {
-            elements[i].page = this.page;
-            elements[i].scrollProgress = 0;
             this.$$('#core-header').appendChild(elements[i]);
           } else if ((elements[i].getAttribute && elements[i].getAttribute('name') === 'core-content')) {
             var pages = Polymer.dom(elements[i]).getEffectiveChildNodes();
             for (var j in pages) {
               this.$$('#core-content').appendChild(pages[j]);
             }
-          }
-        }
-        window.addEventListener('scroll', this.scrollHeaderEffect.bind(this));
-        this.scrollHeaderEffect();
-      },
-      
-      detached: function() {
-        window.removeEventListener('scroll', this.scrollHeaderEffect.bind(this));
-      },
-      
-      scrollHeaderEffect: function() {
-        var appHeader = this.$$('app-header');
-        var appBox = this.$$('app-box');
-        var fadeBackgroundEffect = appHeader.createEffect('fade-background');
-        var progress = appBox.getScrollState().progress;
-        var isCondensed = progress > 0.1;
-        fadeBackgroundEffect.run(isCondensed ? 1 : 0);
-        appHeader.shadow = isCondensed;
-        this.scrollProgress = progress;
-        if (this.$$('#core-header').children.length > 0) {
-          for (var i in this.$$('#core-header').children) {
-            this.$$('#core-header').children[i].scrollProgress = progress;
+            
           }
         }
       },
 
       _routePageChanged: function(page) {
-        this.page = page || this.defaultPage;
+        this.page = page || this.defaultView;
       },
 
       _pageChanged: function(page) {

@@ -1,0 +1,66 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../core-styles.html">
+
+<link rel="import" href="../components/organisms/hero-carousel.html">
+
+<dom-module id="home-page">
+  <template>
+    <style include="core-styles polymer-bootstrap">
+      :host {
+        display: block;
+      }
+    </style>
+
+    <hero-carousel heroes="[[heroes]]" carousel-index="[[carouselIndex]]"></hero-carousel>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'home-page',
+      
+      properties: {
+        carouselIndex: {
+          type: Number,
+          value: 0
+        },
+        heroes: {
+          type: Array,
+          value: function() {
+            return [
+              {
+                heroImage: '/images/assets/ling_mar@1x.png',
+                title: 'ENJOY 25 YEARS OF EXCELLENCE',
+                lead: 'Be our guest and savor the zest and spirit of Italian culture and cuisine',
+                cta: '#'
+              },
+              {
+                heroImage: '/images/assets/pizza_romana.png',
+                title: 'TAKE-OUT DELIVERY',
+                lead: 'Bring Grazie Home',
+                cta: '#'
+              },
+              {
+                heroImage: '/images/assets/dining.png',
+                title: 'GROUP DINING',
+                lead: 'Come celebrate with our timeless Grazie recipes',
+                cta: '#'
+              }
+            ];
+          }
+        }
+      }
+    });
+  </script>
+</dom-module>

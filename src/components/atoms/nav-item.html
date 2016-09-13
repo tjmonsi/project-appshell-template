@@ -9,27 +9,58 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
 <link rel="import" href="../../core-styles.html">
 
-<dom-module id="core-header">
+<dom-module id="nav-item">
   <template>
     <style is="custom-style" include="core-styles polymer-bootstrap">
       :host {
         display: block;
       }
     </style>
-
-    <div main-title>My App</div>
+    
+    <a href="[[href]]" class$="nav-item [[isNameSameAsPage(name, page)]] [[checkScrollProgress(scrollProgress)]]">
+      <content></content>
+    </a>
       
   </template>
 
   <script>
     Polymer({
-      is: 'core-header',
+      is: 'nav-item',
 
       properties: {
+        name: {
+          type: String,
+          value: ''
+        },
+        page: {
+          type: String,
+          value: ''
+        },
+        href: {
+          type: String,
+          value: '#'
+        },
+        scrollProgress: {
+          type: Number,
+          value: 0
+        }
       },
+      
+      isNameSameAsPage: function(name, page) {
+        if (name && page && name === page) {
+          return 'nav-item-active'
+        };
+      },
+      
+      checkScrollProgress: function(scrollProgress) {
+        if (scrollProgress > 0) {
+          return 'nav-item-dark'
+        }
+      }
 
     });
   </script>

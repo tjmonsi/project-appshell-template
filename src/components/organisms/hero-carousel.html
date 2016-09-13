@@ -1,0 +1,183 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../../bower_components/app-layout/app-box/app-box.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../core-styles.html">
+
+<!--<link rel="import" href="../atoms/clickable-logo.html">-->
+<!--<link rel="import" href="../molecules/nav-list.html">-->
+<!--<link rel="import" href="../molecules/right-toolbar.html">-->
+
+<dom-module id="hero-carousel">
+  <template>
+    <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+      }
+      
+      :host .image-background-container {
+        position: absolute;
+        width: 100%;
+        top: 0px;
+      }
+      
+      :host .hero-cta-area {
+        position: absolute;
+        bottom: 119px;
+        width: 100%;
+      }
+      
+      :host .hero-cta-arrow {
+        overflow: hidden;
+        display: inline-block;
+        font-size: 12px; /*set the size for arrow*/
+        width: 4em;
+    	  height: 4em;
+        margin-top: -2em;
+      }
+      
+      :host .hero-cta-arrow-down {
+        transform: rotate(-144deg) skew(-20deg);
+      }
+      
+      :host .hero-text-container {
+        position: relative;
+      }
+      
+      :host .hero-carousel-buttons {
+        position: absolute;
+        right: 57px;
+        top: 0px;
+      }
+    </style>
+    
+    
+
+    <app-box class="image-background-container" effects="parallax-background">
+      <img background src="[[heroImage]]" class="image-background" />
+    </app-box>
+    
+    <div class="hero-text-container">
+      <h1 class="hero-title">[[title]]</h1>
+      <div class="horizontal layout">
+        <div class="flex"></div>
+        <div class="hero-divider"></div>
+        <div class="flex"></div>
+      </div>
+      <div class="horizontal layout">
+        <div class="flex"></div>
+        <div class="hero-lead">
+          [[lead]]
+        </div>
+        <div class="flex"></div>
+      </div>
+    </div>
+    
+    <div class="hero-cta-area">
+      <div class="horizontal layout">
+        <div class="flex"></div>
+        <a href="[[cta]]" class="hero-cta-arrow hero-cta-arrow-down">
+        </a>
+        <div class="flex"></div>
+      </div>
+    </div>
+    
+    <div class="hero-carousel-buttons vertical layout">
+      <div class="flex"></div>
+      <template is="dom-repeat" items="[[heroes]]">
+        <div class$="hero-carousel-nav-button [[_isHeroActive(carouselIndex, index)]]" on-tap="_activateHero" data-index$="[[index]]"></div>
+      </template>
+      <div class="flex"></div>
+    </div>
+    
+      
+  </template>
+
+  <script>
+    Polymer({
+      is: 'hero-carousel',
+
+      properties: {
+        carouselIndex: {
+          type: Number,
+          value: 0,
+          observer: '_carouselIndexChanged'
+        },
+        heroImage: {
+          type: String,
+          value: '/images/placeholders/fpo_16x9.png'
+        },
+        title: {
+          type: String,
+          value: 'TITLE'
+        },
+        lead: {
+          type: String,
+          value: 'Lorem ipmsum'
+        },
+        cta: {
+          type: String,
+          value: '#'
+        },
+        heroes: {
+          type: Array,
+          value: function() {
+            return [];
+          }
+        },
+      },
+      
+      observers: [
+        '_heroesItemsChanged(heroes.splices)',
+        '_carouselIndexChanged(carouselIndex, heroes)'
+      ],
+      
+      _heroesItemsChanged: function() {
+        this.carouselIndex = 0;
+      },
+      
+      _carouselIndexChanged: function(index, h) {
+        if (this.heroes) {
+          if (index > this.heroes.length || index < 0) {
+            this.carouselIndex = 0;
+            index = 0;
+          }
+          if (this.heroes.length > 0) {
+            this.heroImage = this.heroes[index].heroImage;
+            this.title = this.heroes[index].title;
+            this.lead = this.heroes[index].lead;
+            this.cta = this.heroes[index].cta;
+          } else {
+            this.heroImage = '/images/placeholders/fpo_16x9.png';
+            this.title = 'TITLE';
+            this.lead = 'Lorem ipmsum';
+            this.cta = '#';
+          }  
+        }
+      },
+      
+      _isHeroActive: function(i, j) {
+        if (i === j) {
+          return 'hero-carousel-nav-button-active';
+        }
+      },
+      
+      _activateHero: function(e) {
+        var el = e.target;
+        this.carouselIndex = parseInt(el.getAttribute('data-index'), 10);
+      }
+    });
+  </script>
+</dom-module>
