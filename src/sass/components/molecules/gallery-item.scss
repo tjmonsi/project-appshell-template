@@ -1,0 +1,44 @@
+:host gallery-item {
+  width: 100%;
+  height: 480px;
+  cursor: pointer;
+}
+
+:host .gallery-image-background {
+  height: 480px;
+  width: 100%;
+}
+
+:host .gallery-icon-container {
+  height: 480px;
+  width: 100%;
+  top: 0px;
+  position: absolute;
+  
+  .gallery-icon {
+    paper-icon-button {
+      display: none;
+      color: #ffffff;
+      width: 95px;
+      height: 95px;
+    }
+  }
+  
+  &:hover {
+    .gallery-icon {
+      paper-icon-button {
+        display: block;
+      }
+    }  
+  }
+  
+  .gallery-box-container {
+    width: 70%;
+    .gallery-full-image {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    
+  }
+  
+}

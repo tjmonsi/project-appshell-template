@@ -1,0 +1,75 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/app-layout/app-grid/app-grid-style.html">
+<link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../core-styles.html">
+
+<link rel="import" href="../molecules/gallery-item.html">
+
+<dom-module id="gallery-section">
+  <template>
+    <style is="custom-style" include="core-styles polymer-bootstrap app-grid-style">
+      :host {
+        display: block;
+        --app-grid-columns: 3;
+        --app-grid-gutter: 0px;
+      }
+      
+      
+    </style>
+    
+    <div class="app-grid">
+      <template is="dom-repeat" items="[[gallery]]">
+        <div class="item">
+          <gallery-item type="[[item.type]]"></gallery-item>
+        </div>
+      </template>
+    </div>
+      
+  </template>
+
+  <script>
+    Polymer({
+      is: 'gallery-section',
+
+      properties: {
+        gallery: {
+          type: Array,
+          value: function() {
+            return [
+              {
+                type: 'image'
+              },
+              {
+                type: 'image'
+              },
+              {
+                type: 'video'
+              },
+              {
+                type: 'image'
+              },
+              {
+                type: 'image'
+              },
+              {
+                type: 'image'
+              }
+            ];
+          }
+        }
+      },
+
+    });
+  </script>
+</dom-module>

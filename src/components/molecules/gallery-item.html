@@ -1,0 +1,114 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../../bower_components/google-youtube/google-youtube.html">
+<link rel="import" href="../../../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../../bower_components/app-layout/app-box/app-box.html">
+<link rel="import" href="../../../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../../../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../core-styles.html">
+
+<dom-module id="gallery-item">
+  <template>
+    <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+        position: relative;
+      }
+      
+      :host .gallery-image-background {
+        position: absolute;
+        width: 100%;
+        top: 0px;
+        margin: 0px;
+        padding: 0px;
+      }
+      
+    </style>
+    
+    <img background src="[[galleryImage]]" class="gallery-image-background" />
+    <div class="gallery-icon-container horizontal layout center" on-tap="_openDialog">
+      <div class="flex"></div>
+      <div class="gallery-icon">
+        <paper-icon-button icon$="[[_setIcon(type)]]"></paper-icon-button>    
+      </div>
+      <div class="flex"></div>
+    </div>
+    
+    <paper-dialog id="dialog" class="gallery-box" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
+      <div class="gallery-box-container">
+        <template is="dom-if" if="[[_isImage(type)]]">
+          <img src$="[[galleryFullImage]]" style="width: 100%">
+        </template>
+        <template is="dom-if" if="[[_isVideo(type)]]">
+          <google-youtube
+            video-id="[[videoId]]"
+            height="270px"
+            width="480px">
+          </google-youtube>
+        </template>  
+      </div>
+      
+    </paper-dialog>
+    
+      
+  </template>
+
+  <script>
+    Polymer({
+      is: 'gallery-item',
+
+      properties: {
+        galleryImage: {
+          type: String,
+          value: '/images/placeholders/fpo_square.png'
+        },
+        galleryFullImage: {
+          type: String,
+          value: '/images/placeholders/fpo_16x9.png'
+        },
+        videoId: {
+          type: String,
+          value: '3AAdKl1UYZs'
+        },
+        type: {
+          type: String
+        }
+      },
+      
+      _setIcon: function(type) {
+        if (type === 'video') {
+          return 'av:play-circle-outline'
+        } else if (type === 'image') {
+          return 'image:remove-red-eye'
+        }
+      },
+      
+      _isVideo: function(type) {
+        return type === 'video'
+      },
+      
+      _isImage: function(type) {
+        return type === 'image'
+      },
+      
+      _openDialog: function() {
+        this.$$('#dialog').open();
+      },
+
+    });
+  </script>
+</dom-module>
