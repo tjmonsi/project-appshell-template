@@ -1,0 +1,19 @@
+:host .location-section {
+  margin-bottom: 120px;
+  
+  .contact-container, .hours-container {
+    width: 300px;
+    margin-top: 100px;
+    
+    .location-section-bottom-title {
+      font-family: 'ProximaNova-Light';
+      font-size: 32px;
+      color: #000000;
+      margin-bottom: 46px;
+      margin-left: 25px;
+    }
+  }
+  .contact-container {
+    margin-right: 100px;
+  }
+}

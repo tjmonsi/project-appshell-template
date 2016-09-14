@@ -1,0 +1,15 @@
+:host .location-hours-column-list {
+  .location-hours-column-item {
+    margin-bottom: 12px;
+    
+    font-family: 'ProximaNova-Light';
+    font-size: 14px;
+    color: #373A39;
+    line-height: 24px;
+    
+    .day-container {
+      text-transform: uppercase;
+    }
+  }
+  
+}

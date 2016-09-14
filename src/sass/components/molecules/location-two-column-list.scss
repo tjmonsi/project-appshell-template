@@ -1,0 +1,38 @@
+:host .location-two-column-list {
+  .location-two-column-item {
+    margin-bottom: 12px;
+    
+    .icon-container {
+      width: 30px;
+      margin-left: 15px;
+      iron-icon {
+        
+        
+        &.email {
+          height: 12px;
+          width: 22px;
+        }
+        
+        &.phone {
+          width: 17px;
+          height: 17px;
+        }
+        
+        &.transport {
+          height: 25px;
+          width: 20px;
+        }
+      }
+    }
+    
+    .location-two-column-list-text {
+      font-family: 'ProximaNova-Light';
+      font-size: 14px;
+      color: #373A39;
+      line-height: 24px;
+      margin-left: 15px;
+      margin-right: 20px;
+    }
+  }
+  
+}

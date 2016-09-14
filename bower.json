@@ -8,7 +8,7 @@
     "app-layout": "PolymerElements/app-layout#^0.10.0",
     "app-route": "PolymerElements/app-route#^0.9.0",
     "iron-flex-layout": "^1.3.1",
-    "iron-icon": "PolymerElements/iron-icon#^1.0.0",
+    "iron-icon": "^1.0.10",
     "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^1.0.0",
     "iron-localstorage": "PolymerElements/iron-localstorage#^1.0.0",
     "iron-media-query": "^1.0.8",
@@ -18,7 +18,8 @@
     "polymer": "Polymer/polymer#^1.6.0",
     "polymer-bootstrap": "^0.1.2",
     "iron-icons": "^1.1.3",
-    "paper-button": "^1.0.13"
+    "paper-button": "^1.0.13",
+    "google-map": "GoogleWebComponents/google-map#^1.1.11"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

@@ -71,13 +71,13 @@ h1 {
   font-size: 32px;
   color: #FFFFFF;
   letter-spacing: 0px;
-  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-  width: 700px; }
+  width: 700px;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5); }
 
 :host h1.hero-title {
-  font-size: 50px;
-  color: #FFFFFF;
-  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5); }
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #FFFFFF; }
+
 
 :host .nav-item {
   color: #FFFFFF;
@@ -121,6 +121,58 @@ h1 {
   :host .opt-in-button-container .opt-in-button-anchor:hover {
     text-decoration: none; }
 
+:host h1.title {
+  font-size: 50px; }
+
+:host .location-section google-map {
+  height: 300px; }
+
+:host .location-hours-column-list .location-hours-column-item {
+  margin-bottom: 12px;
+  font-family: 'ProximaNova-Light';
+  font-size: 14px;
+  color: #373A39;
+  line-height: 24px; }
+  :host .location-hours-column-list .location-hours-column-item .day-container {
+    text-transform: uppercase; }
+
+:host .location-tab .location-tab-item paper-button {
+  padding-left: 123px;
+  padding-right: 123px;
+  font-size: 36px;
+  letter-spacing: 0px;
+  font-family: 'ProximaNovaT-Thin';
+  color: #417505; }
+  :host .location-tab .location-tab-item paper-button.location-tab-item-active {
+    font-family: 'ProximaNova-Light';
+    color: #762023; }
+
+:host .location-tab .location-tab-divider {
+  height: 45px;
+  border-right: 1px solid #417505; }
+
+:host .location-two-column-list .location-two-column-item {
+  margin-bottom: 12px; }
+  :host .location-two-column-list .location-two-column-item .icon-container {
+    width: 30px;
+    margin-left: 15px; }
+    :host .location-two-column-list .location-two-column-item .icon-container iron-icon.email {
+      height: 12px;
+      width: 22px; }
+    :host .location-two-column-list .location-two-column-item .icon-container iron-icon.phone {
+      width: 17px;
+      height: 17px; }
+    :host .location-two-column-list .location-two-column-item .icon-container iron-icon.transport {
+      height: 25px;
+      width: 20px; }
+  :host .location-two-column-list .location-two-column-item .location-two-column-list-text {
+    font-family: 'ProximaNova-Light';
+    font-size: 14px;
+    color: #373A39;
+    line-height: 24px;
+    margin-left: 15px;
+    margin-right: 20px; }
+
 :host .right-toolbar-icon {
   color: #ffffff;
   margin-right: 27px; }
@@ -128,6 +180,21 @@ h1 {
 :host right-toolbar {
   margin-left: 37px;
   margin-right: 96px; }
+
+:host .title-lead-section {
+  text-align: center;
+  width: 820px;
+  padding-top: 106px; }
+  :host .title-lead-section .title {
+    font-family: 'ProximaNova-Light';
+    font-size: 45px;
+    color: #585858;
+    margin-bottom: 57px; }
+  :host .title-lead-section .lead {
+    font-family: 'ProximaNovaT-Thin';
+    font-size: 30px;
+    color: #585858;
+    letter-spacing: 0px; }
 
 :host hero-carousel {
   height: 1015px; }
@@ -142,6 +209,20 @@ h1 {
   text-align: center;
   margin-top: 0px;
   padding-top: 327px; }
+
+:host .location-section {
+  margin-bottom: 120px; }
+  :host .location-section .contact-container, :host .location-section .hours-container {
+    width: 300px;
+    margin-top: 100px; }
+    :host .location-section .contact-container .location-section-bottom-title, :host .location-section .hours-container .location-section-bottom-title {
+      font-family: 'ProximaNova-Light';
+      font-size: 32px;
+      color: #000000;
+      margin-bottom: 46px;
+      margin-left: 25px; }
+  :host .location-section .contact-container {
+    margin-right: 100px; }
 
 :host {
   --navigation-header-rear-background: #ffffff; }

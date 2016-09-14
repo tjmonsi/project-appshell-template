@@ -1,0 +1,173 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../core-styles.html">
+
+<link rel="import" href="../molecules/title-lead-section.html">
+<link rel="import" href="../molecules/location-tab.html">
+<link rel="import" href="../molecules/location-two-column-list.html">
+<link rel="import" href="../molecules/location-hours-column-list.html">
+
+<dom-module id="location-section">
+  <template>
+    <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+      }
+    </style>
+    
+    <div class="location-section">
+      <title-lead-section title="[[title]]" lead="[[lead]]"></title-lead-section>
+      <location-tab locations="[[locations]]" location-index="{{locationIndex}}"></location-tab>
+      <google-map id="google-map" latitude="[[latitude]]" longitude="[[longitude]]" api-key="[[api]]"></google-map>
+      <div class="horizontal layout">
+        <div class="flex"></div>
+        <div class="contact-container">
+          <h3 class="location-section-bottom-title">[[contactTitle]]</h3>
+          <location-two-column-list list="[[twoColumn]]"></location-two-column-list>
+        </div>
+        <div class="hours-container">
+          <h3 class="location-section-bottom-title">[[hoursTitle]]</h3>
+          <location-hours-column-list list="[[hoursColumn]]"></location-hours-column-list>
+        </div>
+        <div class="flex"></div>
+      </div>
+    </div>
+      
+  </template>
+
+  <script>
+    Polymer({
+      is: 'location-section',
+
+      properties: {
+        title: {
+          type: String,
+          value: 'OUR LOCATIONS'
+        },
+        lead: {
+          type: String,
+          value: 'From downtown to the suburban community, Grazie consistently brings pasta, pizza & other familiar Italian favourites served in a relaxed, vibrant space.'
+        },
+        locationIndex: {
+          type: Number,
+          value: 0
+        },
+        locations: {
+          type: Array,
+          value: function () {
+            return [
+              {
+                label: 'Midtown'
+              },
+              {
+                label: 'Vaughan'
+              }
+            ];
+          }
+        },
+        twoColumn: {
+          type: Array,
+          value: function() {
+            return [
+              {
+                icon: '/images/assets/email.png',
+                iconName: 'email',
+                text: 'infotoronto@grazie.ca'
+              },
+              {
+                icon: '/images/assets/call.png',
+                iconName: 'phone',
+                text: '(416) 488-0088'
+              },
+              {
+                icon: '/images/assets/email.png',
+                iconName: 'email',
+                text: '2373 Yonge Street, Toronto'
+              },
+              {
+                icon: '/images/assets/email.png',
+                iconName: 'email',
+                text: 'Yonge Street Paid Parking till 4pm\u2028Street Parking in Area\u2028Paid Parkin on 11 Broadway Ave'
+              },
+              {
+                icon: '/images/assets/transit_icon.png',
+                iconName: 'transport',
+                text: '1 Block North of Eglinton Station\u20281 min of Stop #8961 on 97 Bus'
+              }
+            ];
+          }
+        },
+        hoursColumn: {
+          type: Array,
+          value: function() {
+            return [
+              {
+                day: 'Monday',
+                time: '12AM - 11PM'
+              },
+              {
+                day: 'Tuesday',
+                time: '12AM - 11PM'
+              },
+              {
+                day: 'Wednesday',
+                time: '12AM - 11PM'
+              },
+              {
+                day: 'Thursday',
+                time: '12AM - 11PM'
+              },
+              {
+                day: 'Friday',
+                time: '12AM - 12PM'
+              },
+              {
+                day: 'Saturday',
+                time: '12AM - 12PM'
+              },
+              {
+                day: 'Sunday',
+                time: '12AM - 12PM'
+              }
+              
+            ]
+          }
+        },
+        latitude: {
+          type: Number
+        },
+        longitude: {
+          type: Number
+        },
+        api: {
+          type: String,
+          value: 'AIzaSyBgrH5R9m2GG2H666ofVyKuQoFcdElPr_o'
+        },
+        contactTitle: {
+          type: String,
+          value: 'CONTACT'
+        },
+        hoursTitle: {
+          type: String,
+          value: 'HOURS'
+        }
+      },
+
+    });
+  </script>
+</dom-module>
