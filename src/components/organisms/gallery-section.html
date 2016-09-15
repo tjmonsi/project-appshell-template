@@ -22,19 +22,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
         --app-grid-columns: 3;
-        --app-grid-gutter: 0px;
+      }
+      
+      ul {
+        padding: 0;
+        list-style: none;
+      }
+      
+      @media(max-width: 900px) {
+        :host {
+          --app-grid-columns: 2;
+        }
+      }
+      
+      @media(max-width: 600px) {
+        :host {
+          --app-grid-columns: 1;
+        }
       }
       
       
     </style>
     
-    <div class="app-grid">
+    <ul class="app-grid">
       <template is="dom-repeat" items="[[gallery]]">
-        <div class="item">
+        <li class="item">
           <gallery-item type="[[item.type]]"></gallery-item>
-        </div>
+        </li>
       </template>
-    </div>
+    </ul>
       
   </template>
 
@@ -68,6 +84,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             ];
           }
         }
+      },
+      
+      attached: function() {
+        this._updateGridStyles = this._updateGridStyles || function() {
+          this.updateStyles();
+        }.bind(this);
+        window.addEventListener('resize', this._updateGridStyles);
+      },
+      detached: function() {
+        window.removeEventListener('resize', this._updateGridStyles);
       },
 
     });

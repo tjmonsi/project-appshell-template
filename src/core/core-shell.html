@@ -79,6 +79,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-header fixed id="core-header">
     </app-header>
     
+    <app-drawer swipe-open ud="core-drawer-container">
+      <div style="height: 100%; overflow: auto;" id="core-drawer"></div>
+    </app-drawer>
+    
   </template>
 
   <script>
@@ -110,11 +114,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         '_routePageChanged(routeData.page)'
       ],
       
+      listeners: {
+        'toggle-drawer': 'toggleDrawer',
+      },
+      
       attached: function() {
         var elements = Polymer.dom(this).getEffectiveChildNodes();
         for (var i in elements) {
           if ((elements[i].tagName && elements[i].tagName === 'CORE-DRAWER') || (elements[i].getAttribute && elements[i].getAttribute('name') === 'core-drawer')) {
-            // this.$$('#core-drawer').appendChild(elements[i]);
+            this.$$('#core-drawer').appendChild(elements[i]);
           } else if ((elements[i].tagName && elements[i].tagName === 'CORE-HEADER') || (elements[i].getAttribute && elements[i].getAttribute('name') === 'core-header')) {
             elements[i].page = this.page;
             elements[i].scrollProgress = 0;
@@ -170,6 +178,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _onQueryMatchesChanged: function(e) {
       },
+      
+      toggleDrawer: function() {
+        this.$$('#core-drawer-container').toggle()
+      }
+      
     });
   </script>
 </dom-module>

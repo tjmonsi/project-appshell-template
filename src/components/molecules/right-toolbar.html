@@ -52,6 +52,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         }
       },
+      
+      attached: function() {
+        this._updateGridStyles = this._updateGridStyles || function() {
+          this.updateStyles();
+        }.bind(this);
+        window.addEventListener('resize', this._updateGridStyles);
+      },
+      detached: function() {
+        window.removeEventListener('resize', this._updateGridStyles);
+      },
 
     });
   </script>
