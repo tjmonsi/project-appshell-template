@@ -14,6 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../bower_components/app-layout/app-box/app-box.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../../core-styles.html">
 
 <dom-module id="hero-carousel">
@@ -28,6 +29,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         position: absolute;
         width: 100%;
         top: 0px;
+        --app-box-background-front-layer: {
+          
+          background-position: center;
+          /*padding-bottom: 120px;*/
+          /*margin-top: -20px;*/
+          height: 100%;
+        };
       }
       
       :host .hero-cta-area {
@@ -57,13 +65,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         position: absolute;
         right: 57px;
         top: 0px;
+        height:100%;
+      }
+      
+      :host .hero-carousel-buttons-container {
+        height: 100%;
+      }
+      
+      :host .hero-carousel-buttons-bottom {
+        position: absolute;
+        top: 800px;
+        width: 100%;
       }
     </style>
     
     
 
     <app-box class="image-background-container" effects="parallax-background">
-      <img background src="[[heroImage]]" class="image-background" />
+      <img background src="[[heroImage]]" class="image-background" id="image-background" />
     </app-box>
     
     <div class="hero-text-container">
@@ -91,15 +110,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
     </div>
     
-    <div class="hero-carousel-buttons vertical layout">
-      <div class="flex"></div>
-      <template is="dom-repeat" items="[[heroes]]">
-        <div class$="hero-carousel-nav-button [[_isHeroActive(carouselIndex, index)]]" on-tap="_activateHero" data-index$="[[index]]"></div>
-      </template>
-      <div class="flex"></div>
+    <div class="hero-carousel-buttons">
+      <div class="hero-carousel-buttons-container vertical layout">
+        <div class="flex"></div>
+        <template is="dom-repeat" items="[[heroes]]">
+          <div 
+            class$="hero-carousel-nav-button hero-carousel-nav-button-right [[_isHeroActive(carouselIndex, index)]]" 
+            on-tap="_activateHero" 
+            data-index$="[[index]]"></div>
+        </template>
+        <div class="flex"></div>
+      </div>  
     </div>
     
-      
+    <div class="hero-carousel-buttons-bottom">
+      <div class="horizontal layout">
+        <div class="flex"></div>
+        <template is="dom-repeat" items="[[heroes]]">
+          <div 
+            class$="hero-carousel-nav-button hero-carousel-nav-button-bottom [[_isHeroActive(carouselIndex, index)]]" 
+            on-tap="_activateHero" 
+            data-index$="[[index]]"></div>
+        </template>
+        <div class="flex"></div>
+      </div>
+    </div>
   </template>
 
   <script>
@@ -174,7 +209,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _activateHero: function(e) {
         var el = e.target;
         this.carouselIndex = parseInt(el.getAttribute('data-index'), 10);
-      }
+      },
+      
+      attached: function() {
+        this._updateGridStyles = this._updateGridStyles || function() {
+          this.updateStyles();
+        }.bind(this);
+        window.addEventListener('resize', this._updateGridStyles);
+      },
+      detached: function() {
+        window.removeEventListener('resize', this._updateGridStyles);
+      },
+      
     });
   </script>
 </dom-module>

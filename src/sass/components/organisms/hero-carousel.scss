@@ -1,3 +1,5 @@
+@import '../../mixins/media-queries';
+
 :host hero-carousel {
   height: 1015px;
 }
@@ -5,8 +7,8 @@
 :host .image-background-container {
   height: 1015px;
   .image-background {
-    width: 100%;
-    height: 1015px;
+    min-width: 100%;
+    height: 100%;
   }
 }
 
@@ -14,4 +16,32 @@
   text-align: center;
   margin-top: 0px;
   padding-top: 327px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+:host .hero-carousel-buttons {
+  display: block;
+    
+  @include tablet {
+    display: none;
+  }
+  
+  @include phone {
+    display: none;
+  }
+
+}
+
+:host .hero-carousel-buttons-bottom {
+  display: none;
+    
+  @include tablet {
+    display: block;
+  }
+  
+  @include phone {
+    display: block;
+  }
+
 }

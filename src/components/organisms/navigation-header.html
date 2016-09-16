@@ -12,6 +12,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../core-styles.html">
 
 <link rel="import" href="../atoms/clickable-logo.html">
@@ -27,6 +29,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <app-toolbar id="navigation-header">
+      <div id="menu-container">
+        <paper-icon-button icon="menu" id="menu" on-tap="toggleDrawer" class$="[[checkScrollProgress(scrollProgress)]]"></paper-icon-button>  
+      </div>
+      
       <clickable-logo
         main-title
         logo-url="/"
@@ -111,6 +117,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               }
             ];
           }
+        }
+      },
+      toggleDrawer: function() {
+        this.fire('toggle-drawer');
+      },
+      checkScrollProgress: function(scrollProgress) {
+        if (scrollProgress > 0) {
+          return 'menu-dark'
         }
       }
     });

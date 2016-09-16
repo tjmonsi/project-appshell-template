@@ -8,9 +8,19 @@
   width: 17px;
   height: 17px;
   border-radius: 50%;
-  margin-bottom: 65px;
+  
   // margin-top: 35px;
   &.hero-carousel-nav-button-active {
     background-color: #ffffff;
   }
+  
+  &.hero-carousel-nav-button-right {
+    margin-bottom: 65px;
+  }
+  
+  &.hero-carousel-nav-button-bottom {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
 }
+

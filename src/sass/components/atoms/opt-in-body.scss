@@ -1,3 +1,5 @@
+@import '../../mixins/media-queries';
+
 :host .opt-in-body {
   font-family: 'ProximaNova-SemiboldIt';
   font-size: 25px;
@@ -8,4 +10,19 @@
   width: 600px;
   margin-top: 18px;
   margin-bottom: 18px;
+  text-align: left;
+  
+  @include tablet {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  @include phone {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
+    text-align: center
+  }
 }

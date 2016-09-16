@@ -22,7 +22,8 @@
     "google-map": "GoogleWebComponents/google-map#^1.1.11",
     "paper-dialog": "^1.1.0",
     "neon-animation": "^1.2.4",
-    "google-youtube": "^1.2.1"
+    "google-youtube": "^1.2.1",
+    "iron-image": "^1.2.5"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
