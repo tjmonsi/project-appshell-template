@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="./core/core-shell.html">
+<link rel="import" href="./core/neon-test.html">
 <link rel="import" href="./components/organisms/navigation-header.html">
 
 
@@ -23,11 +24,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
+    
+    <!--<neon-test></neon-test>-->
 
-    <core-shell id="core-shell" page="[[page]]" default-page="home">
+    <core-shell id="core-shell" page="[[page]]" default-page="[[defaultPage]]">
       <navigation-header name="core-header" page="[[page]]"></navigation-header>
       <div name="core-content">
         <home-page name="home"></home-page>
+        <my-view1 name="my-view1"></my-view1>
       </div>
     </core-shell>
   </template>
@@ -40,6 +44,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         page: {
           type: String,
           reflectToAttribute: true   
+        },
+        defaultPage: {
+          type: String,
+          value: 'home'
         }
       }
     });
