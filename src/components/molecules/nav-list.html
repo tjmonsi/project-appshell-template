@@ -25,18 +25,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     
-    <div class="horizontal layout">
-      <template is="dom-repeat" items="[[menu]]">
-        <nav-item
-          href$="[[item.url]]"
-          name$="[[item.name]]"
-          page$="[[page]]"
-          scroll-progress="[[scrollProgress]]"
-        >
-          [[item.label]]
-        </nav-item>
-      </template>
-    </div>
+    <template is="dom-if" if="[[!isDrawer]]">
+      <div class="horizontal layout nav-list-header">
+        <template is="dom-repeat" items="[[navigationList]]">
+          <nav-item
+            href$="[[item.url]]"
+            name$="[[item.name]]"
+            page$="[[page]]"
+            scroll-progress$="[[scrollProgress]]"
+          >
+            [[item.label]]
+          </nav-item>
+        </template>
+      </div>  
+    </template>
+    
+    <template is="dom-if" if="[[isDrawer]]">
+      <paper-listbox class="nav-list-drawer">
+        
+      </div>
+    </template>
+    
       
   </template>
 
@@ -48,7 +57,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         scrollProgress: {
           type: Number
         },
-        menu: {
+        isDrawer: {
+          type: Boolean,
+          value: false
+        },
+        navigationList: {
           type: Array,
           value: function() {
             return [
@@ -61,6 +74,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         }
       },
+      
+
 
     });
   </script>

@@ -11,41 +11,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/app-layout/app-box/app-box.html">
 <link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../../bower_components/app-route/app-location.html">
 <link rel="import" href="../../bower_components/app-route/app-route.html">
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
-<link rel="import" href="../../bower_components/neon-animation/neon-animatable.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animations.html">
 <link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 
 <!-- Adding global styles here and the polymer-bootstrap here-->
 <link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
 <link rel="import" href="../core-styles.html">
 
 <dom-module id="core-shell">
-  <template>
+  <template strip-whitespace>
     <style is="custom-style" include="core-styles polymer-bootstrap">
       :host {
         display: block;
       }
       
-      :host app-header {
+      app-header {
         @apply(--layout-fixed-top);
-      }
-      
-      :host app-header {
-        background-color: var(--navigation-header-background);
+        color: var(--core-header-color, #000000);
+        background: var(--core-header-background, none);
         --app-header-background-rear-layer: {
-          background-color: var(--navigation-header-rear-background);
-          color: var(--navigation-header-rear-color);
-          border-color: var(--navigation-header-rear-color);
+          color: var(--core-header-rear-color, #000000);
+          background: var(--core-header-rear-background, none);
+        };
+        --app-header-background-front-layer: {
+          color: var(--core-header-front-color, #000000);
+          background: var(--core-header-front-background, none);
         };
       }
       
-      :host app-box {
+      app-box {
         position: fixed;
         top: 0;
         bottom: 0;
@@ -53,10 +55,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         right: 0;
       }
       
-      :host neon-animated-pages {
+      .core-drawer {
+        height: 100%; 
+        overflow: auto;
       }
       
-     
+      app-drawer {
+        --app-drawer-width: var(--core-drawer-width, 256px);
+      }
+      
+      
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -69,7 +77,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-box
       effects="parallax-background"
       effects-config='{"parallax-background": {"scalar": -0.5}}'></app-box>
-    
+      
+    <iron-media-query
+        query="[[_computeMediaTabletQuery()]]"
+        on-query-matches-changed="_onQueryTabletMatchesChanged"></iron-media-query>
     
     <neon-animated-pages
       selected="[[page]]"
@@ -79,14 +90,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       id="core-content"
       entry-animation="[[entryAnimation]]" 
       exit-animation="[[exitAnimation]]">
-      <page-404 name="[[default404]]" id="default-404"></page-404>
+      <page-404 name$="[[default404]]" id="default-404" not-included-in-links></page-404>
+      
     </neon-animated-pages>
     
-    <app-header fixed id="core-header">
+    <app-header fixed$="[[headerFixed]]" id="core-header" class="core-header" effects$="[[headerEffects]]">
+      <app-toolbar id="core-header-toolbar-primary" class="core-header-toolbar-primary" sticky="[[primarySticky]]">
+        <div id="drawer-toggle-button-container" class="drawer-toggle-button-container">
+          <paper-icon-button 
+            icon$="[[drawerButtonIcon]]" 
+            src$="[[drawerButtonImage]]" 
+            id="drawer-toggle-button"
+            on-tap="toggleDrawer" 
+            class$="drawer-toggle-button [[_scrollProgressChangedForDrawerToggleButton(scrollProgress)]]">
+          </paper-icon-button>  
+        </div>
+      </app-toolbar>
     </app-header>
     
-    <app-drawer swipe-open id="core-drawer-container">
-      <div style="height: 100%; overflow: auto;" id="core-drawer"></div>
+    <app-drawer id="core-drawer-container" class="core-drawer-container">
+      <div class="core-drawer" id="core-drawer">
+        <app-toolbar id="core-drawer-toolbar" class="core-drawer-toolbar">
+        </app-toolbar>
+      </div>
     </app-drawer>
     
   </template>
@@ -102,6 +128,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           notify: true,
           observer: '_pageChanged'
         },
+        routeData: {
+          type: Object,
+          notify: true
+        },
+        subroute: {
+          type: Object,
+          notify: true
+        },
+        primarySticky: {
+          type: Boolean,
+        },
         defaultPage: {
           type: String,
           value: 'home'
@@ -114,6 +151,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: Number,
           value: 0
         },
+        scrollProgressThreshold: {
+          type: Number,
+          value: 0.1
+        },
         entryAnimation: {
           type: String,
           value: 'fade-in-animation'
@@ -122,6 +163,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: String,
           value: 'fade-out-animation'
         },
+        navigationObject: {
+          type: Object,
+          notify: true,
+          value: {}
+        },
+        navigationElements: {
+          type: Array,
+          value: []
+        },
+        headerFixed: {
+          type: Boolean,
+          value: true
+        },
+        drawerButtonIcon: {
+          type: String,
+          value: 'menu'
+        },
+        drawerButtonImage: {
+          type: String
+        }
       },
 
       observers: [
@@ -132,22 +193,99 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'toggle-drawer': 'toggleDrawer',
       },
       
+      /**
+       * 
+       * The magic starts here
+       * 
+       * */
       attached: function() {
         var elements = Polymer.dom(this).getEffectiveChildNodes();
         for (var i in elements) {
-          if ((elements[i].tagName && elements[i].tagName === 'CORE-DRAWER') || (elements[i].getAttribute && elements[i].getAttribute('name') === 'core-drawer')) {
-            this.$$('#core-drawer').appendChild(elements[i]);
-          } else if ((elements[i].tagName && elements[i].tagName === 'CORE-HEADER') || (elements[i].getAttribute && elements[i].getAttribute('name') === 'core-header')) {
-            elements[i].page = this.page;
-            elements[i].scrollProgress = 0;
-            this.$$('#core-header').appendChild(elements[i]);
-          } else if ((elements[i].getAttribute && elements[i].getAttribute('name') === 'core-content')) {
+          if (elements[i].tagName && elements[i].tagName === 'CORE-NAV') {
+            var navelarr = Polymer.dom(elements[i]).getEffectiveChildNodes();
+            for (var j in navelarr) {
+              var navel = navelarr[j];
+              var navelheader = Polymer.dom(navel).cloneNode(true);
+              var naveldrawer = Polymer.dom(navel).cloneNode(true);
+              
+              if (navel.hasAttribute && navel.hasAttribute('navigation')) {
+                this.push('navigationElements', navelheader);
+                this.push('navigationElements', naveldrawer);
+                navelheader.page = this.page;
+                naveldrawer.page = this.page;
+                naveldrawer.isDrawer = true;
+              }
+              
+              if ((navel.tagName && navel.tagName === 'APP-TOOLBAR')) {
+                
+                if (navel.hasAttribute && navel.hasAttribute('primary')) {
+                  var toolelarr = Polymer.dom(navel).getEffectiveChildNodes();
+                  for (var k in toolelarr) {
+                    var toolel = toolelarr[k];
+                    var toolelheader = Polymer.dom(toolel).cloneNode(true);
+                    var tooleldrawer = Polymer.dom(toolel).cloneNode(true);
+                    
+                    if (toolel.hasAttribute && toolel.hasAttribute('navigation')) {
+                      this.push('navigationElements', toolelheader);
+                      this.push('navigationElements', tooleldrawer);
+                      toolelheader.page = this.page;
+                      tooleldrawer.page = this.page;
+                      tooleldrawer.isDrawer = true;
+                    }
+                    
+                    this.$$('#core-header-toolbar-primary').appendChild(toolelheader);
+                    
+                    if (toolel[k].hasAttribute && toolel[k].hasAttribute('main-title')) {
+                      this.$$('#core-drawer-toolbar').appendChild(tooleldrawer);
+                    } else if (toolel[k].hasAttribute && !toolel[k].hasAttribute('not-include-in-drawer')) {
+                      this.$$('#core-drawer').appendChild(tooleldrawer);
+                    }
+                  }
+                } else {
+                  
+                  if (navel.hasAttribute && !navel.hasAttribute('not-include-in-drawer')) {
+                    this.$$('#core-drawer').appendChild(naveldrawer);
+                  }
+                  if (navel.hasAttribute && !navel.hasAttribute('not-include-in-header')) {
+                    this.$$('#core-header').appendChild(navelheader);
+                  }
+                }
+              } else {
+                if (navel.hasAttribute && navel.hasAttribute('main-title')) {
+                  this.$$('#core-drawer-toolbar').appendChild(naveldrawer);
+                } else if (navel.hasAttribute && !navel.hasAttribute('not-include-in-drawer')) {
+                  this.$$('#core-drawer').appendChild(naveldrawer);
+                }
+                if (navel.hasAttribute && !navel.hasAttribute('not-include-in-header')) {
+                  this.$$('#core-header-toolbar-primary').appendChild(navelheader);
+                }
+              }
+            }
+          
+          } else if (elements[i].tagName && elements[i].tagName === 'CORE-CONTENT') {
             var pages = Polymer.dom(elements[i]).getEffectiveChildNodes();
+            var core = this.$$('#core-content');
             for (var j in pages) {
-              // var neon = document.createElement('neon-animatable');
-              // neon.setAttribute('name', pages[j].getAttribute('name'));
-              // neon.appendChild(pages[j]);
-              this.$$('#core-content').appendChild(pages[j]);
+              core.appendChild(pages[j]);
+            }
+            var list = core.getEffectiveChildNodes();
+            for (var k in list) {
+              var name = list[k].getAttribute('name');
+              var label = list[k].getAttribute('label');
+              if (!list[k].hasAttribute('not-included-in-links')) {
+                this.set('navigationObject.' + name, {
+                  url: name ? '/' + name : '#',
+                  label: label ? label : 'Link',
+                  name: name ? name : 'name'
+                });  
+              }
+            }
+            var navigationList = [];
+            for (var l in this.navigationObject) {
+              navigationList.push(this.navigationObject[l]);
+            }
+            for (var m in this.navigationElements) {
+              this.navigationElements[m].navigationList = navigationList;
             }
           }
         }
@@ -164,19 +302,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var appBox = this.$$('app-box');
         var fadeBackgroundEffect = appHeader.createEffect('fade-background');
         var progress = appBox.getScrollState().progress;
-        var isCondensed = progress > 0.1;
+        var isCondensed = progress > this.scrollProgressThreshold;
         fadeBackgroundEffect.run(isCondensed ? 1 : 0);
         appHeader.shadow = isCondensed;
         this.scrollProgress = progress;
-        if (this.$$('#core-header').children.length > 0) {
-          for (var i in this.$$('#core-header').children) {
-            this.$$('#core-header').children[i].scrollProgress = progress;
+        var children = appHeader.getEffectiveChildNodes();
+
+        for (var i in children) {
+          var el = children[i];
+          el.scrollProgress = progress;
+          el.scrollProgressThreshold = this.scrollProgressThreshold;
+          var childel = Polymer.dom(el).getEffectiveChildNodes();
+          for (var j in childel) {
+            childel[j].scrollProgress = progress;
+            childel[j].scrollProgressThreshold = this.scrollProgressThreshold;
           }
         }
+        
       },
 
       _routePageChanged: function(page) {
         this.page = page || this.defaultPage;
+        console.log(this.page)
+        for (var m in this.navigationElements) {
+          
+          this.navigationElements[m].page = page;
+        }
       },
 
       _pageChanged: function(page) {
@@ -189,16 +340,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.page = this.default404;
       },
       
-      _computeMediaQuery: function() {
-        return '(max-width: ' + this.$$('#core-drawer-layout').responsiveWidth + ')';
+      _computeMediaTabletQuery: function() {
+        return '(max-width: 768px)';
       },
 
-      _onQueryMatchesChanged: function(e) {
+      _onQueryTabletMatchesChanged: function(e) {
+        this.$$('#core-drawer-container').swipeOpen = e.detail.value ? true : false;
+        if (!e.detail.value) {
+          this.$$('#core-drawer-container').close();
+        }
+      },
+      
+      _scrollProgressChangedForDrawerToggleButton: function(scrollProgress) {
+        if (scrollProgress > 0) {
+          return 'drawer-toggle-button-scrolled';
+        }
       },
       
       toggleDrawer: function() {
-        this.$$('#core-drawer-container').toggle()
-      }
+        this.$$('#core-drawer-container').toggle();
+      },
       
     });
   </script>

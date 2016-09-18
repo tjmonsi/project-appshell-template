@@ -22,6 +22,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     
     <a href="[[href]]" class$="nav-item [[isNameSameAsPage(name, page)]] [[checkScrollProgress(scrollProgress)]]">
+      <template is="dom-if" if="[[!isDrawer]]">
+        
+      </template>
       <content></content>
     </a>
       
@@ -57,7 +60,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       
       checkScrollProgress: function(scrollProgress) {
-        if (scrollProgress > 0) {
+        if (scrollProgress > 0.1) {
           return 'nav-item-dark'
         }
       }

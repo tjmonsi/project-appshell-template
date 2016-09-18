@@ -1,0 +1,115 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../core-styles.html">
+
+<!--<link rel="import" href="./core-nav-item.html">-->
+
+<dom-module id="core-nav-list">
+  <template>
+    <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+      }
+    </style>
+    
+    <template is="dom-if" if="[[!isDrawer]]">
+      <div class="core-nav-list-header">
+        <div class="horizontal layout ">
+          <template is="dom-repeat" items="[[navigationList]]">
+            <a 
+              href$="[[item.url]]" 
+              class$="core-nav-item-header [[_isNameSameAsPageInHeader(item.name, page)]] [[_checkScrollProgress(scrollProgress, scrollProgressThreshold)]]"
+              >
+              [[item.label]]
+            </a>
+          </template>
+        </div>  
+      </div>
+    </template>
+    
+    <template is="dom-if" if="[[isDrawer]]">
+      <div class="core-nav-list-drawer">
+        <paper-listbox class="core-nav-list-drawer-container" selected$="[[page]]">
+          <template is="dom-repeat" items="[[navigationList]]">
+            <a 
+              href$="[[item.url]]" 
+              class="core-nav-item-drawer"
+              >
+              <paper-item name$="[[item.name]]">
+                [[item.label]]
+              </paper-item>
+            </a>
+          </template>
+        </paper-listbox>
+      </div>
+      
+    </template>
+    
+      
+  </template>
+
+  <script>
+    Polymer({
+      is: 'core-nav-list',
+
+      properties: {
+        scrollProgress: {
+          type: Number
+        },
+        scrollProgressThreshold: {
+          type: Number
+        },
+        isDrawer: {
+          type: Boolean,
+          value: false
+        },
+        page: {
+          type: String
+        },
+        navigationList: {
+          type: Array,
+          value: function() {
+            return [
+              {
+                label: 'Home',
+                name: 'home',
+                url: '#'
+              }  
+            ]
+          }
+        }
+      },
+      
+      _isNameSameAsPageInHeader: function(name, page) {
+        console.log(name, page)
+        if (name && page && name === page) {
+          return 'core-nav-item-header-active'
+        };
+      },
+      
+      _checkScrollProgress: function(scrollProgress, scrollProgressThreshold) {
+        if (scrollProgress > scrollProgressThreshold) {
+          return 'core-nav-item-header-scrolled'
+        }
+      }
+      
+
+
+    });
+  </script>
+</dom-module>

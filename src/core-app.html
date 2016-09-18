@@ -9,8 +9,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="./core/core-shell.html">
-<link rel="import" href="./core/neon-test.html">
-<link rel="import" href="./components/organisms/navigation-header.html">
+<link rel="import" href="./core/core-content.html">
+<link rel="import" href="./core/core-nav.html">
+<link rel="import" href="./core/core-nav-list.html">
+
+<link rel="import" href="./components/molecules/clickable-logo.html">
+<link rel="import" href="./components/molecules/right-toolbar.html">
 
 
 <!-- Adding global styles here and the polymer-bootstrap here-->
@@ -24,15 +28,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
-    
-    <!--<neon-test></neon-test>-->
 
-    <core-shell id="core-shell" page="[[page]]" default-page="[[defaultPage]]">
-      <navigation-header name="core-header" page="[[page]]"></navigation-header>
-      <div name="core-content">
-        <home-page name="home"></home-page>
-        <my-view1 name="my-view1"></my-view1>
-      </div>
+    <core-shell 
+      id="core-shell" 
+      page="[[page]]" 
+      default-page="[[defaultPage]]"
+      >
+      <core-nav>
+        <clickable-logo
+          main-title
+          logo-url="/"
+          logo-image="/images/placeholders/logo.png"
+        ></clickable-logo>
+        <core-nav-list navigation></core-nav-list>
+        <right-toolbar
+          toolset="[[toolset]]"
+          scroll-progress
+        ></right-toolbar>
+      </core-nav>
+      <core-content>
+        <home-page name="home" label="Home"></home-page>
+        <my-view1 name="my-view1" label="About"></my-view1>
+        <my-view2 name="my-view2" label="Menu"></my-view2>
+        <my-view3 name="my-view3" label="Booking"></my-view3>
+        <order-page name="order" label="Order"></order-page>
+        <loyalty-page name="loyalty" label="Loyalty"></loyalty-page>
+      </core-content>
     </core-shell>
   </template>
 
@@ -48,6 +69,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         defaultPage: {
           type: String,
           value: 'home'
+        },
+        navigationList: {
+          type: Array,
+          value: []
+        },
+        toolset: {
+          type: Array,
+          value: function() {
+            return [
+              {
+                label: 'Facebook',
+                url: '#',
+                icon: '/images/assets/facebook_default@2x.png'
+              },
+              {
+                label: 'Twitter',
+                url: '#',
+                icon: '/images/assets/twitter_F@2x.png'
+              }
+            ];
+          }
         }
       }
     });
