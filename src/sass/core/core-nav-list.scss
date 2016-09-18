@@ -12,6 +12,10 @@
     display: none;
   }
   
+  @include smallphone {
+    display: none;
+  }
+  
   .core-nav-item-header {
     color: #FFFFFF;
     margin-right: 11px;

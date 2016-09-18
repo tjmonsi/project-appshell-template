@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
 <link rel="import" href="../core-styles.html">
 
+<link rel="import" href="../components/organisms/hero-section.html">
 <link rel="import" href="../components/organisms/hero-carousel.html">
 <link rel="import" href="../components/organisms/opt-in-section.html">
 <link rel="import" href="../components/organisms/location-section.html">
@@ -19,15 +20,72 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../components/organisms/gallery-section.html">
 <link rel="import" href="../components/organisms/footer-section.html">
 
+<link rel="import" href="../components/molecules/hero-wrapper.html">
+
+<link rel="import" href="../components/atoms/hero-title.html">
+<link rel="import" href="../components/atoms/hero-divider.html">
+<link rel="import" href="../components/atoms/hero-lead.html">
+<link rel="import" href="../components/atoms/hero-cta.html">
+<link rel="import" href="../components/atoms/carousel-thumbnail.html">
+
 <dom-module id="home-page">
-  <template>
+  <template strip-whitespace>
     <style include="core-styles polymer-bootstrap">
       :host {
         display: block;
       }
     </style>
 
-    <hero-carousel heroes="[[heroes]]" carousel-index="[[carouselIndex]]"></hero-carousel>
+    <hero-section carousel parallax thumbnail-desktop-side carousel-interval="5000">
+      <hero-wrapper hero-image="/images/assets/ling_mar@1x.png">
+        <hero-title center>
+          ENJOY 25 YEARS OF EXCELLENCE
+        </hero-title>
+        <hero-divider center></hero-divider>
+        <hero-lead center>
+          Be our guest and savor the zest and spirit of Italian culture and cuisine
+        </hero-lead>
+        <hero-cta href="#" center>
+          <div class="hero-cta-arrow hero-cta-arrow-down"></div>
+        </hero-cta>
+        <carousel-thumbnail>
+          <button class="carousel-thumbnail-button"></button>
+        </carousel-thumbnail>
+      </hero-wrapper>
+      
+      <hero-wrapper hero-image="/images/assets/pizza_romana.png">
+        <hero-title center>
+          TAKE-OUT DELIVERY
+        </hero-title>
+        <hero-divider center></hero-divider>
+        <hero-lead center>
+          Bring Grazie Home
+        </hero-lead>
+        <hero-cta href="#" center>
+          <div class="hero-cta-arrow hero-cta-arrow-down"></div>
+        </hero-cta>
+        <carousel-thumbnail>
+          <button class="carousel-thumbnail-button"></button>
+        </carousel-thumbnail>
+      </hero-wrapper>
+      
+      <hero-wrapper hero-image="/images/assets/dining.png">
+        <hero-title center>
+          GROUP DINING
+        </hero-title>
+        <hero-divider center></hero-divider>
+        <hero-lead center>
+          Come celebrate with our timeless Grazie recipes
+        </hero-lead>
+        <hero-cta href="#" center>
+          <div class="hero-cta-arrow hero-cta-arrow-down"></div>
+        </hero-cta>
+        <carousel-thumbnail>
+          <button class="carousel-thumbnail-button"></button>
+        </carousel-thumbnail>
+      </hero-wrapper>
+    </hero-section>
+
     <opt-in-section text="[[optInText]]" button-text="[[optInButtonText]]" cta="[[cta]]"></opt-in-section>
     <location-section></location-section>
     <quote-block></quote-block>

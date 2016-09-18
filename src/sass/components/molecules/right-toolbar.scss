@@ -9,13 +9,14 @@
   }
   
   @include phone {
-    margin-right: 10px;
+    margin-right: 0px;
   }
 }
 
-:host right-toolbar {
+right-toolbar {
   margin-left: 37px;
   margin-right: 96px;
+  display: block;
   
   @include smalldesktop {
     margin-right: 50px;
@@ -31,4 +32,11 @@
     margin-right: 10px;
     margin-left: 10px;
   }
+  
+  .core-header-toolbar-primary & {
+    @include smallphone {
+      display: none;
+    }
+  }
 }
+

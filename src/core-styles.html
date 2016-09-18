@@ -8,7 +8,10 @@
   @media (min-width: 768px) and (max-width: 1023px) {
     .core-nav-list-header {
       display: none; } }
-  @media (max-width: 767px) {
+  @media (min-width: 350px) and (max-width: 767px) {
+    .core-nav-list-header {
+      display: none; } }
+  @media (max-width: 349px) {
     .core-nav-list-header {
       display: none; } }
   .core-nav-list-header .core-nav-item-header {
@@ -32,7 +35,7 @@
 
 :host {
   --core-header-rear-background: #ffffff;
-  --core-drawer-width: 300px; }
+  --core-drawer-width: 280px; }
 
 .core-header-toolbar-primary {
   height: 128px; }
@@ -45,7 +48,10 @@
     @media (min-width: 768px) and (max-width: 1023px) {
       .core-header-toolbar-primary .drawer-toggle-button {
         display: block; } }
-    @media (max-width: 767px) {
+    @media (min-width: 350px) and (max-width: 767px) {
+      .core-header-toolbar-primary .drawer-toggle-button {
+        display: block; } }
+    @media (max-width: 349px) {
       .core-header-toolbar-primary .drawer-toggle-button {
         display: block; } }
     .core-header-toolbar-primary .drawer-toggle-button.drawer-toggle-button-scrolled {
@@ -56,6 +62,27 @@
   .core-drawer-container .core-drawer .core-drawer-toolbar {
     height: 128px; }
 
+
+.carousel-buttons-side {
+  right: 57px;
+  top: 0px; }
+  @media (min-width: 350px) and (max-width: 767px) {
+    .carousel-buttons-side {
+      display: none; } }
+  @media (max-width: 349px) {
+    .carousel-buttons-side {
+      display: none; } }
+
+.carousel-buttons-bottom {
+  bottom: 10px;
+  width: 100%;
+  display: none; }
+  @media (min-width: 350px) and (max-width: 767px) {
+    .carousel-buttons-bottom {
+      display: block; } }
+  @media (max-width: 349px) {
+    .carousel-buttons-bottom {
+      display: block; } }
 
 :host .clickable-logo-image {
   width: 179px;
@@ -69,126 +96,12 @@
   @media (min-width: 768px) and (max-width: 1023px) {
     :host .clickable-logo-image {
       margin-left: 10px; } }
-  @media (max-width: 767px) {
+  @media (min-width: 350px) and (max-width: 767px) {
     :host .clickable-logo-image {
       margin-left: 10px; } }
-
-
-:host .hero-carousel-buttons {
-  height: 1015px; }
-
-:host .hero-carousel-nav-button {
-  cursor: pointer;
-  background-color: #9B9B9B;
-  width: 17px;
-  height: 17px;
-  border-radius: 50%; }
-  :host .hero-carousel-nav-button.hero-carousel-nav-button-active {
-    background-color: #ffffff; }
-  :host .hero-carousel-nav-button.hero-carousel-nav-button-right {
-    margin-bottom: 65px; }
-  :host .hero-carousel-nav-button.hero-carousel-nav-button-bottom {
-    margin-right: 10px;
-    margin-left: 10px; }
-
-:host .hero-cta-arrow-down {
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  bottom: 119px; }
-
-:host .hero-divider {
-  border-top: 2px solid #FFFFFF;
-  width: 276px;
-  height: 24px;
-  margin-top: 55px;
-  margin-bottom: 50px; }
-
-:host .hero-lead {
-  font-family: 'ProximaNova-Regular';
-  font-size: 32px;
-  color: #FFFFFF;
-  letter-spacing: 0px;
-  width: 700px;
-  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5); }
-
-:host h1.hero-title {
-  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-  color: #FFFFFF; }
-
-
-:host .nav-item {
-  color: #FFFFFF;
-  margin-right: 11px;
-  margin-left: 11px;
-  text-transform: uppercase; }
-  :host .nav-item.nav-item-active {
-    color: #FFFFFF;
-    border-bottom: 1px solid #FFFFFF;
-    font-weight: bold; }
-  :host .nav-item:hover {
-    color: #FFFFFF;
-    text-decoration: none;
-    border-bottom: 1px solid #FFFFFF; }
-  :host .nav-item.nav-item-dark {
-    color: #000000; }
-    :host .nav-item.nav-item-dark.nav-item-active {
-      color: #000000;
-      border-bottom: 1px solid #000000; }
-
-:host .opt-in-body {
-  font-family: 'ProximaNova-SemiboldIt';
-  font-size: 25px;
-  color: #FFFFFF;
-  letter-spacing: 0px;
-  line-height: 25.6px;
-  margin-right: 49px;
-  width: 600px;
-  margin-top: 18px;
-  margin-bottom: 18px;
-  text-align: left; }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    :host .opt-in-body {
-      margin-left: 20px;
-      margin-right: 20px;
-      width: 100%;
-      text-align: center; } }
-  @media (max-width: 767px) {
-    :host .opt-in-body {
-      margin-left: 20px;
-      margin-right: 20px;
-      width: 100%;
-      text-align: center; } }
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  :host .opt-in-button-container {
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 18px; } }
-
-@media (max-width: 767px) {
-  :host .opt-in-button-container {
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 18px; } }
-
-:host .opt-in-button-container .opt-in-button-anchor {
-  color: #ffffff; }
-  :host .opt-in-button-container .opt-in-button-anchor .opt-in-button {
-    width: 180px;
-    height: 45px;
-    border: 3px solid #ffffff;
-    text-transform: uppercase;
-    font-family: '.SFNSText-Regular';
-    font-size: 17px; }
-  :host .opt-in-button-container .opt-in-button-anchor:hover {
-    text-decoration: none; }
-
-:host h1.title {
-  font-size: 50px; }
+  @media (max-width: 349px) {
+    :host .clickable-logo-image {
+      margin-left: 10px; } }
 
 :host gallery-item {
   width: 100%;
@@ -219,6 +132,7 @@
 
 :host .location-section google-map {
   height: 300px; }
+
 
 :host .location-hours-column-list .location-hours-column-item {
   margin-bottom: 12px;
@@ -272,25 +186,29 @@
   @media (min-width: 768px) and (max-width: 1023px) {
     :host .right-toolbar-icon {
       margin-right: 10px; } }
-  @media (max-width: 767px) {
+  @media (min-width: 350px) and (max-width: 767px) {
     :host .right-toolbar-icon {
-      margin-right: 10px; } }
+      margin-right: 0px; } }
 
-:host right-toolbar {
+right-toolbar {
   margin-left: 37px;
-  margin-right: 96px; }
+  margin-right: 96px;
+  display: block; }
   @media (min-width: 1024px) and (max-width: 1223px) {
-    :host right-toolbar {
+    right-toolbar {
       margin-right: 50px;
       margin-left: 20px; } }
   @media (min-width: 768px) and (max-width: 1023px) {
-    :host right-toolbar {
+    right-toolbar {
       margin-right: 10px;
       margin-left: 10px; } }
-  @media (max-width: 767px) {
-    :host right-toolbar {
+  @media (min-width: 350px) and (max-width: 767px) {
+    right-toolbar {
       margin-right: 10px;
       margin-left: 10px; } }
+  @media (max-width: 349px) {
+    .core-header-toolbar-primary right-toolbar {
+      display: none; } }
 
 :host .title-lead-section {
   text-align: center;
@@ -316,40 +234,6 @@
   background: rgba(0, 0, 0, 0.75); }
 
 
-:host hero-carousel {
-  height: 1015px; }
-
-:host .image-background-container {
-  height: 1015px; }
-  :host .image-background-container .image-background {
-    min-width: 100%;
-    height: 100%; }
-
-:host .hero-text-container {
-  text-align: center;
-  margin-top: 0px;
-  padding-top: 327px;
-  margin-left: 20px;
-  margin-right: 20px; }
-
-:host .hero-carousel-buttons {
-  display: block; }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    :host .hero-carousel-buttons {
-      display: none; } }
-  @media (max-width: 767px) {
-    :host .hero-carousel-buttons {
-      display: none; } }
-
-:host .hero-carousel-buttons-bottom {
-  display: none; }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    :host .hero-carousel-buttons-bottom {
-      display: block; } }
-  @media (max-width: 767px) {
-    :host .hero-carousel-buttons-bottom {
-      display: block; } }
-
 :host .location-section {
   margin-bottom: 120px; }
   :host .location-section .contact-container, :host .location-section .hours-container {
@@ -363,38 +247,6 @@
       margin-left: 25px; }
   :host .location-section .contact-container {
     margin-right: 100px; }
-
-:host {
-  --navigation-header-rear-background: #ffffff; }
-
-:host #navigation-header {
-  height: 128px; }
-  :host #navigation-header #menu {
-    width: 50px;
-    height: 50px;
-    display: none;
-    color: #ffffff; }
-    @media (min-width: 768px) and (max-width: 1023px) {
-      :host #navigation-header #menu {
-        display: block; } }
-    @media (max-width: 767px) {
-      :host #navigation-header #menu {
-        display: block; } }
-    :host #navigation-header #menu.menu-dark {
-      color: #000000; }
-  :host #navigation-header nav-list {
-    display: block; }
-    @media (min-width: 768px) and (max-width: 1023px) {
-      :host #navigation-header nav-list {
-        display: none; } }
-    @media (max-width: 767px) {
-      :host #navigation-header nav-list {
-        display: none; } }
-  :host #navigation-header right-toolbar {
-    display: block; }
-    @media (max-width: 767px) {
-      :host #navigation-header right-toolbar {
-        display: none; } }
 
 :host .opt-in-section {
   width: 100%;
@@ -439,6 +291,193 @@
         text-decoration: none; }
       :host .quote-block-container .quotation-cta .quotation-cta-anchor paper-button {
         height: 28px; }
+
+.carousel-thumbnail-button {
+  background-color: #9B9B9B;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 0px; }
+  .carousel-thumbnail-button.carousel-thumbnail-button-active {
+    background-color: #ffffff; }
+  .carousel-thumbnail-button.carousel-thumbnail-button-side {
+    margin-bottom: 65px; }
+  .carousel-thumbnail-button.carousel-thumbnail-button-bottom {
+    margin-right: 10px;
+    margin-left: 10px; }
+
+
+:host .hero-carousel-buttons {
+  height: 1015px; }
+
+:host .hero-carousel-nav-button {
+  cursor: pointer;
+  background-color: #9B9B9B;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%; }
+  :host .hero-carousel-nav-button.hero-carousel-nav-button-active {
+    background-color: #ffffff; }
+  :host .hero-carousel-nav-button.hero-carousel-nav-button-right {
+    margin-bottom: 65px; }
+  :host .hero-carousel-nav-button.hero-carousel-nav-button-bottom {
+    margin-right: 10px;
+    margin-left: 10px; }
+
+hero-cta {
+  position: absolute;
+  bottom: 119px;
+  width: 100%; }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    hero-cta {
+      bottom: 19px; } }
+  @media (min-width: 350px) and (max-width: 767px) {
+    hero-cta {
+      bottom: 19px; } }
+  @media (max-width: 349px) {
+    hero-cta {
+      bottom: 40px; } }
+  @media (max-width: 767px) and (orientation: landscape) {
+    hero-cta {
+      bottom: 40px; } }
+
+.hero-cta-arrow {
+  overflow: hidden;
+  display: inline-block;
+  font-size: 12px;
+  /*set the size for arrow*/
+  width: 4em;
+  height: 4em;
+  margin-top: -2em; }
+
+.hero-cta-arrow-down {
+  transform: rotate(-144deg) skew(-20deg);
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  bottom: 119px; }
+
+.hero-divider {
+  border-top: 2px solid #FFFFFF;
+  width: 276px;
+  height: 24px;
+  margin-top: 55px;
+  margin-bottom: 50px; }
+  @media (min-width: 350px) and (max-width: 767px) {
+    .hero-divider {
+      margin-top: 25px;
+      margin-bottom: 5px; } }
+  @media (max-width: 349px) {
+    .hero-divider {
+      margin-top: 25px;
+      margin-bottom: 5px; } }
+  @media (max-width: 767px) and (orientation: landscape) {
+    .hero-divider {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      height: 2px; } }
+
+.hero-image-background {
+  width: 100%;
+  min-width: 756px;
+  height: 100%; }
+
+:host .hero-lead {
+  font-family: 'ProximaNova-Regular';
+  font-size: 32px;
+  color: #FFFFFF;
+  letter-spacing: 0px;
+  max-width: 700px;
+  text-align: center;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-left: 20px;
+  margin-right: 20px; }
+  @media (min-width: 350px) and (max-width: 767px) {
+    :host .hero-lead {
+      font-size: 20px; } }
+  @media (max-width: 349px) {
+    :host .hero-lead {
+      font-size: 20px; } }
+  @media (max-width: 767px) and (orientation: landscape) {
+    :host .hero-lead {
+      font-size: 16px; } }
+
+h1.hero-title {
+  font-family: 'ProximaNova-Light';
+  font-size: 50px;
+  color: #FFFFFF;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 0px;
+  text-align: center; }
+  @media (min-width: 350px) and (max-width: 767px) {
+    h1.hero-title {
+      padding-top: 40px; } }
+  @media (max-width: 349px) {
+    h1.hero-title {
+      padding-top: 80px;
+      font-size: 35px; } }
+  @media (max-width: 767px) and (orientation: landscape) {
+    h1.hero-title {
+      padding-top: 60px;
+      font-size: 30px; } }
+
+
+:host .opt-in-body {
+  font-family: 'ProximaNova-SemiboldIt';
+  font-size: 25px;
+  color: #FFFFFF;
+  letter-spacing: 0px;
+  line-height: 25.6px;
+  margin-right: 49px;
+  width: 600px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  text-align: left; }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    :host .opt-in-body {
+      margin-left: 20px;
+      margin-right: 20px;
+      width: 100%;
+      text-align: center; } }
+  @media (min-width: 350px) and (max-width: 767px) {
+    :host .opt-in-body {
+      margin-left: 20px;
+      margin-right: 20px;
+      width: 100%;
+      text-align: center; } }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  :host .opt-in-button-container {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 18px; } }
+
+@media (min-width: 350px) and (max-width: 767px) {
+  :host .opt-in-button-container {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 18px; } }
+
+:host .opt-in-button-container .opt-in-button-anchor {
+  color: #ffffff; }
+  :host .opt-in-button-container .opt-in-button-anchor .opt-in-button {
+    width: 180px;
+    height: 45px;
+    border: 3px solid #ffffff;
+    text-transform: uppercase;
+    font-family: '.SFNSText-Regular';
+    font-size: 17px; }
+  :host .opt-in-button-container .opt-in-button-anchor:hover {
+    text-decoration: none; }
+
+:host h1.title {
+  font-size: 50px; }
 
 </style>
 </template>

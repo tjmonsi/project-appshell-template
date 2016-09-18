@@ -18,4 +18,8 @@
   @include phone {
     margin-left: 10px;
   }
+  
+  @include smallphone {
+    margin-left: 10px;
+  }
 }

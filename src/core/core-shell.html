@@ -17,7 +17,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/app-route/app-location.html">
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
-<link rel="import" href="../../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
 <link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
@@ -213,19 +214,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           } else if (elements[i].tagName && elements[i].tagName === 'CORE-CONTENT') {
             var pages = Polymer.dom(elements[i]).getEffectiveChildNodes();
             this._addToCoreContent(pages);
-            
             Polymer.dom(elements[i]).observeNodes(function(info) {
               this._addToCoreContent(info.addedNodes);
             }.bind(this));
           }
-          
         }
-        
         window.addEventListener('scroll', this.scrollHeaderEffect.bind(this));
         this.scrollHeaderEffect();
       },
       
       detached: function() {
+        
+        // this.$$('#core-content') create detaching system by reverting back to old
         window.removeEventListener('scroll', this.scrollHeaderEffect.bind(this));
       },
       
