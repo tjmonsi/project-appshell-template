@@ -26,6 +26,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
 <link rel="import" href="../core-styles.html">
 
+<!-- javascript dependencies -->
+<script src="../../bower_components/underscore/underscore.js"></script>
+
 <dom-module id="core-shell">
   <template strip-whitespace>
     <style is="custom-style" include="core-styles polymer-bootstrap">
@@ -83,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         on-query-matches-changed="_onQueryTabletMatchesChanged"></iron-media-query>
     
     <neon-animated-pages
-      selected="[[page]]"
+      selected$="[[page]]"
       attr-for-selected="name"
       fallback-selection="[[default404]]"
       role="main"
@@ -127,6 +130,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           reflectToAttribute: true,
           notify: true,
           observer: '_pageChanged'
+        },
+        pages: {
+          type: Array
         },
         routeData: {
           type: Object,
@@ -203,98 +209,120 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         for (var i in elements) {
           if (elements[i].tagName && elements[i].tagName === 'CORE-NAV') {
             var navelarr = Polymer.dom(elements[i]).getEffectiveChildNodes();
-            for (var j in navelarr) {
-              var navel = navelarr[j];
-              var navelheader = Polymer.dom(navel).cloneNode(true);
-              var naveldrawer = Polymer.dom(navel).cloneNode(true);
-              
-              if (navel.hasAttribute && navel.hasAttribute('navigation')) {
-                this.push('navigationElements', navelheader);
-                this.push('navigationElements', naveldrawer);
-                navelheader.page = this.page;
-                naveldrawer.page = this.page;
-                naveldrawer.isDrawer = true;
-              }
-              
-              if ((navel.tagName && navel.tagName === 'APP-TOOLBAR')) {
-                
-                if (navel.hasAttribute && navel.hasAttribute('primary')) {
-                  var toolelarr = Polymer.dom(navel).getEffectiveChildNodes();
-                  for (var k in toolelarr) {
-                    var toolel = toolelarr[k];
-                    var toolelheader = Polymer.dom(toolel).cloneNode(true);
-                    var tooleldrawer = Polymer.dom(toolel).cloneNode(true);
-                    
-                    if (toolel.hasAttribute && toolel.hasAttribute('navigation')) {
-                      this.push('navigationElements', toolelheader);
-                      this.push('navigationElements', tooleldrawer);
-                      toolelheader.page = this.page;
-                      tooleldrawer.page = this.page;
-                      tooleldrawer.isDrawer = true;
-                    }
-                    
-                    this.$$('#core-header-toolbar-primary').appendChild(toolelheader);
-                    
-                    if (toolel[k].hasAttribute && toolel[k].hasAttribute('main-title')) {
-                      this.$$('#core-drawer-toolbar').appendChild(tooleldrawer);
-                    } else if (toolel[k].hasAttribute && !toolel[k].hasAttribute('not-include-in-drawer')) {
-                      this.$$('#core-drawer').appendChild(tooleldrawer);
-                    }
-                  }
-                } else {
-                  
-                  if (navel.hasAttribute && !navel.hasAttribute('not-include-in-drawer')) {
-                    this.$$('#core-drawer').appendChild(naveldrawer);
-                  }
-                  if (navel.hasAttribute && !navel.hasAttribute('not-include-in-header')) {
-                    this.$$('#core-header').appendChild(navelheader);
-                  }
-                }
-              } else {
-                if (navel.hasAttribute && navel.hasAttribute('main-title')) {
-                  this.$$('#core-drawer-toolbar').appendChild(naveldrawer);
-                } else if (navel.hasAttribute && !navel.hasAttribute('not-include-in-drawer')) {
-                  this.$$('#core-drawer').appendChild(naveldrawer);
-                }
-                if (navel.hasAttribute && !navel.hasAttribute('not-include-in-header')) {
-                  this.$$('#core-header-toolbar-primary').appendChild(navelheader);
-                }
-              }
-            }
-          
+            this._addToCoreNav(navelarr);
           } else if (elements[i].tagName && elements[i].tagName === 'CORE-CONTENT') {
             var pages = Polymer.dom(elements[i]).getEffectiveChildNodes();
-            var core = this.$$('#core-content');
-            for (var j in pages) {
-              core.appendChild(pages[j]);
-            }
-            var list = core.getEffectiveChildNodes();
-            for (var k in list) {
-              var name = list[k].getAttribute('name');
-              var label = list[k].getAttribute('label');
-              if (!list[k].hasAttribute('not-included-in-links')) {
-                this.set('navigationObject.' + name, {
-                  url: name ? '/' + name : '#',
-                  label: label ? label : 'Link',
-                  name: name ? name : 'name'
-                });  
-              }
-            }
-            var navigationList = [];
-            for (var l in this.navigationObject) {
-              navigationList.push(this.navigationObject[l]);
-            }
-            for (var m in this.navigationElements) {
-              this.navigationElements[m].navigationList = navigationList;
-            }
+            this._addToCoreContent(pages);
+            
+            Polymer.dom(elements[i]).observeNodes(function(info) {
+              this._addToCoreContent(info.addedNodes);
+            }.bind(this));
           }
+          
         }
+        
         window.addEventListener('scroll', this.scrollHeaderEffect.bind(this));
         this.scrollHeaderEffect();
       },
       
       detached: function() {
         window.removeEventListener('scroll', this.scrollHeaderEffect.bind(this));
+      },
+      
+      _addToCoreNav: function(navelarr) {
+        for (var j in navelarr) {
+          var navel = navelarr[j];
+          var navelheader = Polymer.dom(navel).cloneNode(true);
+          var naveldrawer = Polymer.dom(navel).cloneNode(true);
+          
+          if (navel.hasAttribute && navel.hasAttribute('navigation')) {
+            this.push('navigationElements', navelheader);
+            this.push('navigationElements', naveldrawer);
+            navelheader.page = this.page;
+            naveldrawer.page = this.page;
+            naveldrawer.isDrawer = true;
+          }
+          
+          if ((navel.tagName && navel.tagName === 'APP-TOOLBAR')) {
+            
+            if (navel.hasAttribute && navel.hasAttribute('primary')) {
+              var toolelarr = Polymer.dom(navel).getEffectiveChildNodes();
+              for (var k in toolelarr) {
+                var toolel = toolelarr[k];
+                var toolelheader = Polymer.dom(toolel).cloneNode(true);
+                var tooleldrawer = Polymer.dom(toolel).cloneNode(true);
+                
+                if (toolel.hasAttribute && toolel.hasAttribute('navigation')) {
+                  this.push('navigationElements', toolelheader);
+                  this.push('navigationElements', tooleldrawer);
+                  toolelheader.page = this.page;
+                  tooleldrawer.page = this.page;
+                  tooleldrawer.isDrawer = true;
+                }
+                
+                this.$$('#core-header-toolbar-primary').appendChild(toolelheader);
+                
+                if (toolel[k].hasAttribute && toolel[k].hasAttribute('main-title')) {
+                  this.$$('#core-drawer-toolbar').appendChild(tooleldrawer);
+                } else if (toolel[k].hasAttribute && !toolel[k].hasAttribute('not-include-in-drawer')) {
+                  this.$$('#core-drawer').appendChild(tooleldrawer);
+                }
+              }
+            } else {
+              
+              if (navel.hasAttribute && !navel.hasAttribute('not-include-in-drawer')) {
+                this.$$('#core-drawer').appendChild(naveldrawer);
+              }
+              if (navel.hasAttribute && !navel.hasAttribute('not-include-in-header')) {
+                this.$$('#core-header').appendChild(navelheader);
+              }
+            }
+          } else {
+            if (navel.hasAttribute && navel.hasAttribute('main-title')) {
+              this.$$('#core-drawer-toolbar').appendChild(naveldrawer);
+            } else if (navel.hasAttribute && !navel.hasAttribute('not-include-in-drawer')) {
+              this.$$('#core-drawer').appendChild(naveldrawer);
+            }
+            if (navel.hasAttribute && !navel.hasAttribute('not-include-in-header')) {
+              this.$$('#core-header-toolbar-primary').appendChild(navelheader);
+            }
+          }
+        }
+      },
+      
+      _addToCoreContent: function(pages) {
+        var core = this.$$('#core-content');
+        for (var j in pages) {
+          if (pages[j].getAttribute) {
+            Polymer.dom(core).appendChild(pages[j]);  
+          }
+        }
+        var list = core.getEffectiveChildNodes();
+        for (var k in list) {
+          if (list[k].getAttribute) {
+            var name = list[k].getAttribute('name');
+            var label = list[k].getAttribute('label');
+            if (!list[k].hasAttribute('not-included-in-links')) {
+              this.set('navigationObject.' + name, {
+                url: name ? '/' + name : '#',
+                label: label ? label : 'Link',
+                name: name ? name : 'name'
+              });  
+            }  
+          }
+          
+        }
+        var navigationList = [];
+        for (var l in this.navigationObject) {
+          navigationList.push(this.navigationObject[l]);
+        }
+        for (var m in this.navigationElements) {
+          this.navigationElements[m].navigationList = navigationList;
+        }
+        
+        // render page
+        this._pageChanged(this.page);
+        core.select(this.page);
       },
       
       scrollHeaderEffect: function() {
@@ -323,9 +351,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _routePageChanged: function(page) {
         this.page = page || this.defaultPage;
-        console.log(this.page)
         for (var m in this.navigationElements) {
-          
           this.navigationElements[m].page = page;
         }
       },
@@ -333,6 +359,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _pageChanged: function(page) {
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('../pages/' + page + '.html');
+        if (this.pages.length > 0) {
+          var url = _.findWhere(this.pages, {'url-slug': page})['source-file'];
+          resolvedPageUrl = this.resolveUrl(url);
+        }
         this.importHref(resolvedPageUrl, null, this._showPage404, true);
       },
 

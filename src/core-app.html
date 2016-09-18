@@ -8,6 +8,10 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
+<!-- Polymer dependencies -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
 <link rel="import" href="./core/core-shell.html">
 <link rel="import" href="./core/core-content.html">
 <link rel="import" href="./core/core-nav.html">
@@ -28,13 +32,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
+    
+    <iron-ajax
+      auto
+      url="/config/pages.json"
+      handle-as="json"
+      on-response="handleResponse"
+      debounce-duration="300">
+    </iron-ajax>
 
     <core-shell 
       id="core-shell" 
-      page="[[page]]" 
       default-page="[[defaultPage]]"
+      pages="[[pages]]"
       >
-      <core-nav>
+      <core-nav id="core-nav">
         <clickable-logo
           main-title
           logo-url="/"
@@ -46,13 +58,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           scroll-progress
         ></right-toolbar>
       </core-nav>
-      <core-content>
-        <home-page name="home" label="Home"></home-page>
-        <my-view1 name="my-view1" label="About"></my-view1>
-        <my-view2 name="my-view2" label="Menu"></my-view2>
-        <my-view3 name="my-view3" label="Booking"></my-view3>
-        <order-page name="order" label="Order"></order-page>
-        <loyalty-page name="loyalty" label="Loyalty"></loyalty-page>
+      <core-content id="core-content">
+        <!-- put pages here that is 'static' or not being loaded dynamically from pages.json -->
       </core-content>
     </core-shell>
   </template>
@@ -62,9 +69,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'core-app',
 
       properties: {
-        page: {
-          type: String,
-          reflectToAttribute: true   
+        pages: {
+          type: Array,
+          value: []
         },
         defaultPage: {
           type: String,
@@ -73,24 +80,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         navigationList: {
           type: Array,
           value: []
-        },
-        toolset: {
-          type: Array,
-          value: function() {
-            return [
-              {
-                label: 'Facebook',
-                url: '#',
-                icon: '/images/assets/facebook_default@2x.png'
-              },
-              {
-                label: 'Twitter',
-                url: '#',
-                icon: '/images/assets/twitter_F@2x.png'
-              }
-            ];
+        }
+      },
+      
+      handleResponse: function(e) {
+        if (e.detail.response) {
+          var data = e.detail.response;
+          
+          if (data['default-page']) {
+            this.defaultPage = data['default-page'];
+          }
+          
+          if (data.pages) {
+            this.pages = data.pages;
+            for (var i in data.pages) {
+              var el = document.createElement(data.pages[i]['element-tag']);
+              el.setAttribute('name', data.pages[i]['url-slug']);
+              el.setAttribute('label', data.pages[i].label);
+              this.$$('#core-content').appendChild(el);
+            }
           }
         }
+        
       }
     });
   </script>
