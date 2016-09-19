@@ -1,0 +1,42 @@
+@import '../mixins/media-queries';
+
+.core-nav-list-header {
+  
+  display: block;
+    
+  @include tablet {
+    display: none;
+  }
+  
+  @include phone {
+    display: none;
+  }
+  
+  @include smallphone {
+    display: none;
+  }
+  
+  .core-nav-item-header {
+    color: #FFFFFF;
+    margin-right: 11px;
+    margin-left: 11px;
+    text-transform: uppercase;
+    &.core-nav-item-header-active {
+      color: #FFFFFF;
+      border-bottom: 1px solid #FFFFFF;
+      font-weight: bold;
+    }
+    &:hover {
+      color: #FFFFFF;
+      text-decoration: none;
+      border-bottom: 1px solid #FFFFFF;
+    }
+    &.core-nav-item-header-scrolled {
+      color: #000000;
+      &.core-nav-item-header-active {
+        color: #000000;
+        border-bottom: 1px solid #000000;
+      }
+    }
+  }
+}

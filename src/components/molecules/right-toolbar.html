@@ -25,11 +25,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     
     <div class="horizontal layout">
-      <template is="dom-repeat" items="[[toolset]]">
-        <a href="[[item.url]]" tabindex="-1" class="right-toolbar-anchor">
-          <paper-icon-button src="[[item.icon]]" class="right-toolbar-icon"></paper-icon-button>
-        </a>
-      </template>
+      <a href="#" tabindex="-1" class="right-toolbar-anchor">
+        <paper-icon-button src="/images/assets/facebook_default@2x.png" class="right-toolbar-icon"></paper-icon-button>
+      </a>
+      <a href="#" tabindex="-1" class="right-toolbar-anchor">
+        <paper-icon-button src="/images/assets/twitter_F@2x.png" class="right-toolbar-icon"></paper-icon-button>
+      </a>
     </div>
       
   </template>
@@ -38,20 +39,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({
       is: 'right-toolbar',
 
-      properties: {
-        toolset: {
-          type: Array,
-          value: function() {
-            return [
-              {
-                label: 'Tooltip',
-                url: '#',
-                icon: '/images/placeholders/fpo_avatar.png'
-              }  
-            ]
-          }
-        }
-      },
+      properties: {},
       
       attached: function() {
         this._updateGridStyles = this._updateGridStyles || function() {

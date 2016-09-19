@@ -11,57 +11,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <!-- Adding global styles here and the polymer-bootstrap here-->
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../core-styles.html">
 
-<dom-module id="nav-item">
+<link rel="import" href="../../behaviors/content-align.html">
+
+<dom-module id="content-align">
   <template>
-    <style is="custom-style" include="core-styles polymer-bootstrap">
+    <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
       :host {
         display: block;
       }
     </style>
     
-    <a href="[[href]]" class$="nav-item [[isNameSameAsPage(name, page)]] [[checkScrollProgress(scrollProgress)]]">
-      <content></content>
-    </a>
+    <div class$="horizontal layout [[centerClass]]">
+      <template is="dom-if" if="[[leftPad]]">
+        <div class="flex"></div>
+      </template>
       
+      <content></content>  
+
+      <template is="dom-if" if="[[rightPad]]">
+        <div class="flex"></div>
+      </template>
+    </div>
+    
   </template>
 
   <script>
     Polymer({
-      is: 'nav-item',
-
-      properties: {
-        name: {
-          type: String,
-          value: ''
-        },
-        page: {
-          type: String,
-          value: ''
-        },
-        href: {
-          type: String,
-          value: '#'
-        },
-        scrollProgress: {
-          type: Number,
-          value: 0
-        }
-      },
+      is: 'content-align',
       
-      isNameSameAsPage: function(name, page) {
-        if (name && page && name === page) {
-          return 'nav-item-active'
-        };
-      },
-      
-      checkScrollProgress: function(scrollProgress) {
-        if (scrollProgress > 0) {
-          return 'nav-item-dark'
-        }
-      }
-
+      behaviors: [
+        Polymer.ContentAlignBehavior  
+      ]
     });
   </script>
 </dom-module>

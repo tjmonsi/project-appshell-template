@@ -1,0 +1,56 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<script>
+  (function() {
+    'use strict';
+
+    /** @polymerBehavior Polymer.ContentAlignBehavior */
+    Polymer.ContentAlignBehavior = {
+      properties: {
+        left: {
+          type: Boolean,
+          value: false
+        },
+        center: {
+          type: Boolean,
+          value: false
+        },
+        right: {
+          type: Boolean,
+          value: false
+        },
+        verticalCenter: {
+          type: Boolean,
+          value: false
+        },
+        noPads: {
+          type: Boolean,
+          value: false
+        },
+        leftPad: {
+          type: Boolean,
+          computed: '_computeLeftPad(noPads, left, center, right)'
+        },
+        rightPad: {
+          type: Boolean,
+          computed: '_computeRightPad(noPads, left, center, right)'
+        },
+        centerClass: {
+          type: String,
+          computed: '_computeVerticalCenter(verticalCenter)'
+        }
+      },
+      
+      _computeLeftPad: function(noPads, left, center, right) {
+        return !noPads && ((!left && right) || center)
+      },
+      
+      _computeRightPad: function(noPads, left, center, right) {
+        return !noPads && ((left && !right) || center)
+      },
+      
+      _computeVerticalCenter: function(verticalCenter) {
+        return verticalCenter ? 'center' : '';
+      }
+    };
+  })();
+</script>

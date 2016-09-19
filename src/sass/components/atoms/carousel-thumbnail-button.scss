@@ -1,0 +1,21 @@
+.carousel-thumbnail-button {
+  background-color: #9B9B9B;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 0px;
+  
+  // margin-top: 35px;
+  &.carousel-thumbnail-button-active {
+    background-color: #ffffff;
+  }
+  
+  &.carousel-thumbnail-button-side {
+    margin-bottom: 65px;
+  }
+  
+  &.carousel-thumbnail-button-bottom {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}

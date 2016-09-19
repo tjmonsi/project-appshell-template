@@ -1,0 +1,53 @@
+{
+  "default-page": "home",
+  "pages" : [
+    {  
+      "label" : "Home",
+      "element-tag": "home-page",
+      "source-file" : "/src/pages/home.html",
+      "url-slug": "home",
+      "description" : "string",
+      "keywords" : []
+    },
+    {  
+      "label" : "About",
+      "element-tag": "about-page",
+      "source-file" : "/src/pages/about.html",
+      "url-slug": "about",
+      "description" : "string",
+      "keywords" : []
+    },
+    {  
+      "label" : "Menu",
+      "element-tag": "menu-page",
+      "source-file" : "/src/pages/menu.html",
+      "url-slug": "menu",
+      "description" : "string",
+      "keywords" : []
+    },
+    {  
+      "label" : "Booking",
+      "element-tag": "booking-page",
+      "source-file" : "/src/pages/booking.html",
+      "url-slug": "booking",
+      "description" : "string",
+      "keywords" : []
+    },
+    {  
+      "label" : "Order",
+      "element-tag": "order-page",
+      "source-file" : "/src/pages/order.html",
+      "url-slug": "order",
+      "description" : "string",
+      "keywords" : []
+    },
+    {  
+      "label" : "Loyalty",
+      "element-tag": "loyalty-page",
+      "source-file" : "/src/pages/loyalty.html",
+      "url-slug": "loyalty",
+      "description" : "string",
+      "keywords" : []
+    }
+  ]
+} 

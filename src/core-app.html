@@ -8,8 +8,17 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
+<!-- Polymer dependencies -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
 <link rel="import" href="./core/core-shell.html">
-<link rel="import" href="./components/organisms/navigation-header.html">
+<link rel="import" href="./core/core-content.html">
+<link rel="import" href="./core/core-nav.html">
+<link rel="import" href="./core/core-nav-list.html">
+
+<link rel="import" href="./components/molecules/clickable-logo.html">
+<link rel="import" href="./components/molecules/right-toolbar.html">
 
 
 <!-- Adding global styles here and the polymer-bootstrap here-->
@@ -23,12 +32,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
+    
+    <iron-ajax
+      auto
+      url="/config/pages.json"
+      handle-as="json"
+      on-response="handleResponse"
+      debounce-duration="300">
+    </iron-ajax>
 
-    <core-shell id="core-shell" page="[[page]]" default-page="home">
-      <navigation-header name="core-header" page="[[page]]"></navigation-header>
-      <div name="core-content">
-        <home-page name="home"></home-page>
-      </div>
+    <core-shell 
+      id="core-shell" 
+      default-page="[[defaultPage]]"
+      pages="[[pages]]"
+      >
+      <core-nav id="core-nav">
+        <clickable-logo
+          main-title
+          logo-url="/"
+          logo-image="/images/placeholders/logo.png"
+        ></clickable-logo>
+        <core-nav-list navigation></core-nav-list>
+        <right-toolbar
+          toolset="[[toolset]]"
+          scroll-progress
+        ></right-toolbar>
+      </core-nav>
+      <core-content id="core-content">
+        <!-- put pages here that is 'static' or not being loaded dynamically from pages.json -->
+      </core-content>
     </core-shell>
   </template>
 
@@ -37,10 +69,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'core-app',
 
       properties: {
-        page: {
+        pages: {
+          type: Array,
+          value: []
+        },
+        defaultPage: {
           type: String,
-          reflectToAttribute: true   
+          value: 'home'
+        },
+        navigationList: {
+          type: Array,
+          value: []
         }
+      },
+      
+      handleResponse: function(e) {
+        if (e.detail.response) {
+          var data = e.detail.response;
+          
+          if (data['default-page']) {
+            this.defaultPage = data['default-page'];
+          }
+          
+          if (data.pages) {
+            this.pages = data.pages;
+            for (var i in data.pages) {
+              var el = document.createElement(data.pages[i]['element-tag']);
+              el.setAttribute('name', data.pages[i]['url-slug']);
+              el.setAttribute('label', data.pages[i].label);
+              this.$$('#core-content').appendChild(el);
+            }
+          }
+        }
+        
       }
     });
   </script>

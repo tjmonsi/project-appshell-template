@@ -1,4 +1,27 @@
-:host h1.hero-title {
-  text-shadow: 1px 2px 4px rgba(0,0,0,0.50);
+@import '../../mixins/media-queries';
+
+h1.hero-title {
+  font-family: 'ProximaNova-Light';
+  font-size: 50px;
   color: #FFFFFF;
+  text-shadow: 1px 2px 4px rgba(0,0,0,0.50);
+  margin: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 0px;
+  text-align: center;
+  
+  @include phone {
+    padding-top: 40px;
+  }
+  
+  @include smallphone {
+    padding-top: 80px;
+    font-size: 35px;
+  }
+  
+  @include smallphonelandscape {
+    padding-top: 60px;
+    font-size: 30px;
+  }
 }

@@ -1,0 +1,251 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-left-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-right-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-top-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-bottom-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-left-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-right-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-up-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-down-animation.html">
+<link rel="import" href="../../core-styles.html">
+
+<dom-module id="carousel-list">
+  <template>
+    <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+        position: relative;
+      }
+      
+      .show {
+        display: block;
+      }
+      
+      .hidden {
+        display: none;
+      }
+      
+      .carousel-buttons-side, .carousel-buttons-bottom {
+        position: absolute;
+      }
+    </style>
+    
+    <neon-animated-pages
+      selected$="[[carouselIndex]]"
+      id="carousel"
+      entry-animation="[[entryAnimation]]" 
+      exit-animation="[[exitAnimation]]">
+    </neon-animated-pages>
+    
+    <div class$="carousel-buttons-side [[_showThumbnailGroup(thumbnailDesktopSide)]]">
+      <div class="carousel-buttons-container vertical layout" id="carousel-buttons-side-container">
+        <div class="flex"></div>
+        <div class="flex" id="prepend-carousel-button-side"></div>
+      </div>  
+    </div>
+
+    <div class="carousel-buttons-bottom">
+      <div class="carousel-buttons-container horizontal layout" id="carousel-buttons-bottom-container">
+        <div class="flex"></div>
+        <div class="flex" id="prepend-carousel-button-bottom"></div>
+      </div>  
+    </div>
+    
+    
+    
+  </template>
+
+  <script>
+    Polymer({
+      is: 'carousel-list',
+
+      properties: {
+        carouselIndex: {
+          type: Number,
+          value: 0
+        },
+        entryAnimation: {
+          type: String
+        },
+        exitAnimation: {
+          type: String
+        },
+        thumbnailDesktopSide: {
+          type: Boolean,
+          value: false
+        },
+        carouselInterval: {
+          type: Number,
+          observer: '_carouselIntervalChanged'
+        }
+      },
+      
+      listeners: {
+        'item-height-changed': '_itemHeightChanged'  
+      },
+      
+      attached: function() {
+        this._observeNodes = Polymer.dom(this).observeNodes(function(info) {
+          this._addNodes(info.addedNodes);
+        }.bind(this));
+        
+        if (this.carouselInterval) {
+          this._carouselIntervalChanged(this.carouselInterval);
+        }
+        // this.listen(this.$$('#carousel'), 'up', '_swipeUp');
+        // this.listen(this.$$('#carousel'), 'left', '_swipeLeft');
+        // this.listen(this.$$('#carousel'), 'right', '_swipeRight');
+        // this.listen(this.$$('#carousel'), 'down', '_swipeDown');
+      },
+      
+      detached: function() {
+        Polymer.dom(this).unobservedNodes(this._observeNodes);
+        clearInterval(this._carouselIntervalTrack);
+        
+      },
+      
+      _carouselIntervalChanged: function(carouselInterval) {
+        var timing = parseInt(carouselInterval, 10);
+        clearInterval(this._carouselIntervalTrack);
+        if (timing && !isNaN(timing)) {
+          this._carouselIntervalTrack = setInterval(function() {
+            this._slideLeft();
+            this.$$('#carousel').selectNext();
+          }.bind(this), timing);
+        } 
+      },
+      
+      _addNodes: function(elements) {
+        for (var i in elements) {
+          var clone = Polymer.dom(elements[i]).cloneNode(true);
+          this.$$('#carousel').appendChild(clone);
+          var cloneel = Polymer.dom(clone).getEffectiveChildNodes();
+          var carouselItem;
+          for (var j in cloneel) {
+            if (cloneel[j].tagName && cloneel[j].tagName === 'CAROUSEL-THUMBNAIL') {
+              carouselItem = cloneel[j];
+              break;
+            }
+          }
+          if (!carouselItem) {
+            var thumbnail = document.createElement('button');
+            Polymer.dom(thumbnail).classList.add('carousel-thumbnail-button');
+            this.$$('#carousel-buttons-side-container').insertBefore(thumbnail, this.$$('#prepend-carousel-button-side'));
+          } else {
+            var thumbs = carouselItem.getEffectiveChildNodes();
+            for (var k in thumbs) {
+              var clonethumbsSide = Polymer.dom(thumbs[k]).cloneNode(true);
+              var clonethumbsBottom = Polymer.dom(thumbs[k]).cloneNode(true);
+              if (clonethumbsSide.setAttribute) {
+                Polymer.dom(clonethumbsSide).classList.add('carousel-thumbnail-button-side');
+                Polymer.dom(clonethumbsBottom).classList.add('carousel-thumbnail-button-bottom');
+                
+                clonethumbsSide.setAttribute('data-index', i);
+                clonethumbsSide.setAttribute('data-position', 'side');
+                
+                clonethumbsBottom.setAttribute('data-index', i);
+                clonethumbsBottom.setAttribute('data-position', 'bottom');
+                
+                this.listen(clonethumbsSide, 'tap', '_carouselThumbnailTap');
+                this.listen(clonethumbsBottom, 'tap', '_carouselThumbnailTap');
+                
+                this.$$('#carousel-buttons-side-container').insertBefore(clonethumbsSide, this.$$('#prepend-carousel-button-side'));
+                this.$$('#carousel-buttons-bottom-container').insertBefore(clonethumbsBottom, this.$$('#prepend-carousel-button-bottom'));
+              }
+              
+            }
+          }
+        }
+      },
+      
+      _itemHeightChanged: function(e) {
+        this.$$('#carousel').style.height = e.detail.value + 'px';
+        this.$$('#carousel-buttons-side-container').style.height = e.detail.value + 'px';
+      },
+      
+      _showThumbnailGroup: function(flag) {
+        return flag ? '' : 'hidden'
+      },
+      
+      _carouselThumbnailTap: function(e) {
+        clearInterval(this._carouselIntervalTrack);
+        var el = e.target;
+        var index = el.getAttribute('data-index');
+        var position = el.getAttribute('data-position');
+        
+        if (index > this.carouselIndex) {
+          if (position === 'side') {
+            this._slideUp();
+          } else if (position === 'bottom') {
+            this._slideLeft();
+          }
+        } else {
+          if (position === 'side') {
+            this._slideDown();
+          } else if (position === 'bottom') {
+            this._slideRight();
+          }
+        }
+        
+        this.carouselIndex = index;
+        this._carouselIntervalChanged(this.carouselInterval);
+      },
+      
+      _slideUp: function() {
+        this.entryAnimation = 'slide-from-bottom-animation';
+        this.exitAnimation = 'slide-up-animation';
+      },
+      
+      _slideDown: function() {
+        this.entryAnimation = 'slide-from-top-animation';
+        this.exitAnimation = 'slide-down-animation';
+      },
+      
+      _slideLeft: function() {
+        this.entryAnimation = 'slide-from-right-animation';
+        this.exitAnimation = 'slide-left-animation';
+      },
+      
+      _slideRight: function() {
+        this.entryAnimation = 'slide-from-left-animation';
+        this.exitAnimation = 'slide-right-animation';
+      },
+      
+      // _swipeUp: function() {
+      //   this._slideUp();
+      //   this.$$('#carousel').selectNext()
+      // },
+      
+      // _swipeDown: function() {
+      //   this._slideDown();
+      //   this.$$('#carousel').selectPrevious()
+      // },
+      
+      _swipeLeft: function() {
+        this._slideLeft();
+        this.$$('#carousel').selectNext()
+      },
+      
+      _swipeRight: function() {
+        this._slideRight();
+        this.$$('#carousel').selectPrevious()
+      },
+      
+    });
+  </script>
+</dom-module>

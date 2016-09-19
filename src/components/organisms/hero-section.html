@@ -1,0 +1,113 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Adding global styles here and the polymer-bootstrap here-->
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../core-styles.html">
+
+<link rel="import" href="../molecules/carousel-list.html">
+<link rel="import" href="../molecules/hero-wrapper.html">
+
+<dom-module id="hero-section">
+  <template>
+    <style is="custom-style" include="core-styles polymer-bootstrap">
+      :host {
+        display: block;
+      }
+    </style>
+    
+    <template is="dom-if" if="[[carousel]]">
+      <carousel-list id="carousel-list" thumbnail-desktop-side="[[thumbnailDesktopSide]]" carousel-interval="[[carouselInterval]]"></carousel-list>
+    </template>
+    <template is="dom-if" if="[[!carousel]]">
+      <hero-wrapper id="hero-wrapper" parallax="[[parallax]]"></hero-wrapper>
+    </template>
+    
+  </template>
+
+  <script>
+    Polymer({
+      is: 'hero-section',
+
+      properties: {
+        carousel: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        },
+        parallax: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        },
+        heroImage: {
+          type: String
+        },
+        thumbnailDesktopSide: {
+          type: Boolean
+        },
+        carouselInterval: {
+          type: Number
+        }
+      },
+      
+      attached: function() {
+        this._observeNodes = Polymer.dom(this).observeNodes(this._addNodes.bind(this));
+      },
+      
+      _addNodes: function() {
+        var elements = Polymer.dom(this).getEffectiveChildNodes();
+        if (this.carousel) {
+          for (var i in elements) {
+            if ((elements[i].tagName && elements[i].tagName === 'HERO-WRAPPER') || (elements[i].hasAttribute && elements[i].hasAttribute('hero-wrapper'))) {
+              var clone = Polymer.dom(elements[i]).cloneNode(true)
+              clone.parallax = this.parallax;
+              this.$$('#carousel-list').appendChild(clone);
+            }
+          }
+        } else {
+          for (var i in elements) {
+            if ((elements[i].tagName && elements[i].tagName === 'HERO-WRAPPER') || (elements[i].hasAttribute && elements[i].hasAttribute('hero-wrapper'))) {
+              var heroelarr = Polymer.dom(elements[i]).getEffectiveChildNodes();
+              this.$$('#hero-wrapper').heroImage = elements[i].getAttribute('hero-image');
+              for (var j in heroelarr) {
+                var clone = Polymer.dom(heroelarr[j]).cloneNode(true)
+                this.$$('#hero-wrapper').appendChild(clone);
+              }
+              break;
+            } else {
+              this.$$('#hero-wrapper').heroImage = this.heroImage;
+              var clone = Polymer.dom(elements[i]).cloneNode(true)
+              this.$$('#hero-wrapper').appendChild(clone);
+            }
+          }
+        }
+      },
+      
+      detached: function() {
+        Polymer.dom(node).unobserveNodes(this._observeNodes);
+        if (this.$$('#hero-wrapper')) {
+          var el = this.$$('#hero-wrapper').getEffectiveChildNodes();
+          for (var i in el) {
+            this.$$('#hero-wrapper').removeChild(el[i]);
+          }
+        }
+        if (this.$$('#carousel-list')) {
+          var el = this.$$('#carousel-list').getEffectiveChildNodes();
+          for (var i in el) {
+            this.$$('#carousel-list').removeChild(el[i]);
+          }
+        }
+      }
+      
+    });
+  </script>
+</dom-module>

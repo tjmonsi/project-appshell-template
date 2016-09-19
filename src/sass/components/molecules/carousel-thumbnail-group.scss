@@ -1,0 +1,30 @@
+@import '../../mixins/media-queries';
+
+.carousel-buttons-side {
+  right: 57px;
+  top: 0px;
+
+  
+  @include phone {
+    display: none;
+  }
+  
+  @include smallphone {
+    display: none;
+  }
+}
+
+.carousel-buttons-bottom {
+  bottom: 10px;
+  width: 100%;
+  display: none;
+  
+  
+  @include phone {
+    display: block;
+  }
+  
+  @include smallphone {
+    display: block;
+  }
+}
