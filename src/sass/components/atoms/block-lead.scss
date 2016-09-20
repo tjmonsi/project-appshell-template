@@ -1,0 +1,38 @@
+@import '../../mixins/media-queries';
+
+.block-lead {
+  font-family: 'ProximaNovaT-Thin';
+  font-size: 30px;
+  color: #585858;
+  letter-spacing: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  max-width: 820px;
+  text-align: center;
+  
+  &.hero {
+    font-family: 'ProximaNova-Regular';
+    font-size: 32px;
+    color: #FFFFFF;
+    letter-spacing: 0px;
+    max-width: 700px;
+    text-shadow: 1px 2px 4px rgba(0,0,0,0.50);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 0px;
+    
+    @include phone {
+      font-size: 20px;
+    }
+    
+    @include smallphone {
+      font-size: 20px;
+    }
+    
+    @include smallphonelandscape {
+      font-size: 16px;
+    }  
+  }
+  
+}

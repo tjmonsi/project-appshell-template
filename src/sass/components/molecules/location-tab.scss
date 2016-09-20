@@ -1,27 +1,69 @@
-:host .location-tab {
-  
-  .location-tab-item {
-    
-    paper-button {
-      padding-left: 123px;
-      padding-right: 123px;
-      font-size: 36px;
-      letter-spacing: 0px;
-      font-family: 'ProximaNovaT-Thin';
-      color: #417505;
+@import '../../mixins/media-queries';
 
-      &.location-tab-item-active {
-        font-family: 'ProximaNova-Light';
-        color: #762023;
-      }
+.location-tab {
+  
+  .location-tab-spacer {
+    display: block ;
+    
+    @include tablet {
+      display: none;
+    }
+    
+    @include phone {
+      display: none;
+    }
+    
+    @include smallphone {
+      display: none;
     }
     
     
   }
   
+  paper-button {
+    
+    @include tablet {
+      width: 100%;
+    }
+    
+    @include phone {
+      width: 100%;
+    }
+    
+    @include smallphone {
+      width: 100%;
+    }
+    
+    &.location-tab-item {
+      padding-left: 123px;
+      padding-right: 123px;
+      font-size: 36px;
+      letter-spacing: 0px;
+      font-family: 'ProximaNovaT-Thin';
+      color: #417505;  
+      
+      &.location-tab-item-active {
+        font-family: 'ProximaNova-Light';
+        color: #762023;
+      }
+    }
+  }
+    
   .location-tab-divider {
     height: 45px;
     border-right: 1px solid #417505;
+    
+    @include tablet {
+      display: none;
+    }
+    
+    @include phone {
+      display: none;
+    }
+    
+    @include smallphone {
+      display: none;
+    }
   }
   
   

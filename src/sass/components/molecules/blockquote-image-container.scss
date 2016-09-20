@@ -1,0 +1,89 @@
+@import '../../mixins/media-queries';
+
+.blockquote-image-container {
+  text-align: center;
+  padding-top: 72px;
+  padding-bottom: 58px;
+  padding-left: 20px;
+  padding-right: 20px;
+  
+  .blockquote-image {
+    min-width: 100%;
+    height: 100%;
+  }
+  
+  .blockquote-icon {
+    font-family: 'ABeeZee-Regular';
+    font-size: 120px;
+    color: #FFFFFF;
+  }
+  
+  .blockquote-text {
+    font-family: 'ProximaNova-LightIt';
+    font-size: 48px;
+    color: #FFFCFC;
+    margin-top: -80px;
+    max-width: 833px;
+    
+    @include smallphone {
+      font-size: 30px;
+    }
+    
+    @include phone {
+      font-size: 30px;
+    }
+    
+    @include tablet {
+      font-size: 35px;
+    }
+    
+  }
+  
+  .blockquote-reference {
+    font-family: 'ProximaNova-Light';
+    font-size: 48px;
+    color: #FFFFFF;
+    
+    @include smallphone  {
+      font-size: 30px;
+    }
+    
+    @include phone {
+      font-size: 30px;
+    }
+    
+    @include tablet {
+      font-size: 35px;
+    }
+  }
+  
+  .blockquote-cta {
+    font-family: 'ProximaNovaT-Thin';
+    font-size: 23px;
+    color: #FFFFFF;
+    text-shadow: 1px 2px 4px rgba(0,0,0,0.50);
+    margin-top: 56px;
+    
+    @include smallphone  {
+      font-size: 16px;
+    }
+    
+    @include phone {
+      font-size: 16px;
+    }
+    
+    .blockquote-cta-anchor {
+      color: inherit;
+      
+      &:hover {
+        color: inherit;
+        text-decoration: none;
+      }
+      
+      paper-button {
+        height: 28px;
+        // width: 158px;
+      }
+    }
+  }
+}

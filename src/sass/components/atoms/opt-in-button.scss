@@ -1,12 +1,12 @@
 @import '../../mixins/media-queries';
 
-:host .opt-in-button-container {
+.opt-in-button-container {
   @include tablet {
     margin-left: 20px;
     margin-right: 20px;
     width: 100%;
     text-align: center;
-    margin-bottom: 18px;
+    padding-bottom: 18px;
   }
   
   @include phone {
@@ -14,7 +14,15 @@
     margin-right: 20px;
     width: 100%;
     text-align: center;
-    margin-bottom: 18px;
+    padding-bottom: 18px;
+  }
+  
+  @include smallphone {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 18px;
   }
   
   .opt-in-button-anchor {

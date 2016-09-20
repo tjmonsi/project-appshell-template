@@ -1,0 +1,20 @@
+:host {
+  --app-grid-columns: 3;
+}
+
+ul.gallery-grid {
+  padding: 0;
+  list-style: none;
+}
+
+@media(max-width: 900px) {
+  :host {
+    --app-grid-columns: 2;
+  }
+}
+
+@media(max-width: 600px) {
+  :host {
+    --app-grid-columns: 1;
+  }
+}

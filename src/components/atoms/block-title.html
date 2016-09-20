@@ -16,7 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../behaviors/content-align.html">
 <link rel="import" href="./content-align.html">
 
-<dom-module id="hero-lead">
+<dom-module id="block-title">
   <template>
     <style is="custom-style" include="core-styles polymer-bootstrap">
       :host {
@@ -30,16 +30,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       left$="[[left]]" 
       right$="[[right]]" 
       vertical-center$="[[verticalCenter]]">
-      <div class="hero-lead">
+      
+      <h1 class$="block-title [[classList]]">
         <content></content>
-      </div>
+      </h1>
     </content-align>
-    
+
   </template>
 
   <script>
     Polymer({
-      is: 'hero-lead',
+      is: 'block-title',
+      
+      properties: {
+        classList: {
+          type: String
+        }
+      },
       
       behaviors: [
         Polymer.ContentAlignBehavior  

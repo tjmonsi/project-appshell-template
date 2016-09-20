@@ -1,6 +1,6 @@
 @import '../../mixins/media-queries';
 
-:host .opt-in-body {
+.opt-in-body {
   font-family: 'ProximaNova-SemiboldIt';
   font-size: 25px;
   color: #FFFFFF;
@@ -23,6 +23,13 @@
     margin-left: 20px;
     margin-right: 20px;
     width: 100%;
-    text-align: center
+    text-align: center;
+  }
+  
+  @include smallphone {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
+    text-align: center;
   }
 }
