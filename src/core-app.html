@@ -12,18 +12,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
+<!-- HUB Core shell dependencies -->
+
 <link rel="import" href="./core/core-shell.html">
 <link rel="import" href="./core/core-content.html">
 <link rel="import" href="./core/core-nav.html">
 <link rel="import" href="./core/core-nav-list.html">
 
+<!-- Adding global styles -->
+
+<link rel="import" href="./core-styles.html">
+
+<!-- Project Dependencies -->
+
 <link rel="import" href="./components/molecules/clickable-logo.html">
 <link rel="import" href="./components/molecules/right-toolbar.html">
 
-
-<!-- Adding global styles here and the polymer-bootstrap here-->
+<!-- 3rd party Dependencies -->
 <link rel="import" href="../bower_components/polymer-bootstrap/polymer-bootstrap.html">
-<link rel="import" href="./core-styles.html">
+
 
 <dom-module id="core-app">
   <template strip-whitespace>
@@ -50,16 +57,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <clickable-logo
           main-title
           logo-url="/"
-          logo-image="/images/placeholders/logo.png"
-        ></clickable-logo>
+          logo-image="/images/placeholders/logo.png">
+        </clickable-logo>
         
         <core-nav-list navigation></core-nav-list>
         
         <right-toolbar
           toolset="[[toolset]]"
-          scroll-progress
-        ></right-toolbar>
+          scroll-progress>
+        </right-toolbar>
       </core-nav>
+      
       <core-content id="core-content">
         <!-- put pages here that is 'static' or not being loaded dynamically from pages.json -->
       </core-content>
