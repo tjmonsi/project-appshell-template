@@ -1,0 +1,57 @@
+@import '../../base/media-queries';
+@import '../../base/colors';
+
+%hero-carousel-thumbnail-button {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 0px;
+}
+
+.hero-section-carousel-buttons-side {
+  top: 0px;
+  right: 60px;
+  
+  .carousel-thumbnail-button {
+    @extend %hero-carousel-thumbnail-button;
+    margin-bottom: 65px;
+    background-color: $grey-4;
+    
+    &.iron-selected {
+      background-color: $light;
+    }
+  }
+  
+  @include phone {
+    display: none;
+  }
+  
+  @include smallphone {
+    display: none;
+  }
+}
+
+.hero-section-carousel-buttons-bottom {
+  bottom: 10px;
+  width: 100%;
+  display: none;
+  
+  .carousel-thumbnail-button {
+    @extend %hero-carousel-thumbnail-button;
+    margin-right: 10px;
+    margin-left: 10px;
+    background-color: $grey-4;
+    
+    &.iron-selected {
+      background-color: $light;
+    }
+  }
+  
+  @include phone {
+    display: block;
+  }
+  
+  @include smallphone {
+    display: block;
+  }
+}

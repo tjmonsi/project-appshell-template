@@ -50,20 +50,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     
-    <div class="block-section" id="block-section-container">
-      <template is="dom-if" if="[[title]]">
-        <block-title center>
-          [[title]]
-        </block-title>  
-      </template>
-      <template is="dom-if" if="[[lead]]">
-        <block-lead center>
-          [[lead]]
-        </block-lead>  
-      </template>
+    <app-box 
+      class="block-section" 
+      id="block-section" 
+      effects="parallax-background"
+      effects-config='{"parallax-background": {"scalar": -0.5}}'>
+      <img background src="[[blockImage]]" class="block-image-background" id="block-image-background" />
+      <content></content>
+    </app-box>
+    
+    <!--<div class="block-section" id="block-section-container">-->
+    <!--  <template is="dom-if" if="[[title]]">-->
+    <!--    <block-title center>-->
+    <!--      [[title]]-->
+    <!--    </block-title>  -->
+    <!--  </template>-->
+    <!--  <template is="dom-if" if="[[lead]]">-->
+    <!--    <block-lead center>-->
+    <!--      [[lead]]-->
+    <!--    </block-lead>  -->
+    <!--  </template>-->
       
-      <div class="block-section-content" id="block-section-content"></div>
-    </div>
+    <!--  <div class="block-section-content" id="block-section-content"></div>-->
+    <!--</div>-->
 
   </template>
 
@@ -72,28 +81,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'block-section',
 
       properties: {
-        title: {
-          type: String
-        },
-        lead: {
-          type: String
-        }
       },
       
       attached: function() {
-        var elements = Polymer.dom(this).getEffectiveChildNodes();
-        var core = this.$$('#block-section-content');
-        for (var i in elements) {
-          if (elements[i].hasAttribute && elements[i].hasAttribute('title')) {
-            this.title = elements[i].textContent || elements[i].innerText;
-          } else if (elements[i].hasAttribute && elements[i].hasAttribute('lead')) {
-            this.lead = elements[i].textContent || elements[i].innerText;
-          } else {
-            var clone = Polymer.dom(elements[i]).cloneNode(true);
-            Polymer.dom(core).appendChild(clone);
-          }
-        }
-        
         this._updateGridStyles = this._updateGridStyles || function() {
           this.updateStyles();
         }.bind(this);

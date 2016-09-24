@@ -25,8 +25,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!-- Project Dependencies -->
 
-<link rel="import" href="./components/molecules/clickable-logo.html">
-<link rel="import" href="./components/molecules/right-toolbar.html">
+<link rel="import" href="./components/molecules/app-logo.html">
+<link rel="import" href="./components/molecules/nav-toolbar.html">
 
 <!-- 3rd party Dependencies -->
 <link rel="import" href="../bower_components/polymer-bootstrap/polymer-bootstrap.html">
@@ -54,18 +54,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       pages="[[pages]]"
       >
       <core-nav id="core-nav">
-        <clickable-logo
+        <app-logo
           main-title
           logo-url="/"
-          logo-image="/images/placeholders/logo.png">
-        </clickable-logo>
+          logo-image="/images/assets/Brand_Logo.png">
+        </app-logo>
         
-        <core-nav-list navigation></core-nav-list>
+        <core-nav-list navigation nav-class-header="app-nav-link" ></core-nav-list>
         
-        <right-toolbar
-          toolset="[[toolset]]"
-          scroll-progress>
-        </right-toolbar>
+        <nav-toolbar scroll-progress></nav-toolbar>
       </core-nav>
       
       <core-content id="core-content">
@@ -111,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
           }
         }
-        
+        this.$$('#core-shell').finishLoadingPages = true;
       }
     });
   </script>

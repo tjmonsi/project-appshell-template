@@ -1,0 +1,33 @@
+@import 'media-queries';
+
+.phone-only {
+  display: none;
+  
+  @include phone {
+    display: block;
+  }
+  
+  &.small-phone-only {
+    display: none;
+    
+    @include phone {
+      display: block;
+    }
+    
+    @include smallphone {
+      display: block;
+    }
+  }
+}
+
+.small-phone-only {
+  display: none;
+  
+  @include smallphone {
+    display: block;
+  }
+}
+
+.wrapper {
+  width: 100%;
+}

@@ -1,0 +1,30 @@
+$garamond-pro: 'Garamond Premier Pro', sans-serif;
+
+%font-garamond-pro {
+  font-family: $garamond-pro;
+}
+
+%font-garamond-pro-300 {
+  @extend %font-garamond-pro;
+  font-weight: 300;
+}
+
+%font-garamond-pro-300 {
+  @extend %font-garamond-pro;
+  font-weight: 600;
+}
+
+%font-garamond-pro-italic {
+  @extend %font-garamond-pro;
+  font-style: italic;
+}
+
+%font-garamond-pro-bold {
+  @extend %font-garamond-pro;
+  font-weight: bold;
+}
+
+%font-garamond-pro-bold-italic {
+  @extend %font-garamond-pro-bold;
+  @extend %font-garamond-pro-italic;
+}

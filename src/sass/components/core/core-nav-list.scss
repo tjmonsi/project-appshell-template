@@ -1,0 +1,16 @@
+@import '../../base/media-queries';
+
+.core-nav-list-header {
+
+  @include tablet {
+    display: none;
+  }
+  
+  @include phone {
+    display: none;
+  }
+  
+  @include smallphone {
+    display: none;
+  }
+}

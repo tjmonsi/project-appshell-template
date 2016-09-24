@@ -189,6 +189,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         drawerButtonImage: {
           type: String
+        },
+        finishLoadingPages: {
+          type: Boolean,
+          value: false
         }
       },
 
@@ -215,6 +219,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var pages = Polymer.dom(elements[i]).getEffectiveChildNodes();
             this._addToCoreContent(pages);
             Polymer.dom(elements[i]).observeNodes(function(info) {
+              if (this.pages && this.pages.length > 0) {
+                this.finishLoadingPages = true;
+              }
+              
               this._addToCoreContent(info.addedNodes);
             }.bind(this));
           }
@@ -321,6 +329,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
         
         // render page
+        this._routePageChanged(this.defaultPage);
         this._pageChanged(this.page);
         core.select(this.page);
       },
@@ -352,18 +361,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged: function(page) {
         this.page = page || this.defaultPage;
         for (var m in this.navigationElements) {
-          this.navigationElements[m].page = page;
+          this.navigationElements[m].page = this.page;
         }
       },
 
       _pageChanged: function(page) {
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('../pages/' + page + '.html');
-        if (this.pages.length > 0) {
-          var url = _.findWhere(this.pages, {'url-slug': page})['source-file'];
-          resolvedPageUrl = this.resolveUrl(url);
+        // console.log(this.pages)
+        if (this.pages && this.pages.length > 0) {
+          // console.log(this.pages)
+          var obj = _.findWhere(this.pages, {'url-slug': page});
+          if (obj && obj['source-file']) {
+            // console.log(obj['so'])
+            resolvedPageUrl = this.resolveUrl(obj['source-file']);
+          }
         }
-        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+        // console.log(resolvedPageUrl)
+        if (this.finishLoadingPages) {
+          this.importHref(resolvedPageUrl, null, this._showPage404, true);  
+        }
       },
 
       _showPage404: function() {

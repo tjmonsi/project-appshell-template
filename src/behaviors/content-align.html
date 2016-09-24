@@ -26,6 +26,10 @@
           type: Boolean,
           value: false
         },
+        wrap: {
+          type: Boolean,
+          value: false
+        },
         leftPad: {
           type: Boolean,
           computed: '_computeLeftPad(noPads, left, center, right)'
@@ -37,6 +41,10 @@
         centerClass: {
           type: String,
           computed: '_computeVerticalCenter(verticalCenter)'
+        },
+        wrapClass: {
+          type: String,
+          computed: '_computeWrap(wrap)'
         }
       },
       
@@ -50,6 +58,10 @@
       
       _computeVerticalCenter: function(verticalCenter) {
         return verticalCenter ? 'center' : '';
+      },
+      
+      _computeWrap: function(wrap) {
+        return wrap ? 'wrap' : '';
       }
     };
   })();

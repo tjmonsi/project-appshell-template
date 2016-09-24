@@ -13,6 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../core-styles.html">
@@ -29,16 +30,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     
     <template is="dom-if" if="[[!isDrawer]]">
       <div class="core-nav-list-header">
-        <div class="horizontal layout ">
+        <iron-selector class="horizontal layout" attr-for-selected="name" selected$="[[page]]">
           <template is="dom-repeat" items="[[navigationList]]">
-            <a 
+            <a
+              name$="[[item.name]]"
               href$="[[item.url]]" 
-              class$="core-nav-item-header [[_isNameSameAsPageInHeader(item.name, page)]] [[_checkScrollProgress(scrollProgress, scrollProgressThreshold)]]"
+              class$="core-nav-item-header [[navClassHeader]]"
               >
               [[item.label]]
             </a>
           </template>
-        </div>  
+        </iron-selector>  
       </div>
     </template>
     
@@ -81,6 +83,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         page: {
           type: String
         },
+        navClassHeader: {
+          type: String,
+          value: ''
+        },
         navigationList: {
           type: Array,
           value: function() {
@@ -95,11 +101,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       },
       
-      _isNameSameAsPageInHeader: function(name, page) {
-        if (name && page && name === page) {
-          return 'core-nav-item-header-active'
-        };
-      },
+      // _isNameSameAsPageInHeader: function(name, page, navClassHeaderActive) {
+      //   if (name && page && name === page) {
+      //     return 'core-nav-item-header-active'
+      //   };
+      // },
       
       _checkScrollProgress: function(scrollProgress, scrollProgressThreshold) {
         if (scrollProgress > scrollProgressThreshold) {
@@ -107,7 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       }
       
-
+      // [[_checkScrollProgress(scrollProgress, scrollProgressThreshold)]]
 
     });
   </script>

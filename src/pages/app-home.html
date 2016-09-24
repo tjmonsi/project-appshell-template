@@ -1,0 +1,415 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/app-layout/app-box/app-box.html">
+<link rel="import" href="../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../core-styles.html">
+
+<link rel="import" href="../components/organisms/hero-section.html">
+<link rel="import" href="../components/organisms/block-section.html">
+
+<link rel="import" href="../components/organisms/gallery-section.html">
+<link rel="import" href="../components/organisms/footer-section.html">
+
+<link rel="import" href="../components/molecules/hero-wrapper.html">
+
+<link rel="import" href="../components/atoms/content-align.html">
+<link rel="import" href="../components/atoms/hero-divider.html">
+<link rel="import" href="../components/atoms/block-lead.html">
+<link rel="import" href="../components/atoms/hero-cta.html">
+<link rel="import" href="../components/atoms/carousel-thumbnail.html">
+<link rel="import" href="../components/molecules/gallery-item.html">
+
+<dom-module id="app-home-page">
+  <template strip-whitespace>
+    <style include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+      }
+    </style>
+    
+    
+    <div class="app-home-page">
+      
+      <!-- HERO SECTION -->
+      
+      <hero-section 
+        carousel 
+        parallax 
+        thumbnail-desktop-side 
+        carousel-interval="5000" 
+        class="hero-section"
+        class-carousel-buttons-side="hero-section-carousel-buttons-side"
+        class-carousel-buttons-bottom="hero-section-carousel-buttons-bottom">
+      
+        <!-- carousel item 1 -->
+        
+        <hero-wrapper hero-image="/images/assets/ling_mar@1x.png">
+          
+          <content-align center>
+            <h1 class="app-hero-title">
+              ENJOY 25 YEARS OF EXCELLENCE
+            </h1>
+          </content-align>
+          
+          <content-align center>
+            <div class="app-hero-divider"></div>
+          </content-align>
+          
+          <content-align center>
+            <div class="app-hero-lead">
+              Be our guest and savor the zest and spirit of Italian culture and cuisine
+            </div>
+          </content-align>
+          
+          
+        </hero-wrapper>
+        
+        <!-- carousel item 2 -->
+        
+        <hero-wrapper hero-image="/images/assets/pizza_romana.png">
+          
+          <content-align center>
+            <h1 class="app-hero-title">
+              TAKE-OUT DELIVERY
+            </h1>
+          </content-align>
+          
+          <content-align center>
+            <div class="app-hero-divider"></div>
+          </content-align>
+          
+          <content-align center>
+            <div class="app-hero-lead">
+              Bring Grazie Home
+            </div>
+          </content-align>
+          
+          
+        </hero-wrapper>
+        
+        <!-- carousel item 3 -->
+        
+        <hero-wrapper hero-image="/images/assets/dining.png">
+          
+          <content-align center>
+            <h1 class="app-hero-title">
+              GROUP DINING
+            </h1>
+          </content-align>
+          
+          <content-align center>
+            <div class="app-hero-divider"></div>
+          </content-align>
+          
+          <content-align center>
+            <div class="app-hero-lead">
+              Come celebrate with our timeless Grazie recipes
+            </div>
+          </content-align>
+          
+        </hero-wrapper>
+      </hero-section>
+      
+      <!-- BLOCK SECTION OPT-IN -->
+  
+      <block-section class="block-section-opt-in">
+        
+        <content-align center wrap vertical-center>
+          <div class="opt-in-body">Get the full Grazie experience with updates with the latest offers and events.</div>
+          <div class="flex phone-only small-phone-only"></div>
+          <div class="wrapper phone-only small-phone-only"></div>
+          <div class="flex phone-only small-phone-only"></div>
+          <div class="opt-in-cta">
+            <a href="#" class="">
+              <paper-button class="app-button inverse">JOIN US</paper-button>  
+            </a>  
+          </div>
+          
+        </content-align>
+      </block-section>
+      
+      <!-- BLOCK SECTION LOCATION -->
+      
+      <block-section class="block-section-location">
+        <h1 title>
+          OUR LOCATIONS
+        </h1>
+        <div lead>
+          From downtown to the suburban community, Grazie consistently brings pasta, pizza & other familiar Italian favourites served in a relaxed, vibrant space.
+        </div>
+        
+        <div class="horizontal layout center location-tab wrap">
+          <div class="flex location-tab-spacer"></div>
+          <paper-button data-index="0" class$="location-tab-item [[_isActive(0, locationIndex)]]" on-tap="_setLocationActive">
+            Midtown
+          </paper-button>
+          <div class="location-tab-divider"></div>
+          <paper-button data-index="1" class$="location-tab-item [[_isActive(1, locationIndex)]]" on-tap="_setLocationActive">
+            Vaughan
+          </paper-button>
+          <div class="flex location-tab-spacer"></div>
+        </div>
+        
+        <google-map 
+          id="google-map"
+          class="home-google-map"
+          api-key="AIzaSyBgrH5R9m2GG2H666ofVyKuQoFcdElPr_o">
+        </google-map>
+        
+        <div class="horizontal layout location-list wrap">
+          <div class="flex location-list-spacer"></div>
+          <div class="contact">
+            <h3 class="block-section-sub-title">CONTACT</h3>
+            
+            <div class="horizontal layout location-contact-item">
+              <div class="icon-container">
+                <iron-icon src="/images/assets/email.png" class="email"></iron-icon>  
+              </div>
+              <div class="location-list-text flex">
+                infotoronto@grazie.ca
+              </div>  
+            </div>
+            
+            <div class="horizontal layout location-contact-item">
+              <div class="icon-container">
+                <iron-icon src="/images/assets/call.png" class="phone"></iron-icon>  
+              </div>
+              <div class="location-list-text flex">
+                (416) 488-0088
+              </div>  
+            </div>
+            
+            <div class="horizontal layout location-contact-item">
+              <div class="icon-container">
+                <iron-icon src="/images/assets/email.png" class="email"></iron-icon>  
+              </div>
+              <div class="location-list-text flex">
+                2373 Yonge Street, Toronto
+              </div>  
+            </div>
+            
+            <div class="horizontal layout location-contact-item">
+              <div class="icon-container">
+                <iron-icon src="/images/assets/email.png" class="email"></iron-icon>  
+              </div>
+              <div class="location-list-text flex">
+                Yonge Street Paid Parking till 4pm<br/>
+                Street Parking in Area<br/>
+                Paid Parkin on 11 Broadway Ave
+              </div>  
+            </div>
+            
+            <div class="horizontal layout location-contact-item">
+              <div class="icon-container">
+                <iron-icon src="/images/assets/transit_icon.png" class="transport"></iron-icon>  
+              </div>
+              <div class="location-list-text flex">
+                1 Block North of Eglinton Station<br/>
+                1 min of Stop #8961 on 97 Bus
+              </div>  
+            </div>
+            
+          </div>
+          <div class="hours">
+            <h3 class="block-section-sub-title">HOURS</h3>
+            
+            <!-- this is the list molecule with the days/time atoms as items in the list -->
+            
+            <div class="horizontal layout location-hours-item">
+              <div class="day-container flex">
+                Monday
+              </div>
+              
+              <div class="time-container flex">
+                12AM - 11PM
+              </div>  
+            </div>
+            
+            <div class="horizontal layout location-hours-item">
+              <div class="day-container flex">
+                Tuesday
+              </div>
+              
+              <div class="time-container flex">
+                12AM - 11PM
+              </div>  
+            </div>
+            
+            <div class="horizontal layout location-hours-item">
+              <div class="day-container flex">
+                Wednesday
+              </div>
+              
+              <div class="time-container flex">
+                12AM - 11PM
+              </div>  
+            </div>
+            
+            <div class="horizontal layout location-hours-item">
+              <div class="day-container flex">
+                Thursday
+              </div>
+              
+              <div class="time-container flex">
+                12AM - 11PM
+              </div>  
+            </div>
+            
+            <div class="horizontal layout location-hours-item">
+              <div class="day-container flex">
+                Friday
+              </div>
+              
+              <div class="time-container flex">
+                12AM - 11PM
+              </div>  
+            </div>
+            
+            <div class="horizontal layout location-hours-item">
+              <div class="day-container flex">
+                Saturday
+              </div>
+              
+              <div class="time-container flex">
+                12AM - 11PM
+              </div>  
+            </div>
+            
+            <div class="horizontal layout location-hours-item">
+              <div class="day-container flex">
+                Sunday
+              </div>
+              
+              <div class="time-container flex">
+                12AM - 11PM
+              </div>  
+            </div>
+          </div>
+          <div class="flex location-list-spacer"></div>
+        </div>
+      </block-section>
+      
+      <!-- BLOCK SECTION BLOCKQOUTE -->
+      
+      <block-section class="block-section-blockquote">
+        
+        <!-- I forgot about this. I should make it sure that the app-box be included inside the blocksection when there's
+             a parallax -->
+        
+        <app-box class="blockquote-image-container" effects="parallax-background">
+          <img background src="/images/assets/cookbook_picture.png" class="blockquote-image" />
+          <div class="horizontal layout">
+            <div class="flex"></div>
+            <div class="blockquote-icon">
+              "
+            </div>
+            <div class="flex"></div>
+          </div>
+          <div class="horizontal layout">
+            <div class="flex"></div>
+            <div class="blockquote-text">
+              Good food holds the memories of our heart’s deepest treasures
+            </div>
+            <div class="flex"></div>
+          </div>
+          <div class="horizontal layout">
+            <div class="flex"></div>
+            <div class="blockquote-reference">
+              - Joe Brancatella
+            </div>
+            <div class="flex"></div>
+          </div>
+          <div class="horizontal layout">
+            <div class="flex"></div>
+            <div class="blockquote-cta">
+              <a href="#" class="blockquote-cta-anchor">
+                <paper-button>TEXT BUTTON</paper-button>  
+              </a>
+            </div>
+            <div class="flex"></div>
+          </div>
+        </app-box>
+      </block-section>
+      
+      <!-- BLOCK SECTION MENU -->
+      
+      <block-section class="block-section-location">
+        <h1 title>
+          OUR MENU
+        </h1>
+        
+      </blockquote>
+      
+      <!-- BLOCK SECTION GALLERY -->
+      
+      <block-section class="block-section-gallery">
+        <ul class="app-grid gallery-grid">
+  
+          <li class="gallery-item-container">
+            <gallery-item type="video"></gallery-item>
+          </li>
+          
+          <li class="gallery-item-container">
+            <gallery-item type="image"></gallery-item>
+          </li>
+          
+          <li class="gallery-item-container">
+            <gallery-item type="video"></gallery-item>
+          </li>
+          
+          <li class="gallery-item-container">
+            <gallery-item type="image"></gallery-item>
+          </li>
+          
+          <li class="gallery-item-container">
+            <gallery-item type="video"></gallery-item>
+          </li>
+          
+          <li class="gallery-item-container">
+            <gallery-item type="image"></gallery-item>
+          </li>
+  
+        </ul>
+      </block-section>
+      
+      <footer-section></footer-section>
+    </div>
+
+    
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'app-home-page',
+      
+      properties: {
+        locationIndex: {
+          type: Number,
+          reflectToAttribute: true
+        },
+      },
+      
+      _setLocationActive: function(e) {
+        var el = e.target;
+        this.locationIndex = parseInt(el.getAttribute('data-index'), 10);
+      },
+      
+       
+    });
+  </script>
+</dom-module>

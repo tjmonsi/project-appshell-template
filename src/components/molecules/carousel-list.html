@@ -14,6 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../bower_components/neon-animation/neon-animated-pages.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-left-animation.html">
 <link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-right-animation.html">
 <link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-top-animation.html">
@@ -30,6 +31,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
         position: relative;
+        overflow-y: hidden;
       }
       
       .show {
@@ -43,30 +45,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .carousel-buttons-side, .carousel-buttons-bottom {
         position: absolute;
       }
+      
+      #carousel {
+        overflow-y: hidden;
+      }
     </style>
     
     <neon-animated-pages
-      selected$="[[carouselIndex]]"
+      selected$="{{carouselIndex}}"
       id="carousel"
       entry-animation="[[entryAnimation]]" 
       exit-animation="[[exitAnimation]]">
+      <content></content>
     </neon-animated-pages>
     
-    <div class$="carousel-buttons-side [[_showThumbnailGroup(thumbnailDesktopSide)]]">
-      <div class="carousel-buttons-container vertical layout" id="carousel-buttons-side-container">
+    <div class$="carousel-buttons-side [[_showThumbnailGroup(thumbnailDesktopSide)]] [[classCarouselButtonsSide]]">
+      <iron-selector 
+        class="carousel-buttons-container vertical layout" 
+        id="carousel-buttons-side-container"
+        attr-for-selected="data-index"
+        selected$={{carouselIndex}}>
         <div class="flex"></div>
         <div class="flex" id="prepend-carousel-button-side"></div>
-      </div>  
+      </iron-selector>  
     </div>
 
-    <div class="carousel-buttons-bottom">
-      <div class="carousel-buttons-container horizontal layout" id="carousel-buttons-bottom-container">
+    <div class$="carousel-buttons-bottom [[classCarouselButtonsBottom]]">
+      <iron-selector 
+        class="carousel-buttons-container horizontal layout" 
+        id="carousel-buttons-bottom-container"
+        attr-for-selected="data-index"
+        selected$={{carouselIndex}}>
         <div class="flex"></div>
         <div class="flex" id="prepend-carousel-button-bottom"></div>
-      </div>  
+      </iron-selector>  
     </div>
-    
-    
     
   </template>
 
@@ -77,7 +90,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       properties: {
         carouselIndex: {
           type: Number,
-          value: 0
+          value: 0,
+          notify: true,
+          reflectToAttribute: true,
+          observer: '_carouselIndexChanged'
         },
         entryAnimation: {
           type: String
@@ -92,17 +108,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         carouselInterval: {
           type: Number,
           observer: '_carouselIntervalChanged'
+        },
+        height: {
+          type: Number,
+          value: 0,
+          observer: '_heightChanged'
+        },
+        classCarouselButtonsSide: {
+          type: String
+        },
+        classCarouselButtonsBottom: {
+          type: String
         }
       },
       
-      listeners: {
-        'item-height-changed': '_itemHeightChanged'  
-      },
       
       attached: function() {
-        this._observeNodes = Polymer.dom(this).observeNodes(function(info) {
-          this._addNodes(info.addedNodes);
-        }.bind(this));
+        var children = Polymer.dom(this).getEffectiveChildNodes();
+        var index = 0;
+        for (var i in children) {
+          if (children[i].hasAttribute) {
+            children[i].setAttribute('parallax', this.parallax);
+            var thumbnailSide = document.createElement('button');
+            var thumbnailBottom = document.createElement('button');
+            thumbnailSide.setAttribute('data-index', index);
+            thumbnailBottom.setAttribute('data-index', index);
+            Polymer.dom(thumbnailSide).classList.add('carousel-thumbnail-button');
+            Polymer.dom(thumbnailBottom).classList.add('carousel-thumbnail-button');
+            
+            this.listen(thumbnailSide, 'tap', '_carouselThumbnailTap');
+            this.listen(thumbnailBottom, 'tap', '_carouselThumbnailTap');
+            
+            this.$$('#carousel-buttons-side-container').insertBefore(thumbnailSide, this.$$('#prepend-carousel-button-side'));
+            this.$$('#carousel-buttons-bottom-container').insertBefore(thumbnailBottom, this.$$('#prepend-carousel-button-bottom'));
+            index++;
+          }
+        }
         
         if (this.carouselInterval) {
           this._carouselIntervalChanged(this.carouselInterval);
@@ -114,7 +155,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       
       detached: function() {
-        Polymer.dom(this).unobservedNodes(this._observeNodes);
+        // Polymer.dom(this).unobservedNodes(this._observeNodes);
         clearInterval(this._carouselIntervalTrack);
         
       },
@@ -126,56 +167,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this._carouselIntervalTrack = setInterval(function() {
             this._slideLeft();
             this.$$('#carousel').selectNext();
+            this._carouselIndexChanged(this.$$('#carousel').selected)
           }.bind(this), timing);
         } 
       },
       
-      _addNodes: function(elements) {
-        for (var i in elements) {
-          var clone = Polymer.dom(elements[i]).cloneNode(true);
-          this.$$('#carousel').appendChild(clone);
-          var cloneel = Polymer.dom(clone).getEffectiveChildNodes();
-          var carouselItem;
-          for (var j in cloneel) {
-            if (cloneel[j].tagName && cloneel[j].tagName === 'CAROUSEL-THUMBNAIL') {
-              carouselItem = cloneel[j];
-              break;
-            }
-          }
-          if (!carouselItem) {
-            var thumbnail = document.createElement('button');
-            Polymer.dom(thumbnail).classList.add('carousel-thumbnail-button');
-            this.$$('#carousel-buttons-side-container').insertBefore(thumbnail, this.$$('#prepend-carousel-button-side'));
-          } else {
-            var thumbs = carouselItem.getEffectiveChildNodes();
-            for (var k in thumbs) {
-              var clonethumbsSide = Polymer.dom(thumbs[k]).cloneNode(true);
-              var clonethumbsBottom = Polymer.dom(thumbs[k]).cloneNode(true);
-              if (clonethumbsSide.setAttribute) {
-                Polymer.dom(clonethumbsSide).classList.add('carousel-thumbnail-button-side');
-                Polymer.dom(clonethumbsBottom).classList.add('carousel-thumbnail-button-bottom');
-                
-                clonethumbsSide.setAttribute('data-index', i);
-                clonethumbsSide.setAttribute('data-position', 'side');
-                
-                clonethumbsBottom.setAttribute('data-index', i);
-                clonethumbsBottom.setAttribute('data-position', 'bottom');
-                
-                this.listen(clonethumbsSide, 'tap', '_carouselThumbnailTap');
-                this.listen(clonethumbsBottom, 'tap', '_carouselThumbnailTap');
-                
-                this.$$('#carousel-buttons-side-container').insertBefore(clonethumbsSide, this.$$('#prepend-carousel-button-side'));
-                this.$$('#carousel-buttons-bottom-container').insertBefore(clonethumbsBottom, this.$$('#prepend-carousel-button-bottom'));
-              }
-              
-            }
+      _carouselIndexChanged: function(index) {
+        // console.log(index)
+        var children = Polymer.dom(this).getEffectiveChildNodes();
+        var array = []
+        for (var i in children) {
+          if (children[i].resetLayout) {
+            array.push(children[i])
           }
         }
+        if (array[index]) {
+          array[index].resetLayout(); 
+        }
+        this.$$('#carousel-buttons-side-container').select(index);
+        this.$$('#carousel-buttons-bottom-container').select(index);
       },
       
-      _itemHeightChanged: function(e) {
-        this.$$('#carousel').style.height = e.detail.value + 'px';
-        this.$$('#carousel-buttons-side-container').style.height = e.detail.value + 'px';
+      _heightChanged: function(e) {
+        this.$$('#carousel').style.height = e + 'px';
+        this.$$('#carousel-buttons-side-container').style.height = e + 'px';
       },
       
       _showThumbnailGroup: function(flag) {
@@ -191,18 +206,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (index > this.carouselIndex) {
           if (position === 'side') {
             this._slideUp();
-          } else if (position === 'bottom') {
+          } else {
             this._slideLeft();
           }
         } else {
           if (position === 'side') {
             this._slideDown();
-          } else if (position === 'bottom') {
+          } else {
             this._slideRight();
           }
         }
         
         this.carouselIndex = index;
+        this.$$('#carousel').select(index);
         this._carouselIntervalChanged(this.carouselInterval);
       },
       
@@ -247,5 +263,48 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       
     });
+    
+    // _addNodes: function(elements) {
+    //     for (var i in elements) {
+    //       var clone = Polymer.dom(elements[i]).cloneNode(true);
+    //       this.$$('#carousel').appendChild(clone);
+    //       var cloneel = Polymer.dom(clone).getEffectiveChildNodes();
+    //       var carouselItem;
+    //       for (var j in cloneel) {
+    //         if (cloneel[j].tagName && cloneel[j].tagName === 'CAROUSEL-THUMBNAIL') {
+    //           carouselItem = cloneel[j];
+    //           break;
+    //         }
+    //       }
+    //       if (!carouselItem) {
+    //         var thumbnail = document.createElement('button');
+    //         Polymer.dom(thumbnail).classList.add('carousel-thumbnail-button');
+    //         this.$$('#carousel-buttons-side-container').insertBefore(thumbnail, this.$$('#prepend-carousel-button-side'));
+    //       } else {
+    //         var thumbs = carouselItem.getEffectiveChildNodes();
+    //         for (var k in thumbs) {
+    //           var clonethumbsSide = Polymer.dom(thumbs[k]).cloneNode(true);
+    //           var clonethumbsBottom = Polymer.dom(thumbs[k]).cloneNode(true);
+    //           if (clonethumbsSide.setAttribute) {
+    //             Polymer.dom(clonethumbsSide).classList.add('carousel-thumbnail-button-side');
+    //             Polymer.dom(clonethumbsBottom).classList.add('carousel-thumbnail-button-bottom');
+                
+    //             clonethumbsSide.setAttribute('data-index', i);
+    //             clonethumbsSide.setAttribute('data-position', 'side');
+                
+    //             clonethumbsBottom.setAttribute('data-index', i);
+    //             clonethumbsBottom.setAttribute('data-position', 'bottom');
+                
+    //             this.listen(clonethumbsSide, 'tap', '_carouselThumbnailTap');
+    //             this.listen(clonethumbsBottom, 'tap', '_carouselThumbnailTap');
+                
+    //             this.$$('#carousel-buttons-side-container').insertBefore(clonethumbsSide, this.$$('#prepend-carousel-button-side'));
+    //             this.$$('#carousel-buttons-bottom-container').insertBefore(clonethumbsBottom, this.$$('#prepend-carousel-button-bottom'));
+    //           }
+              
+    //         }
+    //       }
+    //     }
+    //   },
   </script>
 </dom-module>

@@ -1,0 +1,41 @@
+@import '../../base/media-queries';
+
+:host .nav-toolbar-icon {
+  margin-right: 27px;
+  
+  @include tablet {
+    margin-right: 10px;
+  }
+  
+  @include phone {
+    margin-right: 0px;
+  }
+}
+
+nav-toolbar {
+  margin-left: 37px;
+  margin-right: 96px;
+  display: block;
+  
+  @include smalldesktop {
+    margin-right: 50px;
+    margin-left: 20px;
+  }
+  
+  @include tablet {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  
+  @include phone {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  
+  .core-header-toolbar-primary & {
+    @include smallphone {
+      display: none;
+    }
+  }
+}
+

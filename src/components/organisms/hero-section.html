@@ -11,10 +11,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <!-- Adding global styles here and the polymer-bootstrap here-->
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../../bower_components/app-layout/app-scroll-effects/effects/parallax-background.html">
 <link rel="import" href="../../core-styles.html">
 
 <link rel="import" href="../molecules/carousel-list.html">
 <link rel="import" href="../molecules/hero-wrapper.html">
+<link rel="import" href="../../behaviors/utils.html">
 
 <dom-module id="hero-section">
   <template>
@@ -25,10 +27,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     
     <template is="dom-if" if="[[carousel]]">
-      <carousel-list id="carousel-list" thumbnail-desktop-side="[[thumbnailDesktopSide]]" carousel-interval="[[carouselInterval]]"></carousel-list>
+      <carousel-list 
+        id="carousel-list" 
+        thumbnail-desktop-side="[[thumbnailDesktopSide]]" 
+        carousel-interval="[[carouselInterval]]" 
+        height="[[height]]"
+        parallax="[[parallax]]"
+        class-carousel-buttons-side="[[classCarouselButtonsSide]]"
+        class-carousel-buttons-bottom="[[classCarouselButtonsBottom]]">
+        <content></content>
+      </carousel-list>
     </template>
     <template is="dom-if" if="[[!carousel]]">
-      <hero-wrapper id="hero-wrapper" parallax="[[parallax]]"></hero-wrapper>
+      <hero-wrapper id="hero-wrapper" parallax="[[parallax]]" hero-image="[[hero-image]]">
+        <content></content>
+      </hero-wrapper>
     </template>
     
   </template>
@@ -56,57 +69,84 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         carouselInterval: {
           type: Number
+        },
+        height: {
+          type: Number,
+          value: 0
+        },
+        classCarouselButtonsSide: {
+          type: String
+        },
+        classCarouselButtonsBottom: {
+          type: String
         }
       },
+      
+      behaviors: [
+        Polymer.UtilsBehavior
+      ],
       
       attached: function() {
-        this._observeNodes = Polymer.dom(this).observeNodes(this._addNodes.bind(this));
-      },
-      
-      _addNodes: function() {
-        var elements = Polymer.dom(this).getEffectiveChildNodes();
-        if (this.carousel) {
-          for (var i in elements) {
-            if ((elements[i].tagName && elements[i].tagName === 'HERO-WRAPPER') || (elements[i].hasAttribute && elements[i].hasAttribute('hero-wrapper'))) {
-              var clone = Polymer.dom(elements[i]).cloneNode(true)
-              clone.parallax = this.parallax;
-              this.$$('#carousel-list').appendChild(clone);
-            }
-          }
-        } else {
-          for (var i in elements) {
-            if ((elements[i].tagName && elements[i].tagName === 'HERO-WRAPPER') || (elements[i].hasAttribute && elements[i].hasAttribute('hero-wrapper'))) {
-              var heroelarr = Polymer.dom(elements[i]).getEffectiveChildNodes();
-              this.$$('#hero-wrapper').heroImage = elements[i].getAttribute('hero-image');
-              for (var j in heroelarr) {
-                var clone = Polymer.dom(heroelarr[j]).cloneNode(true)
-                this.$$('#hero-wrapper').appendChild(clone);
-              }
-              break;
-            } else {
-              this.$$('#hero-wrapper').heroImage = this.heroImage;
-              var clone = Polymer.dom(elements[i]).cloneNode(true)
-              this.$$('#hero-wrapper').appendChild(clone);
-            }
-          }
-        }
+        this._resize();
+        window.addEventListener('resize', this._resize.bind(this));
       },
       
       detached: function() {
-        Polymer.dom(node).unobserveNodes(this._observeNodes);
-        if (this.$$('#hero-wrapper')) {
-          var el = this.$$('#hero-wrapper').getEffectiveChildNodes();
-          for (var i in el) {
-            this.$$('#hero-wrapper').removeChild(el[i]);
-          }
-        }
-        if (this.$$('#carousel-list')) {
-          var el = this.$$('#carousel-list').getEffectiveChildNodes();
-          for (var i in el) {
-            this.$$('#carousel-list').removeChild(el[i]);
-          }
-        }
+        window.removeEventListener('resize', this._resize.bind(this));
+      },
+      
+      _resize: function() {
+        this.height = this.windowSize().height;
       }
+      
+      // attached: function() {
+      //   // this._observeNodes = Polymer.dom(this).observeNodes(this._addNodes.bind(this));
+      // },
+      
+      // _addNodes: function() {
+      //   var elements = Polymer.dom(this).getEffectiveChildNodes();
+      //   if (this.carousel) {
+      //     for (var i in elements) {
+      //       if ((elements[i].tagName && elements[i].tagName === 'HERO-WRAPPER') || (elements[i].hasAttribute && elements[i].hasAttribute('hero-wrapper'))) {
+      //         var clone = Polymer.dom(elements[i]).cloneNode(true)
+      //         clone.parallax = this.parallax;
+      //         this.$$('#carousel-list').appendChild(clone);
+      //       }
+      //     }
+      //   } else {
+      //     for (var i in elements) {
+      //       if ((elements[i].tagName && elements[i].tagName === 'HERO-WRAPPER') || (elements[i].hasAttribute && elements[i].hasAttribute('hero-wrapper'))) {
+      //         var heroelarr = Polymer.dom(elements[i]).getEffectiveChildNodes();
+      //         this.$$('#hero-wrapper').heroImage = elements[i].getAttribute('hero-image');
+      //         for (var j in heroelarr) {
+      //           var clone = Polymer.dom(heroelarr[j]).cloneNode(true);
+      //           this.$$('#hero-wrapper').appendChild(clone);
+      //         }
+      //         break;
+      //       } else {
+      //         this.$$('#hero-wrapper').heroImage = this.heroImage;
+      //         var clone = Polymer.dom(elements[i]).cloneNode(true);
+      //         this.$$('#hero-wrapper').appendChild(clone);
+      //       }
+      //     }
+      //   }
+      // },
+      
+      // detached: function() {
+      //   Polymer.dom(node).unobserveNodes(this._observeNodes);
+      //   if (this.$$('#hero-wrapper')) {
+      //     var el = this.$$('#hero-wrapper').getEffectiveChildNodes();
+      //     for (var i in el) {
+      //       this.$$('#hero-wrapper').removeChild(el[i]);
+      //     }
+      //   }
+      //   if (this.$$('#carousel-list')) {
+      //     var el = this.$$('#carousel-list').getEffectiveChildNodes();
+      //     for (var i in el) {
+      //       this.$$('#carousel-list').removeChild(el[i]);
+      //     }
+      //   }
+      // }
       
     });
   </script>

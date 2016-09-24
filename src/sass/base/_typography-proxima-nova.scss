@@ -1,0 +1,85 @@
+$proxima-nova-th: 'Proxima Nova Th', sans-serif;
+$proxima-nova-rg: 'Proxima Nova Rg', sans-serif;
+$proxima-nova-lt: 'Proxima Nova Lt', sans-serif;
+$proxima-nova-bl: 'Proxima Nova Bl', sans-serif;
+
+%font-proxima-nova-th {
+  font-family: $proxima-nova-th;
+}
+
+%font-proxima-nova-rg {
+  font-family: $proxima-nova-rg;
+}
+
+%font-proxima-nova-lt {
+  font-family: $proxima-nova-lt;
+}
+
+%font-proxima-nova-bl {
+  font-family: $proxima-nova-bl;
+}
+
+%font-proxima-nova-extra-bold {
+  @extend %font-proxima-nova-th;
+  font-weight: 800;
+}
+
+%font-proxima-nova-extra-bold-italic {
+  @extend %font-proxima-nova-extra-bold;
+  font-style: italic;
+}
+
+%font-proxima-nova-thin {
+  @extend %font-proxima-nova-th;
+  font-weight: 100;
+}
+
+%font-proxima-nova-thin-italic {
+  @extend %font-proxima-nova-thin;
+  font-style: italic;
+}
+
+%font-proxima-nova-bold {
+  @extend %font-proxima-nova-rg;
+  font-weight: bold;
+}
+
+%font-proxima-nova-italic {
+  @extend %font-proxima-nova-rg;
+  font-style: italic;
+}
+
+%font-proxima-nova-bold-italic {
+  @extend %font-proxima-nova-bold;
+  @extend %font-proxima-nova-italic;
+}
+
+%font-proxima-nova-light {
+  @extend %font-proxima-nova-lt;
+  font-weight: 300;
+}
+
+%font-proxima-nova-semibold {
+  @extend %font-proxima-nova-lt;
+  font-weight: 600;
+}
+
+%font-proxima-nova-semibold-italic {
+  @extend %font-proxima-nova-semibold;
+  font-style: italic;
+}
+
+%font-proxima-nova-light-italic {
+  @extend %font-proxima-nova-light;
+  font-style: italic;
+}
+
+%font-proxima-nova-black {
+  @extend %font-proxima-nova-bl;
+  font-weight: 900;
+}
+
+%font-proxima-nova-black-italic {
+  @extend %font-proxima-nova-black;
+  font-style: italic;
+}

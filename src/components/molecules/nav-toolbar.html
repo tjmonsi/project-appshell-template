@@ -11,45 +11,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <!-- Adding global styles here and the polymer-bootstrap here-->
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../core-styles.html">
 
-<dom-module id="clickable-logo">
+<dom-module id="nav-toolbar">
   <template>
-    <style is="custom-style" include="core-styles polymer-bootstrap">
+    <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
       :host {
         display: block;
       }
     </style>
     
-    <a href="[[logo-url]]" class$="clickable-logo-anchor [[anchorClass]]">
-      <img 
-        class$="clickable-logo-image [[imageClass]]" 
-        src="[[logo-image]]"
-      />
-    </a>
+    <div class="horizontal layout">
+      <a href="#" tabindex="-1" class="nav-toolbar-anchor">
+        <paper-icon-button src="/images/assets/facebook_default@2x.png" class="nav-toolbar-icon"></paper-icon-button>
+      </a>
+      <a href="#" tabindex="-1" class="nav-toolbar-anchor">
+        <paper-icon-button src="/images/assets/twitter_F@2x.png" class="nav-toolbar-icon"></paper-icon-button>
+      </a>
+    </div>
       
   </template>
 
   <script>
     Polymer({
-      is: 'clickable-logo',
+      is: 'nav-toolbar',
 
-      properties: {
-        logoUrl: {
-          type: String,
-          value: '/'
-        },
-        logoImage: {
-          type: String,
-          value: '/images/placeholders/logo.png'
-        },
-        anchorClass: {
-          type: String
-        },
-        imageClass: {
-          type: String
-        }
-      },
+      properties: {},
       
       attached: function() {
         this._updateGridStyles = this._updateGridStyles || function() {

@@ -1,0 +1,44 @@
+@import '../../base/media-queries';
+
+hero-wrapper {
+  .app-hero-title {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .app-hero-divider {
+    border-top: 2px solid #FFFFFF;
+    width: 276px;
+    height: 24px;
+    margin-top: 18px;
+    margin-bottom: 7px;
+    
+    @include phone {
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    
+    @include smallphone {
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    
+    @include smallphonelandscape {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      height: 2px;
+    }
+  }
+  
+  .app-hero-lead {
+    max-width: 623px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+.hero-image-background {
+  width: 100%;
+  min-width: 756px;
+  height: 100%;
+}
+

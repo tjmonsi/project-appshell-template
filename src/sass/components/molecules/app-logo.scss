@@ -1,0 +1,25 @@
+@import '../../base/media-queries';
+
+:host .app-logo-image {
+  width: 179px;
+  height: 80px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  margin-left: 186px;
+  
+  @include smalldesktop {
+    margin-left: 50px;
+  }
+  
+  @include tablet {
+    margin-left: 10px;
+  }
+  
+  @include phone {
+    margin-left: 10px;
+  }
+  
+  @include smallphone {
+    margin-left: 10px;
+  }
+}

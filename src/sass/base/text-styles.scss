@@ -1,0 +1,32 @@
+@import '_colors';
+@import '_typography-proxima-nova';
+
+.app-lead-text{
+  @extend %font-proxima-nova-thin;
+  font-size: 30px;
+  color: $dark;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+.app-body-1 {
+  @extend %font-proxima-nova-light;
+  font-size: 24px;
+  color: $grey-2;
+  letter-spacing: 0px;
+}
+
+.app-body-2 {
+  @extend %font-proxima-nova-light;
+  font-size: 14px;
+  color: $grey-3;
+  line-height: 24px;
+}
+
+.app-body-3 {
+  @extend %font-proxima-nova-thin;
+  font-size: 13px;
+  color: $grey-5;
+}
+
+

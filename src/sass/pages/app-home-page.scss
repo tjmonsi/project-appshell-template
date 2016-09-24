@@ -1,0 +1,45 @@
+@import '../base/colors';
+@import '../base/typography-proxima-nova';
+@import '../base/media-queries';
+
+.app-home-page {
+  .block-section-opt-in {
+    background: $brand-color-3;
+    padding: 20px;
+    
+    .opt-in-cta {
+      @include phone {
+        text-align: center;
+        width: 100%;
+        margin-top: 20px;
+      }
+      
+      @include smallphone {
+        text-align: center;
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+    
+    .opt-in-body {
+      @extend %font-proxima-nova-semibold-italic;
+      font-size: 25px;
+      color: $light;
+      letter-spacing: 0px;
+      line-height: 25.6px;
+      text-shadow: $text-shadow-1;
+      max-width: 612px;
+      margin-right: 112px;
+      
+      @include phone {
+        text-align: center;
+        margin-right: 0;
+      }
+      
+      @include smallphone {
+        text-align: center;
+        margin-right: 0;
+      }
+    }
+  }
+}

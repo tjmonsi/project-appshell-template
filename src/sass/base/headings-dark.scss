@@ -1,0 +1,41 @@
+@import '_colors';
+@import '_typography-proxima-nova';
+
+%headline-dark-body {
+  color: $light;
+  text-shadow: $text-shadow-1;
+}
+
+%nav-link-body {
+  @extend %headline-dark-body;
+  font-size: 22px;
+}
+
+.app-headings-dark {
+  @extend %font-proxima-nova-thin;
+  @extend %headline-dark-body;
+  font-size: 45px;
+}
+
+.app-nav-link {
+  @extend %font-proxima-nova-semibold;
+  @extend %nav-link-body;
+  margin-right: 11px;
+  margin-left: 11px;
+  text-transform: uppercase;
+  
+  &.active, &.iron-selected {
+    @extend %font-proxima-nova-bold;
+    @extend %nav-link-body;
+    border-bottom: 1px solid $light;
+    padding-bottom: 12px;
+  }
+  
+  &:hover {
+    @extend %headline-dark-body;
+    text-decoration: none;  
+  }
+  
+}
+
+
