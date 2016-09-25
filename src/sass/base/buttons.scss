@@ -52,13 +52,14 @@
     padding: 2px;
     background: none;
     text-shadow: $text-shadow-2;
+    border: none;
     
     &:hover {
       background: none;
       color: $brand-color-2;
     }
     
-    &[active] {
+    &[active], &.iron-selected {
       background: none;
       color: $brand-color-4;
     }

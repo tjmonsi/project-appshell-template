@@ -1,33 +1,51 @@
 @import 'media-queries';
 
-.phone-only {
-  display: none;
-  
-  @include phone {
-    display: block;
+
+.visibility {
+  &.phone-only {
+    display: none;
+    @include phone {
+      display: block;
+    }
+    &.small-phone-only {
+      @include phone {
+        display: block;
+      }
+      @include smallphone {
+        display: block;
+      }
+    }
   }
   
   &.small-phone-only {
     display: none;
-    
-    @include phone {
-      display: block;
-    }
-    
     @include smallphone {
       display: block;
     }
   }
-}
-
-.small-phone-only {
-  display: none;
   
-  @include smallphone {
-    display: block;
+  &.hide-on-phone {
+    @include phone {
+      display: none;
+    }
+    &.hide-on-small-phone {
+      @include phone {
+        display: none;
+      }
+      @include smallphone {
+        display: none;
+      }
+    }
+  }
+  
+  &.hide-on-small-phone {
+    @include smallphone {
+      display: none;
+    }
   }
 }
 
+
 .wrapper {
-  width: 100%;
+  width: 101%;
 }

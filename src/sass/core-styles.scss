@@ -4,6 +4,7 @@
 @import 'base/headings-dark';
 @import 'base/text-styles';
 @import 'base/section-dark';
+@import 'base/icons';
 @import 'base/visible';
 
 @import 'components/core/core-nav';
@@ -12,8 +13,12 @@
 @import 'components/molecules/app-logo';
 @import 'components/molecules/nav-toolbar';
 @import 'components/molecules/hero-wrapper';
+@import 'components/molecules/list-with-title-block';
+@import 'components/molecules/gallery-item';
 
 @import 'components/organisms/hero-section';
+@import 'components/organisms/block-section';
+@import 'components/organisms/footer-section';
 
 @import 'pages/app-home-page';
 

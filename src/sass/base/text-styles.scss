@@ -1,7 +1,7 @@
 @import '_colors';
 @import '_typography-proxima-nova';
 
-.app-lead-text{
+.app-lead-text {
   @extend %font-proxima-nova-thin;
   font-size: 30px;
   color: $dark;
@@ -28,5 +28,7 @@
   font-size: 13px;
   color: $grey-5;
 }
+
+
 
 

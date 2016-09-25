@@ -1,39 +1,40 @@
 @import '_colors';
 @import '_typography-proxima-nova';
 
-h1 {
+h1.app-headings {
   @extend %font-proxima-nova-light;
   font-size: 45px;
   color: $grey-1;
 }
 
-h2 {
+h2.app-headings {
   @extend %font-proxima-nova-light;
   font-size: 32px;
   color: $dark;
 }
 
-h3 {
+h3.app-headings {
   @extend %font-proxima-nova-light;
   font-size: 26px;
   color: $dark;
 }
 
-h4 {
+h4.app-headings {
   @extend %font-proxima-nova-light;
   font-size: 22px;
   color: $dark;
 }
 
-h5 {
+h5.app-headings {
   @extend %font-proxima-nova-semibold;
   font-size: 18px;
   color: $dark;
 }
 
-h6 {
+h6.app-headings {
   @extend %font-proxima-nova-rg;
   font-size: 14px;
   color: $dark;
 }
+
 

@@ -25,54 +25,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
         position: relative;
-        --app-grid-columns: 3;
       }
       
-      .block-section {
-        position: relative;
+      .block-image-background {
+        width: 100%;
       }
       
-      ul {
-        padding: 0;
-        list-style: none;
+      .block-section-container {
+        width: 100%;
+        overflow: hidden;
       }
       
-      @media(max-width: 900px) {
-        :host {
-          --app-grid-columns: 2;
-        }
-      }
-      
-      @media(max-width: 600px) {
-        :host {
-          --app-grid-columns: 1;
-        }
+      .block-image-overlay {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
       }
     </style>
     
     <app-box 
-      class="block-section" 
+      class="block-section-container" 
       id="block-section" 
       effects="parallax-background"
       effects-config='{"parallax-background": {"scalar": -0.5}}'>
-      <img background src="[[blockImage]]" class="block-image-background" id="block-image-background" />
+      <img background src="[[blockImage]]" class$="block-image-background [[classBackgroundImage]]" id="block-image-background" />
+      <div class$="block-image-overlay [[classBackgroundOverlay]]"></div>
       <content></content>
     </app-box>
-    
-    <!--<div class="block-section" id="block-section-container">-->
-    <!--  <template is="dom-if" if="[[title]]">-->
-    <!--    <block-title center>-->
-    <!--      [[title]]-->
-    <!--    </block-title>  -->
-    <!--  </template>-->
-    <!--  <template is="dom-if" if="[[lead]]">-->
-    <!--    <block-lead center>-->
-    <!--      [[lead]]-->
-    <!--    </block-lead>  -->
-    <!--  </template>-->
-      
-    <!--  <div class="block-section-content" id="block-section-content"></div>-->
-    <!--</div>-->
 
   </template>
 
@@ -81,6 +63,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'block-section',
 
       properties: {
+        classBackgroundImage: {
+          type: String
+        },
+        classBackgroundOverlay: {
+          type: String
+        }
       },
       
       attached: function() {

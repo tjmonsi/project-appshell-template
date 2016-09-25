@@ -1,0 +1,14 @@
+.list-with-title-block {
+  padding: 20px;
+}
+
+.list-block {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  
+  .icon-container {
+    margin-right: 13px;
+    width: 20px;
+  }
+}
