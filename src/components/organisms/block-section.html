@@ -16,9 +16,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../bower_components/app-layout/app-grid/app-grid-style.html">
 <link rel="import" href="../../core-styles.html">
 
-<link rel="import" href="../atoms/block-title.html">
-<link rel="import" href="../atoms/block-lead.html">
-
 <dom-module id="block-section">
   <template>
     <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment app-grid-style">
@@ -52,7 +49,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       effects="parallax-background"
       effects-config='{"parallax-background": {"scalar": -0.5}}'>
       <img background src="[[blockImage]]" class$="block-image-background [[classBackgroundImage]]" id="block-image-background" />
-      <div class$="block-image-overlay [[classBackgroundOverlay]]"></div>
+      <template is="dom-if" if="[[blockImage]]">
+        <div class$="block-image-overlay [[classBackgroundOverlay]]"></div>  
+      </template>
       <content></content>
     </app-box>
 

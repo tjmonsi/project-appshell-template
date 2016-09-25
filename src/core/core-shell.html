@@ -148,7 +148,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         defaultPage: {
           type: String,
-          value: 'home'
+          value: 'app-home'
         },
         default404: {
           type: String,
@@ -329,7 +329,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
         
         // render page
-        this._routePageChanged(this.defaultPage);
+        this._routePageChanged(this.page);
         this._pageChanged(this.page);
         core.select(this.page);
       },

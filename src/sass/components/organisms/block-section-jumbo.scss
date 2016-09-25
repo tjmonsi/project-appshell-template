@@ -1,0 +1,17 @@
+@import '../../base/colors';
+@import '../../base/media-queries';
+
+.block-section {
+  &.block-section-jumbo {
+    padding: 0px;
+    height: 514px;
+    
+    .block-section-jumbo-container {
+      height: 514px;
+    }
+  }
+}
+
+.block-section-jumbo-background-image {
+  height: 650px;
+}
