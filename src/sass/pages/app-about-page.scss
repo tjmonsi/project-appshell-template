@@ -1,0 +1,63 @@
+@import '../base/colors';
+@import '../base/typography-proxima-nova';
+@import '../base/typography-abeezee';
+@import '../base/media-queries';
+
+.app-about-page {
+  .block-section {
+    &.block-section-about {
+      padding: 0px;
+      padding-top: 121px;
+      
+      .app-body-1 {
+        max-width: 849px;
+        text-align: justify;
+      }
+      
+      .about-timeline {
+        width: 100%;
+        z-index: -10;
+      }
+    }
+    
+    &.block-section-about-location {
+      padding: 0px;
+      
+      &.block-section-about-location-1 {
+        background: $brand-color-6;
+      }
+      
+      .about-location-image {
+        max-width: 580px;
+        
+        img: {
+          width: 100%;
+        }
+      }
+      
+      .about-location-text-container {
+        padding-top: 106px;
+        padding-left: 120px;
+        padding-right: 100px;
+        padding-bottom: 135px;
+        
+        .app-body-2 {
+          &.about-location-description {
+            text-align: justify;
+            padding-right: 40px;
+            border-right: 2px solid $grey-4;
+            min-width: 392px;
+          }
+        }
+        
+        .about-location-additional-info {
+          padding-left: 18px;
+          .about-location-additional-info-list {
+            padding: 0;
+            list-style: none;
+          }  
+        }
+      }
+    }
+  }
+}
