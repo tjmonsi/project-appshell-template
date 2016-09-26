@@ -52,12 +52,20 @@
         
         .about-location-additional-info {
           padding-left: 18px;
-          .about-location-additional-info-list {
-            padding: 0;
-            list-style: none;
-          }  
+          
+          .about-location-contact-list {
+            margin-top: 62px;
+            
+            .about-location-contact-list-item {
+              margin-bottom: 20px;
+            }
+          }
         }
       }
+    }
+    
+    &.block-section-faq {
+      background: $brand-color-6;
     }
   }
 }
