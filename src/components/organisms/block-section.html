@@ -40,18 +40,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         left: 0;
         right: 0;
         bottom: 0;
+        display: none;
       }
+      
+      app-box {
+        --block-section-background: none;
+        --block-section-parallax: 100%;
+        --app-box-background-front-layer: {
+          background-image: var(--block-section-background);
+          background-repeat: no-repeat;
+          background-attachment: scroll;
+          height: var(--block-section-parallax);
+          background-position: center;
+          background-size: cover;
+        }
+      }
+      
+      
     </style>
     
     <app-box 
-      class="block-section-container" 
+      class$="block-section-container [[classBlockSectionContainer]]" 
       id="block-section" 
       effects="parallax-background"
       effects-config='{"parallax-background": {"scalar": -0.5}}'>
-      <img background src="[[blockImage]]" class$="block-image-background [[classBackgroundImage]]" id="block-image-background" />
-      <template is="dom-if" if="[[blockImage]]">
-        <div class$="block-image-overlay [[classBackgroundOverlay]]"></div>  
-      </template>
       <content></content>
     </app-box>
 
@@ -62,11 +74,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'block-section',
 
       properties: {
-        classBackgroundImage: {
-          type: String
+        blockImage: {
+          type: String,
+          observer: '_blockImageChanged'
         },
-        classBackgroundOverlay: {
-          type: String
+        parallax: {
+          type: Boolean,
+          observer: '_parallaxChanged'
         }
       },
       
@@ -81,8 +95,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         window.removeEventListener('resize', this._updateGridStyles);
       },
       
+      _blockImageChanged: function(image) {
+        if (image) {
+          this.$$('#block-section').customStyle['--block-section-background'] = 'url('+image+')';
+          this.$$('#block-section').updateStyles()
+          this.$$('#block-section').resetLayout();
+        }
+      },
       
+      _parallaxChanged: function(parallax) {
 
+        this.$$('#block-section').customStyle['--block-section-parallax'] = parallax ? '120%' : '100%';
+        this.$$('#block-section').updateStyles()
+        this.$$('#block-section').resetLayout();
+        
+      }
     });
   </script>
 </dom-module>

@@ -31,9 +31,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     
     <div class="app-booking-page">
       <block-section 
-        class="block-section block-section-jumbo" 
-        block-image="/images/assets/image(1).png"
-        class-background-image="block-section-jumbo-background-image">
+        class="block-section block-section-jumbo"
+        block-image="/images/assets/image1.png"
+        parallax>
+        
         <div class="vertical layout block-section-jumbo-container">
           <div class="flex"></div>
           <content-align center>
@@ -45,9 +46,64 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
       </block-section>
       
-      <block-section class="block-section block-section-booking-opt-in">
+      <block-section 
+        class="block-section block-section-special-opt-in" 
+        block-image="/images/assets/Vector.png">
+        <div class="block-section-special-opt-in-container">
+          <content-align center>
+            <h3 class="booking-opt-in-header">
+              TAKE OUT OR DELIVERY
+            </h3>
+          </content-align>
+          <content-align center wrap vertical-center>
+            <div class="opt-in-body">Grab a glass of wine and wait for the taste of Italy to arrive at your doorstep.</div>
+            <div class="flex visibility phone-only small-phone-only"></div>
+            <div class="wrapper visibility phone-only small-phone-only"></div>
+            <div class="flex visibility phone-only small-phone-only"></div>
+            <div class="opt-in-cta">
+              <a href="#" class="">
+                <paper-button class="app-button">JOIN US</paper-button>  
+              </a>  
+            </div>
+          </content-align>  
+        </div>
         
       </block-section>
+      
+      <block-section 
+        class="block-section block-section-booking"
+        block-image="/images/assets/Image.png"
+        >
+        <content-align center>
+          <h1 class="booking-header">
+            BOOK WITH US
+          </h1>
+        </content-align>
+        <content-align center>
+          <div class="app-lead-text dark">
+            Join us for lunch, your birthday celebration or private event. 
+            At Grazie, we can accommodate all types of occasions, adding our splash of hospitality and warm service. 
+            We invite you to call us with any questions or special requests so that we may serve you better. 
+          </div>
+        </content-align>
+        <content-align center wrap class="booking-buttons">
+          
+          <paper-button class="app-button inverse" >
+            CALL US
+          </paper-button>
+          
+          <div class="booking-spacer visibility hide-on-phone hide-on-small-phone"></div>
+          <div class="flex visibility phone-only small-phone-only"></div>
+          <div class="wrapper visibility phone-only small-phone-only"></div>
+          <div class="flex visibility phone-only small-phone-only"></div>
+          
+          <paper-button class="app-button inverse">
+            EMAIL US
+          </paper-button>
+        </content-align>
+      </block-section>
+      
+      
       
       <footer-section></footer-section>
     </div>

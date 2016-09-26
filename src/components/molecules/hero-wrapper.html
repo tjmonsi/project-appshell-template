@@ -34,13 +34,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .hero-content-container {
         height: 100%;
       }
+      
+      app-box {
+        --block-section-background: none;
+        --block-section-parallax: 100%;
+        --app-box-background-front-layer: {
+          background-image: var(--block-section-background);
+          background-repeat: no-repeat;
+          background-attachment: scroll;
+          height: var(--block-section-parallax);
+          background-position: center;
+          background-size: cover;
+        }
+      }
     </style>
     
     <app-box 
       class="hero-wrapper" 
       effects="parallax-background"
       effects-config='{"parallax-background": {"scalar": -0.5}}'>
-      <img background src="[[heroImage]]" class="hero-image-background" />
+      <!--<img background src="[[heroImage]]" class="hero-image-background" />-->
       <div class="vertical layout hero-content-container">
         <div class="flex"></div>
         <div id="hero-content" class="hero-content">
@@ -59,11 +72,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       properties: {
         heroImage: {
           type: String,
+          observer: '_blockImageChanged'
         },
         parallax: {
           type: Boolean,
           value: false,
-          observer: '_resize'
+          observer: '_parallaxChanged'
         },
         itemHeight: {
           type: Number,
@@ -93,7 +107,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _resize: function() {
         var height = this.windowSize().height;
         this.$$('.hero-wrapper').style.height = height + 'px';
-        this.$$('.hero-image-background').style.height = (this.parallax ? height + 400 : height) + 'px';
+        // this.$$('.hero-image-background').style.height = (this.parallax ? height + 400 : height) + 'px';
         this.itemHeight = height;
       },
       
@@ -105,6 +119,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
       resetLayout: function() {
         this.$$('.hero-wrapper').resetLayout();
+      },
+      
+      _blockImageChanged: function(image) {
+        if (image) {
+          this.$$('.hero-wrapper').customStyle['--block-section-background'] = 'url('+image+')';
+          this.$$('.hero-wrapper').updateStyles()
+          this.$$('.hero-wrapper').resetLayout();
+        }
+      },
+      
+      _parallaxChanged: function(parallax) {
+
+        this.$$('.hero-wrapper').customStyle['--block-section-parallax'] = parallax ? '120%' : '100%';
+        this.$$('.hero-wrapper').updateStyles()
+        this.$$('.hero-wrapper').resetLayout();
+        
       }
       
     });

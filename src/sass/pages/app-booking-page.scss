@@ -1,0 +1,78 @@
+@import '../base/colors';
+@import '../base/typography-proxima-nova';
+@import '../base/typography-alegreya';
+@import '../base/media-queries';
+
+.app-booking-page {
+  .block-section {
+    &.block-section-booking {
+      padding: 0px;
+      
+      .booking-header {
+        @extend %font-proxima-nova-thin;
+        font-size: 45px;
+        color: $light;
+        text-shadow: $text-shadow-1;
+        margin-bottom: 48px;
+        margin-top: 108px;
+        padding-left: 20px;
+        padding-right: 20px;
+        
+        @include phone {
+          font-size: 30px;
+          margin-top: 70px;
+          margin-bottom: 20px;
+        }
+        
+        @include smallphone {
+          font-size: 30px;
+          margin-top: 70px;
+          margin-bottom: 20px;
+        }
+      }
+      
+      .app-lead-text {
+        padding-left: 20px;
+        padding-right: 20px;
+        
+        @include phone {
+          font-size: 20px;
+        }
+        
+        @include smallphone {
+          font-size: 20px;
+        }
+      }
+      
+      .booking-buttons {
+        margin-top: 100px;
+        margin-bottom: 108px;
+        
+        @include phone {
+          margin-top: 10px;
+        }
+        
+        @include smallphone {
+          margin-top: 10px;
+        }
+        
+        .booking-spacer {
+          width: 120px;
+        }
+        
+        .app-button {
+          @include phone {
+            margin-top: 10px;
+            margin-bottom: 10px;
+          }
+          
+          @include smallphone {
+            margin-top: 10px;
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
