@@ -333,6 +333,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         window.addEventListener('resize', this._setOptionsViewerHeight.bind(this));
       },
       
+      detached: function() {
+        window.removeEventListener('resize', this._setOptionsViewerHeight.bind(this));
+      },
+      
       _setOptionActive: function(e) {
         var el = e.target;
         var num = el.getAttribute('data-index') !== null ? el.getAttribute('data-index') : el.parentNode.getAttribute('data-index');

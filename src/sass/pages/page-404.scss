@@ -1,0 +1,53 @@
+@import '../base/colors';
+@import '../base/typography-proxima-nova';
+@import '../base/typography-abeezee';
+@import '../base/media-queries';
+
+.page-404 {
+  .block-section {
+    &.block-section-404 {
+      padding: 0px;
+
+      .heading-404 {
+        @extend %font-proxima-nova-extra-bold;
+        font-size: 75px;
+        color: $light;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+        margin: 0px;
+      }
+      
+      .lead-404 {
+        @extend %font-proxima-nova-rg;
+        font-size: 48px;
+        color: $light;
+        text-align: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: 0px;
+        margin-bottom: 121px;
+        
+        @include phone {
+          font-size: 24px;
+          margin-bottom: 40px;
+        }
+        
+        @include smallphone {
+          font-size: 24px;
+          margin-bottom: 40px;
+        }
+      }
+      
+      .app-button {
+        margin-bottom: 44px;
+      }
+
+      nav-toolbar {
+        margin: 0;
+      }
+      
+      
+    }
+  }
+}

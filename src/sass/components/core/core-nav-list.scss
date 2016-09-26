@@ -1,7 +1,7 @@
 @import '../../base/media-queries';
 
 .core-nav-list-header {
-
+  
   @include tablet {
     display: none;
   }

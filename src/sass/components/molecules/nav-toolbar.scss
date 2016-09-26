@@ -1,10 +1,12 @@
 @import '../../base/media-queries';
 
-:host .nav-toolbar-icon {
-  margin-right: 27px;
+.nav-toolbar-icon {
+  margin-right: 13px;
+  margin-left: 14px;
   
   @include tablet {
-    margin-right: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
   }
   
   @include phone {

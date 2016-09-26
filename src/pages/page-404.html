@@ -16,10 +16,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../core-styles.html">
 
-<link rel="import" href="../components/organisms/block-section.html">
+<link rel="import" href="../components/molecules/hero-wrapper.html">
 <link rel="import" href="../components/organisms/footer-section.html">
 
 <link rel="import" href="../components/atoms/content-align.html">
+<link rel="import" href="../components/molecules/nav-toolbar.html">
+
+<link rel="import" href="../behaviors/utils.html">
 
 <dom-module id="page-404">
   <template>
@@ -30,13 +33,46 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="page-404">
-      
+      <hero-wrapper 
+        class="block-section block-section-404" 
+        hero-image="/images/assets/image1.png">
+        <div class="horizontal layout wrap">
+          <div class="flex block-section-404-container">
+            <content-align center>
+              <h1 class="heading-404">
+                404
+              </h1>
+            </content-align>
+            
+            <content-align center>
+              <h2 class="lead-404">
+                Page not found. Time for a coffee
+              </h2>
+            </content-align>
+            
+            <content-align center>
+              <a href="/">
+                <paper-button class="app-button inverse">
+                  GO HOME
+                </paper-button>  
+              </a>
+              
+            </content-align>
+            
+            <content-align center>
+              <nav-toolbar></nav-toolbar>
+            </content-align>
+          </div>
+          
+          <div class="flex visibility hide-on-phone hide-on-small-phone"></div>
+        </div>
+      </hero-wrapper>
     </div>
   </template>
 
   <script>
     Polymer({
-      is: 'page-404'
+      is: 'page-404',
     });
   </script>
 </dom-module>
