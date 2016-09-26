@@ -1,0 +1,12 @@
+@import '../base/colors';
+@import '../base/typography-proxima-nova';
+@import '../base/typography-alegreya';
+@import '../base/media-queries';
+
+.app-menu-page {
+  .block-section {
+    &.block-section-menu {
+      height: 1701px;
+    }
+  }
+}

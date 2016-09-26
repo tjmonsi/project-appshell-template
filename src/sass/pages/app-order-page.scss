@@ -1,0 +1,85 @@
+@import '../base/colors';
+@import '../base/typography-proxima-nova';
+@import '../base/typography-alegreya';
+@import '../base/media-queries';
+
+.app-order-page {
+  .block-section {
+    &.block-section-takeout-order {
+      padding: 0px;
+      
+      .takeout-header {
+        margin-top: 127px;
+      }
+      
+      .app-headings-dark {
+        font-size: 32px;
+        
+      }
+      
+      .app-lead-text {
+        font-size: 30px;
+        margin-top: 71px;
+      }
+      
+      .selector-location {
+        margin-bottom: 108px;
+        
+        .location-tab-divider {
+          height: 45px;
+          border-right: 1px solid $light;
+        }  
+      }
+      
+      
+    }
+    
+    &.block-section-order {
+      padding: 0px;
+      
+      &.block-section-order-1 {
+        background: $brand-color-6;
+      }
+      
+      .order-content {
+        margin-top: 58px;
+        margin-bottom: 54px;
+      }
+      
+      .option-slide {
+        width: 80%;
+        min-width: 300px;
+        .option-content {
+          min-width: 300px;
+          margin-right: 63px;
+          
+          .app-headings {
+            text-align: center;
+            max-width: 380px;
+            margin-bottom: 34px;
+          }
+          
+          .app-body-1.options-text {
+            font-size: 20px;
+            text-align: center;
+            padding-bottom: 20px;
+            width: 385px;
+          }
+        }
+        
+        .option-spacer {
+          width: 214px;
+        }
+        
+        .options-image {
+          min-width: 300px;
+          margin-left: 5px;
+          margin-right: 5px;
+          img {
+            width: 100%;
+          }
+        }  
+      }
+    }
+  }
+}

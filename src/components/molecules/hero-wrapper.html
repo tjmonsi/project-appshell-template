@@ -43,8 +43,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           background-repeat: no-repeat;
           background-attachment: scroll;
           height: var(--block-section-parallax);
-          background-position: center;
+          background-position: center top;
           background-size: cover;
+          
+          -webkit-animation-name: slideNav;
+          -webkit-animation-iteration-count: 1;
+          -webkit-animation-timing-function: ease-in-out;
+          -webkit-animation-duration: 1s;
+          -webkit-animation-fill-mode:forwards;
+          
+          animation-name: fadeIn;
+          animation-iteration-count: 1;
+          animation-timing-function: ease-in-out;
+          animation-duration: 2s;
+          animation-fill-mode:forwards;
         }
       }
     </style>
@@ -123,9 +135,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
       _blockImageChanged: function(image) {
         if (image) {
-          this.$$('.hero-wrapper').customStyle['--block-section-background'] = 'url('+image+')';
-          this.$$('.hero-wrapper').updateStyles()
-          this.$$('.hero-wrapper').resetLayout();
+          var img = new Image();
+          img.onload = function(){
+            this.$$('.hero-wrapper').customStyle['--block-section-background'] = 'url('+image+')';
+            this.$$('.hero-wrapper').updateStyles()
+            this.$$('.hero-wrapper').resetLayout();
+          }.bind(this)
+          img.src = image;
+          
         }
       },
       

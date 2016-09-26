@@ -73,6 +73,61 @@
         }
       }
     }
+    
+    &.block-section-options {
+      .selector-option {
+        .selector-option-tab {
+          .app-headings {
+            opacity: 0.5;  
+          }
+          
+          &.iron-selected {
+            .app-headings {
+              opacity: 1;  
+            }
+            
+          }
+        }  
+      }
+      
+      .options-viewer {
+        margin-top: 95px;
+        
+        .option-slide {
+          width: 80%;
+          min-width: 300px;
+          .option-content {
+            min-width: 300px;
+            margin-right: 63px;
+            
+            .app-headings {
+              text-align: center;
+              max-width: 380px;
+              margin-bottom: 34px;
+            }
+            
+            .app-body-1.options-text {
+              font-size: 20px;
+              text-align: justify;
+              padding-bottom: 20px;
+            }
+          }
+          
+          .options-image {
+            min-width: 300px;
+            img {
+              width: 100%;
+            }
+          }  
+        }
+      }
+      
+      .options-footnote {
+        margin-top: 53px;
+        margin-bottom: 100px;
+        max-width: 900px;
+      }
+    }
   }
 }
 

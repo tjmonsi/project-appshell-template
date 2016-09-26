@@ -14,12 +14,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
 <link rel="import" href="../core-styles.html">
 
 <link rel="import" href="../components/organisms/block-section.html">
 <link rel="import" href="../components/organisms/footer-section.html">
 
 <link rel="import" href="../components/atoms/content-align.html">
+<link rel="import" href="../components/atoms/selector-align.html">
 
 <dom-module id="app-booking-page">
   <template strip-whitespace>
@@ -73,7 +77,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <block-section 
         class="block-section block-section-booking"
         block-image="/images/assets/Image.png"
-        >
+        parallax >
         <content-align center>
           <h1 class="booking-header">
             BOOK WITH US
@@ -103,7 +107,208 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </content-align>
       </block-section>
       
+      <block-section class="block-section block-section-options">
+        <selector-align 
+          center 
+          vertical-center 
+          wrap 
+          attr-for-selected="data-index" 
+          id="selector-option" 
+          class="selector-option"
+          selected="0">
+          
+          <paper-button data-index="0" class="selector-option-tab" on-tap="_setOptionActive">
+            <h2 class="app-headings">
+              OPTION ONE
+            </h2>
+          </paper-button>
+          
+          <div class="flex visibility phone-only small-phone-only"></div>
+          <div class="wrapper visibility phone-only small-phone-only"></div>
+          <div class="flex visibility phone-only small-phone-only"></div>
+          
+          <paper-button data-index="1" class="selector-option-tab" on-tap="_setOptionActive">
+            <h2 class="app-headings">
+              OPTION TWO
+            </h2>
+          </paper-button>
+          
+          <div class="flex visibility phone-only small-phone-only"></div>
+          <div class="wrapper visibility phone-only small-phone-only"></div>
+          <div class="flex visibility phone-only small-phone-only"></div>
+          
+          <paper-button data-index="2" class="selector-option-tab " on-tap="_setOptionActive">
+            <h2 class="app-headings">
+              OPTION THREE
+            </h2>
+          </paper-button>
+          
+          <div class="flex visibility phone-only small-phone-only"></div>
+          <div class="wrapper visibility phone-only small-phone-only"></div>
+          <div class="flex visibility phone-only small-phone-only"></div>
+          
+          <paper-button data-index="3" class="selector-option-tab" on-tap="_setOptionActive">
+            <h2 class="app-headings">
+              OPTION FOUR
+            </h2>
+          </paper-button>
+
+        </selector-align>
+        
+        <neon-animated-pages
+          selected$="[[optionIndex]]"
+          attr-for-selected="data-index"
+          id="options-viewer"
+          class="options-viewer"
+          entry-animation="fade-in-animation" 
+          exit-animation="fade-out-animation">
+          <content-align center data-index="0">
+            <div class="option-slide horizontal layout wrap center">
+              <div class="flex option-content">
+                <content-align center>
+                  <h2 class="app-headings">
+                    Lunch Reservations
+                  </h2>  
+                </content-align>
+                
+                <div class="app-body-1 options-text">
+                  We accept lunch reservations for any party size anytime between 12:00pm up to 5:00 pm. 
+                  For dinner reservations, we offer a first come, first serve policy, 
+                  but you may call the manager for special requests. 
+                  Simply call us to place your reservation and we’ll try our best to accommodate you.
+                </div>
+              </div>
+              
+              <div class="flex visibility phone-only small-phone-only"></div>
+              <div class="wrapper visibility phone-only small-phone-only"></div>
+              <div class="flex visibility phone-only small-phone-only"></div>
+              
+              <div class="flex options-image">
+                <img src="/images/assets/veal_chop.png">  
+              </div>
+            </div>
+          </content-align>
+          
+          <content-align center data-index="1">
+            <div class="option-slide horizontal layout wrap center">
+              <div class="flex option-content">
+                <content-align center>
+                  <h2 class="app-headings">
+                    Catering
+                  </h2>  
+                </content-align>
+                
+                <div class="app-body-1 options-text">
+                  We offer a specialized catering menu for every occasion and for any party size.  
+                  Our menu features diverse options to satisfy all palettes. We do offer delivery upon request.
+                </div>
+              </div>
+              
+              <div class="flex visibility phone-only small-phone-only"></div>
+              <div class="wrapper visibility phone-only small-phone-only"></div>
+              <div class="flex visibility phone-only small-phone-only"></div>
+              
+              <div class="flex options-image">
+                <img src="/images/assets/veal_chop.png">  
+              </div>
+            </div>
+          </content-align>
+          
+          <content-align center data-index="2">
+            <div class="option-slide horizontal layout wrap center">
+              <div class="flex option-content">
+                <content-align center>
+                  <h2 class="app-headings">
+                    Special Occasions and Private Dining
+                  </h2>  
+                </content-align>
+                
+                <div class="app-body-1 options-text">
+                  For special occasions and private dining, 
+                  we recommend that you make special arrangements with the manager. 
+                  Preset private dining menus are available to fit any budget for any occasion. 
+                  The managers will guide you to ensure that Grazie hosts a successful and memorable event. 
+                  Our venue can accommodate up to 10 to 120 people, depending on which location you are select. 
+                </div>
+              </div>
+              
+              <div class="flex visibility phone-only small-phone-only"></div>
+              <div class="wrapper visibility phone-only small-phone-only"></div>
+              <div class="flex visibility phone-only small-phone-only"></div>
+              
+              <div class="flex options-image">
+                <img src="/images/assets/service.png">  
+              </div>
+            </div>
+          </content-align>
+          
+          <content-align center data-index="3">
+            <div class="option-slide horizontal layout wrap center">
+              <div class="flex option-content">
+                <content-align center>
+                  <h2 class="app-headings">
+                    Group Dining
+                  </h2>  
+                </content-align>
+                
+                <div class="app-body-1 options-text">
+                   We accept group dining reservations for lunch. 
+                   For dinner group dining, we recommend that one person arrives 
+                   30 minutes early to maintain their spot on the wait list. 
+                   We are group-friendly and do our best to accommodate all bookings for group parties up to 5:30pm and after 9:30pm. 
+                   hile waiting for a table, we invite you to relax at the bar area where you can enjoy refreshments before being seated.
+                </div>
+              </div>
+              
+              <div class="flex visibility phone-only small-phone-only"></div>
+              <div class="wrapper visibility phone-only small-phone-only"></div>
+              <div class="flex visibility phone-only small-phone-only"></div>
+              
+              <div class="flex options-image">
+                <img src="/images/assets/veal_chop.png">  
+              </div>
+            </div>
+          </content-align>
+          
+          
+          
+          
+        </neon-animated-pages>
+        
+        <content-align center>
+          <div class="app-body-3 options-footnote">
+            *To ensure that we provide you with an authentic Grazie experience, 
+            all booking inquiries are made at the manager's discretion to ensure 
+            that your group/private booking is a success.  
+            We try to accommodate all requests the best we can, but all bookings are not guaranteed.
+          </div>  
+        </content-align>
+        
+      </block-section>
       
+      <block-section 
+        class="block-section block-section-special-opt-in" 
+        block-image="/images/assets/Vector.png">
+        <div class="block-section-special-opt-in-container">
+          <content-align center>
+            <h3 class="booking-opt-in-header">
+              GIVE THE GIFT OF GRAZIE
+            </h3>
+          </content-align>
+          <content-align center wrap vertical-center>
+            <div class="opt-in-body">Lorem impsum blah blah blah</div>
+            <div class="flex visibility phone-only small-phone-only"></div>
+            <div class="wrapper visibility phone-only small-phone-only"></div>
+            <div class="flex visibility phone-only small-phone-only"></div>
+            <div class="opt-in-cta">
+              <a href="#" class="">
+                <paper-button class="app-button">GIVE A GIFT</paper-button>  
+              </a>  
+            </div>
+          </content-align>  
+        </div>
+        
+      </block-section>
       
       <footer-section></footer-section>
     </div>
@@ -115,6 +320,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     Polymer({
       is: 'app-booking-page',
+      
+      properties: {
+        optionIndex: {
+          type: Number,
+          value: 0
+        }
+      },
+      
+      attached: function() {
+        this._setOptionsViewerHeight();
+        window.addEventListener('resize', this._setOptionsViewerHeight.bind(this));
+      },
+      
+      _setOptionActive: function(e) {
+        var el = e.target;
+        var num = el.getAttribute('data-index') !== null ? el.getAttribute('data-index') : el.parentNode.getAttribute('data-index');
+        this.$$('#selector-option').select(parseInt(num, 10));
+        this.optionIndex = parseInt(num, 10);
+        this._setOptionsViewerHeight();
+      },
+      
+      _setOptionsViewerHeight: function() {
+        setTimeout(function(){
+          var height = this.$$('#options-viewer').selectedItem.children[0].getBoundingClientRect().height;
+          console.log(height, this.$$('#options-viewer').selectedItem.children[0])
+          this.$$('#options-viewer').style.height = height + 'px';
+        }.bind(this), 500)
+        
+      }
     });
   </script>
 </dom-module>

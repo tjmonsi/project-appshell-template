@@ -9,20 +9,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../core-styles.html">
+
+<link rel="import" href="../components/organisms/block-section.html">
+<link rel="import" href="../components/organisms/footer-section.html">
+
+<link rel="import" href="../components/atoms/content-align.html">
 
 <dom-module id="page-404">
   <template>
-    <style include="core-styles polymer-bootstrap">
+    <style include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
       :host {
         display: block;
-
-        padding: 10px 20px;
       }
     </style>
 
-    Oops you hit a 404. <a href="/">Head back to home.</a>
+    <div class="page-404">
+      
+    </div>
   </template>
 
   <script>
