@@ -21,6 +21,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../core-styles.html">
 
+<link rel="import" href="../../behaviors/utils.html">
+
 <dom-module id="gallery-item">
   <template>
     <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
@@ -29,7 +31,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         position: relative;
       }
       
-      :host .gallery-image-background {
+      .gallery-image-background {
         position: absolute;
         width: 100%;
         top: 0px;
@@ -37,13 +39,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 0px;
       }
       
+      .gallery-icon-container:hover {
+        background: rgba(0,0,0,0.5);
+      }
+      
+      /*.gallery-box-container {*/
+      /*  width: 80%;*/
+      /*}*/
+      
     </style>
     
-    <img background src="[[galleryImage]]" class="gallery-image-background" />
+    <img background src="[[galleryImage]]" class="gallery-image-background" on-tap="_openDialog"/>
     <div class="gallery-icon-container horizontal layout center" on-tap="_openDialog">
       <div class="flex"></div>
       <div class="gallery-icon">
-        <paper-icon-button icon$="[[_setIcon(type)]]"></paper-icon-button>    
+        <paper-icon-button icon$="[[_setIcon(type)]]" on-tap="_openDialog"></paper-icon-button>    
       </div>
       <div class="flex"></div>
     </div>
@@ -55,6 +65,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </template>
         <template is="dom-if" if="[[_isVideo(type)]]">
           <google-youtube
+            id="video-container"
             video-id="[[videoId]]"
             height="270px"
             width="480px">
@@ -89,6 +100,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       },
       
+      behaviors: [
+        Polymer.UtilsBehavior
+      ],
+      
+      attached: function() {
+        this._resize();
+        window.addEventListener('resize', this._resize.bind(this));
+      },
+      
+      detached: function() {
+        window.removeEventListener('resize', this._resize.bind(this));
+      },
+      
+      _resize: function() {
+        if (this.$$('#video-container')) {
+          var width = this.windowSize().width;
+          var height = this.windowSize().height;
+          var newWidth = (0.8 * width);
+          var newHeight = (0.8 * height);
+          var scaledWidth = newHeight * (16/9);
+          var scaledHeight = newWidth * (9/16);
+          
+          if (scaledHeight > newHeight) {
+            this.$$('#video-container').width =  scaledWidth  + 'px';
+            this.$$('#video-container').height = newHeight + 'px';
+          } else {
+            this.$$('#video-container').width =  newWidth + 'px';
+            this.$$('#video-container').height = scaledHeight + 'px';
+          }
+        }
+      },
+      
       _setIcon: function(type) {
         if (type === 'video') {
           return 'av:play-circle-outline'
@@ -106,6 +149,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       
       _openDialog: function() {
+        this._resize();
         this.$$('#dialog').open();
       },
 
