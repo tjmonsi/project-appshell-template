@@ -115,8 +115,8 @@
       }
       
       .blockquote-line {
-        border-top: 1px solid $light;
-        width: 100px;
+        border-top: 2px solid $light;
+        width: 51px;
         height: 12px;
         margin-top: 18px;
         margin-bottom: 7px;
@@ -132,6 +132,8 @@
             font-size: 28px;
             color: $light;
             text-shadow: $text-shadow-1;
+            margin-left: 24px;
+            margin-right: 24px;
           }
           
           &:hover {
