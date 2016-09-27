@@ -167,7 +167,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         clearInterval(this._carouselIntervalTrack);
         if (timing && !isNaN(timing)) {
           this._carouselIntervalTrack = setInterval(function() {
-            this._slideLeft();
+            // this._slideLeft();
+            this._fade();
             this.$$('#carousel').selectNext();
             this._carouselIndexChanged(this.$$('#carousel').selected)
           }.bind(this), timing);
