@@ -1,7 +1,7 @@
 @import '../../base/media-queries';
 
 :host {
-  --core-header-rear-background: rgba(255, 255, 255, 0.5);
+  --core-header-rear-background: rgba(255, 255, 255, 0.65);
   --core-drawer-width: 280px;
 }
 
@@ -37,6 +37,17 @@
   .core-drawer {
     .core-drawer-toolbar {
       height: 128px;
+    }
+  }
+}
+
+.core-header[shadow] {
+  .core-header-toolbar-primary {
+    height: 90px;
+    
+    app-logo {
+      margin-bottom: 30px;
+      height: 80px;
     }
   }
 }

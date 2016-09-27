@@ -49,6 +49,21 @@
       padding-left: 0px;
       padding-right: 0px;
       
+      .app-headings {
+        margin-top: 70px;
+        margin-bottom: 20px;
+      }
+      
+      .block-section-divider {
+        margin-top: 0px;
+        margin-bottom: 3px;
+      }
+      
+      .app-lead-text {
+        width: 953px;
+        margin-bottom: 60px;
+      }
+      
       .selector-location {
         .selector-location-tab {
           @extend %font-proxima-nova-light;
