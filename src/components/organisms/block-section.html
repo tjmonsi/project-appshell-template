@@ -46,6 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app-box {
         --block-section-background: none;
         --block-section-parallax: 100%;
+        --block-section-margin: 0;
         --app-box-background-front-layer: {
           background-image: var(--block-section-background);
           background-repeat: no-repeat;
@@ -53,6 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           height: var(--block-section-parallax);
           background-position: center top;
           background-size: cover;
+          margin-top: var(--block-section-margin);
         }
       }
       
@@ -106,7 +108,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
       _parallaxChanged: function(parallax) {
         console.log(parallax)
-        this.$$('#block-section').customStyle['--block-section-parallax'] = parallax ? '120%' : '100%';
+        this.$$('#block-section').customStyle['--block-section-parallax'] = parallax ? '130%' : '100%';
+        this.$$('#block-section').customStyle['--block-section-margin'] = parallax ? '-5%' : '0%';
         this.$$('#block-section').updateStyles()
         this.$$('#block-section').resetLayout();
         
