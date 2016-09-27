@@ -1,6 +1,7 @@
 @import '../../base/media-queries';
 
 .core-nav-list-header {
+  margin-top: 10px;
   
   @include tablet {
     display: none;

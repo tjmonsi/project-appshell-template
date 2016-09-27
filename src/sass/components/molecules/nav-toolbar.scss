@@ -1,22 +1,35 @@
 @import '../../base/media-queries';
 
 .nav-toolbar-icon {
-  margin-right: 13px;
-  margin-left: 14px;
+  width: 44px;
+  height: 44px;
+  
+  &.facebook-icon {
+    margin-right: 27px;
+  }
   
   @include tablet {
-    margin-right: 5px;
-    margin-left: 5px;
+    &.facebook-icon {
+      margin-right: 20px;
+    }
   }
   
   @include phone {
-    margin-right: 0px;
+    &.facebook-icon {
+      margin-right: 10px;
+    }
+  }
+  
+  @include smallphone {
+    &.facebook-icon {
+      margin-right: 5px;
+    }
   }
 }
 
 nav-toolbar {
-  margin-left: 37px;
-  margin-right: 96px;
+  margin-left: 48px;
+  margin-right: 145px;
   display: block;
   
   @include smalldesktop {
