@@ -1,5 +1,6 @@
 @import '_colors';
 @import '_typography-proxima-nova';
+@import '_typography-garamond-pro';
 
 .app-lead-text {
   &.dark {
@@ -14,8 +15,8 @@
 
 h1 {
   &.app-hero-title {
-    @extend %font-proxima-nova-light;
-    font-size: 50px;
+    @extend %font-garamond-pro-bold-italic;
+    font-size: 60px;
     color: $light;
     text-shadow: $text-shadow-2;
     text-align: center;
@@ -23,8 +24,8 @@ h1 {
 }
 
 .app-hero-lead {
-  @extend %font-proxima-nova-rg;
-  font-size: 32px;
+  @extend %font-garamond-pro-bold-italic;
+  font-size: 48px;
   color: $light;
   letter-spacing: 0px;
   text-shadow: $text-shadow-2;
