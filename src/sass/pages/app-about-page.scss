@@ -124,6 +124,39 @@
     
     &.block-section-faq {
       background: $brand-color-6;
+      
+      .faq-list {
+        width: 400px;
+        margin-left: 30px;
+        margin-right: 30px;
+        
+        
+        .faq-item {
+          margin-bottom: 40px;
+          
+          .faq-question {
+            font-size: 18px;
+            @extend %font-proxima-nova-semibold;
+            color: $dark;
+            cursor: pointer;
+          }
+          
+          .faq-answer {
+            margin-top: 10px;
+            @extend %font-proxima-nova-light;
+            color: $grey-3;
+            line-height: 24px;
+            font-size: 16px;
+            display: none;
+          }
+          
+          &.faq-reveal {
+            .faq-answer {
+              display: block;
+            }
+          }
+        }
+      }
     }
   }
 }
