@@ -1,20 +1,65 @@
 .gallery-item-container {
-  width: 480px;
+  min-height: 100px;
+  height: calc(100vw * 480 / 1440);
+    // max-height:270px;
+    
+  @media(max-width: 900px) {
+    height: calc(100vw * 480 / 900);
+  }
+  
+  @media(max-width: 500px) {
+    // min-height: 300px;
+    height: calc(100vw * 480 / 500);
+  }
 }
 
 gallery-item {
   width: 100%;
-  height: 480px;
+  // height: 480px;
+  min-height: 100px;
+  height: calc(100vw * 480 /1440);
+  
+  @media(max-width: 900px) {
+    height: calc(100vw * 480 / 900);
+  }
+  
+  @media(max-width: 500px) {
+    // min-height: 300px;
+    height: calc(100vw * 480 / 500);
+  }
+  
   cursor: pointer;
 }
 
 .gallery-image-background {
-  height: 480px;
+  // height: 480px;
+  min-height: 100px;
+  height: calc(100vw * 480 / 1440);
+  
+  @media(max-width: 900px) {
+    height: calc(100vw * 480 / 900);
+  }
+  
+  @media(max-width: 500px) {
+    // min-height: 300px;
+    height: calc(100vw * 480 / 500);
+  }
   width: 100%;
 }
 
 .gallery-icon-container {
-  height: 480px;
+  // height: 480px;
+  min-height: 100px;
+  height: calc(100vw * 480 / 1440.0);
+  
+  @media(max-width: 900px) {
+    height: calc(100vw * 480 / 900);
+  }
+  
+  @media(max-width: 500px) {
+    // min-height: 300px;
+    height: calc(100vw * 480 / 500);
+  }
   width: 100%;
   top: 0px;
   position: absolute;

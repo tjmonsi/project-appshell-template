@@ -6,6 +6,18 @@ hero-wrapper {
     margin-left: 20px;
     margin-right: 20px;
     max-width: 1000px;
+    
+    @include phone {
+      font-size: 40px;
+    }
+    
+    @include smallphone {
+      font-size: 40px;
+    }
+    
+    @include smallphonelandscape {
+      font-size: 40px;
+    }
   }
   .app-hero-divider {
     border-top: 2px solid $light;
@@ -35,6 +47,18 @@ hero-wrapper {
     max-width: 880px;
     margin-left: 20px;
     margin-right: 20px;
+    
+    @include phone {
+      font-size: 25px;
+    }
+    
+    @include smallphone {
+      font-size: 25px;
+    }
+    
+    @include smallphonelandscape {
+      font-size: 25px;
+    }
   }
 }
 
