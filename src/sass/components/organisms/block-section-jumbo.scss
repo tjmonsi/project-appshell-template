@@ -8,6 +8,22 @@
     
     .block-section-jumbo-container {
       height: 514px;
+      
+      .app-hero-title {
+        padding-left: 20px;
+        padding-right: 20px;
+        @include phone {
+          font-size: 40px;
+        }
+        
+        @include smallphone {
+          font-size: 40px;
+        }
+        
+        @include smallphonelandscape {
+          font-size: 40px;
+        }
+      }
     }
   }
 }

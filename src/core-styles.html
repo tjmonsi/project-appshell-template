@@ -642,6 +642,18 @@ gallery-item {
   height: 514px; }
   .block-section.block-section-jumbo .block-section-jumbo-container {
     height: 514px; }
+    .block-section.block-section-jumbo .block-section-jumbo-container .app-hero-title {
+      padding-left: 20px;
+      padding-right: 20px; }
+      @media (min-width: 350px) and (max-width: 767px) {
+        .block-section.block-section-jumbo .block-section-jumbo-container .app-hero-title {
+          font-size: 40px; } }
+      @media (max-width: 349px) {
+        .block-section.block-section-jumbo .block-section-jumbo-container .app-hero-title {
+          font-size: 40px; } }
+      @media (max-width: 767px) and (orientation: landscape) {
+        .block-section.block-section-jumbo .block-section-jumbo-container .app-hero-title {
+          font-size: 40px; } }
 
 .block-image-background.block-section-jumbo-background-image {
   min-width: 1400px;
@@ -755,33 +767,37 @@ h6.app-headings, .page-404 .block-section.block-section-404 .lead-404 {
         text-align: center;
         margin-right: 0; } }
 
-.app-home-page .block-section.block-section-location {
-  padding-left: 0px;
-  padding-right: 0px; }
-  .app-home-page .block-section.block-section-location .app-lead-text {
-    width: 953px;
-    margin-bottom: 60px; }
-  .app-home-page .block-section.block-section-location .selector-location .selector-location-tab {
-    font-size: 36px;
-    letter-spacing: 0px;
-    color: #417505; }
-    .app-home-page .block-section.block-section-location .selector-location .selector-location-tab.iron-selected {
-      color: #762023; }
-  .app-home-page .block-section.block-section-location .selector-location .location-tab-divider {
-    height: 45px;
-    border-right: 1px solid #417505; }
-  .app-home-page .block-section.block-section-location .home-google-map {
-    height: 300px; }
-  .app-home-page .block-section.block-section-location .contact-list-text {
-    margin-bottom: 12px; }
-  .app-home-page .block-section.block-section-location .day-container {
-    width: 114px;
-    margin-bottom: 16px;
-    text-transform: uppercase; }
-  .app-home-page .block-section.block-section-location .time-container {
-    text-align: right; }
-  .app-home-page .block-section.block-section-location .location-spacer {
-    width: 30px; }
+.app-home-page .block-section.block-section-location .app-lead-text {
+  width: 953px;
+  margin-bottom: 60px; }
+
+.app-home-page .block-section.block-section-location .selector-location .selector-location-tab {
+  font-size: 36px;
+  letter-spacing: 0px;
+  color: #417505; }
+  .app-home-page .block-section.block-section-location .selector-location .selector-location-tab.iron-selected {
+    color: #762023; }
+
+.app-home-page .block-section.block-section-location .selector-location .location-tab-divider {
+  height: 45px;
+  border-right: 1px solid #417505; }
+
+.app-home-page .block-section.block-section-location .home-google-map {
+  height: 300px; }
+
+.app-home-page .block-section.block-section-location .contact-list-text {
+  margin-bottom: 12px; }
+
+.app-home-page .block-section.block-section-location .day-container {
+  width: 114px;
+  margin-bottom: 16px;
+  text-transform: uppercase; }
+
+.app-home-page .block-section.block-section-location .time-container {
+  text-align: right; }
+
+.app-home-page .block-section.block-section-location .location-spacer {
+  width: 30px; }
 
 .app-home-page .block-section.block-section-blockquote {
   padding-left: 0px;
@@ -876,11 +892,12 @@ h6.app-headings, .page-404 .block-section.block-section-404 .lead-404 {
   font-family: "ABeeZee", sans-serif; }
 
 .app-about-page .block-section.block-section-about {
-  padding: 0px;
-  padding-top: 121px; }
+  padding: 0px; }
   .app-about-page .block-section.block-section-about .app-body-1 {
     max-width: 849px;
-    text-align: justify; }
+    text-align: justify;
+    padding-left: 20px;
+    padding-right: 20px; }
   .app-about-page .block-section.block-section-about .about-timeline {
     width: 100%;
     z-index: -10; }
@@ -890,20 +907,62 @@ h6.app-headings, .page-404 .block-section.block-section-404 .lead-404 {
   .app-about-page .block-section.block-section-about-location.block-section-about-location-1 {
     background: #FCFBE3; }
   .app-about-page .block-section.block-section-about-location .about-location-image {
-    max-width: 580px;
-    img-width: 100%; }
+    min-width: 580px; }
+    @media (max-width: 349px) {
+      .app-about-page .block-section.block-section-about-location .about-location-image {
+        max-width: 100%;
+        min-width: 300px; } }
+    @media (min-width: 350px) and (max-width: 767px) {
+      .app-about-page .block-section.block-section-about-location .about-location-image {
+        max-width: 100%;
+        min-width: 300px; } }
+    .app-about-page .block-section.block-section-about-location .about-location-image img {
+      width: 100%; }
   .app-about-page .block-section.block-section-about-location .about-location-text-container {
     padding-top: 106px;
     padding-left: 120px;
     padding-right: 100px;
     padding-bottom: 135px; }
+    .app-about-page .block-section.block-section-about-location .about-location-text-container .app-headings {
+      margin-top: 0px; }
+    @media (max-width: 349px) {
+      .app-about-page .block-section.block-section-about-location .about-location-text-container {
+        padding: 20px;
+        width: 100%; } }
+    @media (min-width: 350px) and (max-width: 767px) {
+      .app-about-page .block-section.block-section-about-location .about-location-text-container {
+        padding: 50px;
+        width: 100%; } }
+    @media (max-width: 349px) {
+      .app-about-page .block-section.block-section-about-location .about-location-text-container .about-location-description-container {
+        width: 100%; } }
+    @media (min-width: 350px) and (max-width: 767px) {
+      .app-about-page .block-section.block-section-about-location .about-location-text-container .about-location-description-container {
+        width: 100%; } }
     .app-about-page .block-section.block-section-about-location .about-location-text-container .app-body-2.about-location-description {
       text-align: justify;
       padding-right: 40px;
-      border-right: 2px solid #979797;
-      min-width: 392px; }
+      border-right: 1px solid #979797;
+      min-width: 392px;
+      padding-bottom: 20px; }
+      @media (max-width: 349px) {
+        .app-about-page .block-section.block-section-about-location .about-location-text-container .app-body-2.about-location-description {
+          min-width: 100%;
+          border-right: 0px;
+          padding-right: 0px; } }
+      @media (min-width: 350px) and (max-width: 767px) {
+        .app-about-page .block-section.block-section-about-location .about-location-text-container .app-body-2.about-location-description {
+          min-width: 100%;
+          border-right: 0px;
+          padding-right: 0px; } }
     .app-about-page .block-section.block-section-about-location .about-location-text-container .about-location-additional-info {
       padding-left: 18px; }
+      @media (max-width: 349px) {
+        .app-about-page .block-section.block-section-about-location .about-location-text-container .about-location-additional-info {
+          padding-top: 20px; } }
+      @media (min-width: 350px) and (max-width: 767px) {
+        .app-about-page .block-section.block-section-about-location .about-location-text-container .about-location-additional-info {
+          padding-top: 20px; } }
       .app-about-page .block-section.block-section-about-location .about-location-text-container .about-location-additional-info .about-location-contact-list {
         margin-top: 62px; }
         .app-about-page .block-section.block-section-about-location .about-location-text-container .about-location-additional-info .about-location-contact-list .about-location-contact-list-item {

@@ -7,11 +7,12 @@
   .block-section {
     &.block-section-about {
       padding: 0px;
-      padding-top: 121px;
       
       .app-body-1 {
         max-width: 849px;
         text-align: justify;
+        padding-left: 20px;
+        padding-right: 20px;
       }
       
       .about-timeline {
@@ -28,9 +29,19 @@
       }
       
       .about-location-image {
-        max-width: 580px;
+        min-width: 580px;
         
-        img: {
+        @include smallphone {
+          max-width: 100%;
+          min-width: 300px;
+        }
+        
+        @include phone {
+          max-width: 100%;
+          min-width: 300px;
+        }
+        
+        img {
           width: 100%;
         }
       }
@@ -41,17 +52,64 @@
         padding-right: 100px;
         padding-bottom: 135px;
         
+        .app-headings {
+          margin-top: 0px;
+        }
+        
+        @include smallphone {
+          padding: 20px;
+          width: 100%;
+        }
+        
+        @include phone {
+          padding: 50px;
+          width: 100%;
+        }
+        
+        .about-location-description-container {
+          @include smallphone {
+            width: 100%;
+            
+          }
+          
+          @include phone {
+            width: 100%;
+          }
+        }
+        
         .app-body-2 {
           &.about-location-description {
             text-align: justify;
             padding-right: 40px;
-            border-right: 2px solid $grey-4;
+            border-right: 1px solid $grey-4;
             min-width: 392px;
+            padding-bottom: 20px;
+            
+            @include smallphone {
+              min-width: 100%;
+              border-right: 0px;
+              padding-right: 0px;
+            }
+            
+            @include phone {
+              min-width: 100%;
+              border-right: 0px;
+              padding-right: 0px;
+            }
           }
         }
         
         .about-location-additional-info {
           padding-left: 18px;
+          
+          @include smallphone {
+            padding-top: 20px;
+            
+          }
+          
+          @include phone {
+            padding-top: 20px;
+          }
           
           .about-location-contact-list {
             margin-top: 62px;
