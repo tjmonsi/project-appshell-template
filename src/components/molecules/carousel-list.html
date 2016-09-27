@@ -15,14 +15,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-left-animation.html">
-<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-right-animation.html">
-<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-top-animation.html">
-<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-bottom-animation.html">
-<link rel="import" href="../../../bower_components/neon-animation/animations/slide-left-animation.html">
-<link rel="import" href="../../../bower_components/neon-animation/animations/slide-right-animation.html">
-<link rel="import" href="../../../bower_components/neon-animation/animations/slide-up-animation.html">
-<link rel="import" href="../../../bower_components/neon-animation/animations/slide-down-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/fade-out-animation.html">
+<!--<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-left-animation.html">-->
+<!--<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-right-animation.html">-->
+<!--<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-top-animation.html">-->
+<!--<link rel="import" href="../../../bower_components/neon-animation/animations/slide-from-bottom-animation.html">-->
+<!--<link rel="import" href="../../../bower_components/neon-animation/animations/slide-left-animation.html">-->
+<!--<link rel="import" href="../../../bower_components/neon-animation/animations/slide-right-animation.html">-->
+<!--<link rel="import" href="../../../bower_components/neon-animation/animations/slide-up-animation.html">-->
+<!--<link rel="import" href="../../../bower_components/neon-animation/animations/slide-down-animation.html">-->
 <link rel="import" href="../../core-styles.html">
 
 <dom-module id="carousel-list">
@@ -205,21 +207,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         
         if (index > this.carouselIndex) {
           if (position === 'side') {
-            this._slideUp();
+            // this._slideUp();
+            this._fade();
           } else {
-            this._slideLeft();
+            // this._slideLeft();
+            this._fade();
           }
         } else {
           if (position === 'side') {
-            this._slideDown();
+            // this._slideDown();
+            this._fade();
           } else {
-            this._slideRight();
+            // this._slideRight();
+            this._fade();
           }
         }
         
         this.carouselIndex = index;
         this.$$('#carousel').select(index);
         this._carouselIntervalChanged(this.carouselInterval);
+      },
+      
+      _fade: function() {
+        this.entryAnimation = 'fade-in-animation';
+        this.exitAnimation = 'fade-out-animation';
       },
       
       _slideUp: function() {
