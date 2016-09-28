@@ -24,6 +24,43 @@
     }
   }
   
+  &.hide-on-tablet {
+    @include tablet {
+      display: none;
+    }
+    
+    &.hide-on-phone {
+      @include phone {
+        display: none;
+      }
+      
+      @include tablet {
+        display: none;
+      }
+      
+      &.hide-on-small-phone {
+        @include phone {
+          display: none;
+        }
+        @include smallphone {
+          display: none;
+        }
+        
+        @include tablet {
+          display: none;
+        }
+      }
+    }
+    
+    &.hide-on-small-phone {
+      @include smallphone {
+        display: none;
+      }
+    }
+    
+    
+  }
+  
   &.hide-on-phone {
     @include phone {
       display: none;

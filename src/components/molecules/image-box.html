@@ -19,7 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../behaviors/utils.html">
 
-<dom-module id="hero-wrapper">
+<dom-module id="image-box">
   <template>
     <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
       :host {
@@ -27,7 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         position: relative;
       }
       
-      .hero-wrapper {
+      .image-box-container {
         width: 100%;
       }
       
@@ -40,6 +40,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         --block-section-parallax: 100%;
         --app-box-background-front-layer: {
           background-image: var(--block-section-background);
+          background-color: #333333;
           background-repeat: no-repeat;
           background-attachment: scroll;
           height: var(--block-section-parallax);
@@ -62,32 +63,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     
     <app-box 
-      class="hero-wrapper" 
+      class="image-box-container" 
       effects="parallax-background"
       effects-config='{"parallax-background": {"scalar": -0.5}}'>
       <!--<img background src="[[heroImage]]" class="hero-image-background" />-->
-      <template is="dom-if" if="[[!noVerticalCenter]]">
-        <div class="vertical layout hero-content-container">
-          <div class="flex"></div>
-          <div id="hero-content" class="hero-content">
-            <content></content>
-          </div>
-          <div class="flex"></div>
-        </div>  
-      </template>
-      <template is="dom-if" if="[[noVerticalCenter]]">
-        <content></content>
-      </template>
+      
+      <content></content>
+
     </app-box>
     
   </template>
 
   <script>
     Polymer({
-      is: 'hero-wrapper',
+      is: 'image-box',
 
       properties: {
-        heroImage: {
+        imageBackground: {
           type: String,
           observer: '_blockImageChanged'
         },
@@ -111,8 +103,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ],
       
       attached: function() {
-        this._resize();
-        window.addEventListener('resize', this._resize.bind(this));
+        // this._resize();
+        // window.addEventListener('resize', this._resize.bind(this));
         
         this._updateGridStyles = this._updateGridStyles || function() {
           this.updateStyles();
@@ -121,34 +113,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       
       detached: function() {
-        window.removeEventListener('resize', this._resize.bind(this));
+        // window.removeEventListener('resize', this._resize.bind(this));
         window.removeEventListener('resize', this._updateGridStyles);
       },
       
-      _resize: function() {
-        var height = this.windowSize().height;
-        this.$$('.hero-wrapper').style.height = height + 'px';
+      // _resize: function() {
+        // console.log(this.getBoundingClientRect())
+        // var height = this.getBoundingClientRect().height;
+        // console.log(height)
+        // console.log(this.getBoundingClientRect().height, this)
+        // this.$$('.image-box-container').style.height = (height) + 'px';
+        
+        // console.log(Polymer.dom(this).getOwnerRoot().host)
+        // var height = Polymer.dom(this.root).getBoundingClientRect().height;
+        // this.$$('.image-box-container').style.height = height + 'px';
         // this.$$('.hero-image-background').style.height = (this.parallax ? height + 400 : height) + 'px';
-        this.itemHeight = height;
-      },
+        // this.itemHeight = height;
+      // },
       
       createEffect: function(a, b) {
-        var x = this.$$('.hero-wrapper').createEffect(a, b);
-        this.$$('.hero-wrapper').resetLayout();
+        var x = this.$$('.image-box-container').createEffect(a, b);
+        this.$$('.image-box-container').resetLayout();
         return x;
       },
       
       resetLayout: function() {
-        this.$$('.hero-wrapper').resetLayout();
+        this.$$('.image-box-container').resetLayout();
       },
       
       _blockImageChanged: function(image) {
         if (image) {
           var img = new Image();
           img.onload = function(){
-            this.$$('.hero-wrapper').customStyle['--block-section-background'] = 'url('+image+')';
-            this.$$('.hero-wrapper').updateStyles()
-            this.$$('.hero-wrapper').resetLayout();
+            this.$$('.image-box-container').customStyle['--block-section-background'] = 'url('+image+')';
+            this.$$('.image-box-container').updateStyles()
+            this.$$('.image-box-container').resetLayout();
           }.bind(this)
           img.src = image;
           
@@ -157,9 +156,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
       _parallaxChanged: function(parallax) {
 
-        this.$$('.hero-wrapper').customStyle['--block-section-parallax'] = parallax ? '120%' : '100%';
-        this.$$('.hero-wrapper').updateStyles()
-        this.$$('.hero-wrapper').resetLayout();
+        this.$$('.image-box-container').customStyle['--block-section-parallax'] = parallax ? '120%' : '100%';
+        this.$$('.image-box-container').updateStyles()
+        this.$$('.image-box-container').resetLayout();
         
       }
       

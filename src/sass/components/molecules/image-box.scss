@@ -1,0 +1,25 @@
+@import '../../base/media-queries';
+@import '../../base/colors';
+
+
+image-box {
+  .image-box-header {
+    // font-family: ProximaNova-Light;
+    font-size: 26px;
+    color: $light;
+    text-shadow: $text-shadow-1;
+  }
+  
+  .block-section-divider {
+    border-top: 1px solid $light;
+  }
+  
+  .image-box-text {
+    // font-family: ProximaNova-Light;
+    font-size: 24px;
+    color: $light;
+    text-shadow: $text-shadow-1;
+    letter-spacing: 0px;
+    // text-shadow: 0px 2px 4px rgba(0,0,0,0.50);
+  }
+}

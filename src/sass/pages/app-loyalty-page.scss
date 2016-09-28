@@ -1,0 +1,221 @@
+@import '../base/colors';
+@import '../base/typography-proxima-nova';
+@import '../base/typography-abeezee';
+@import '../base/media-queries';
+
+.app-loyalty-page {
+  .hero-section {
+    .loyalty-hero-container {
+      .loyalty-hero-text {
+        max-width: 576px;
+        min-width: 350px;
+        margin-bottom: 48px;
+        margin-right: 83px;
+        
+        @include smalldesktop {
+          margin-bottom: 10px;
+          margin-right: 43px;
+        }
+        
+        @include tablet {
+
+          margin-bottom: 10px;
+          margin-right: 23px;
+        }
+        
+        @include phone {
+          margin-right: 0;
+          margin-bottom: 10px;
+          min-width: 280px;
+        }
+        
+        @include smallphone {
+          margin-right: 0;
+          margin-bottom: 10px;
+          min-width: 280px;
+        }
+        
+        .loyalty-hero-header {
+          @extend %font-proxima-nova-light;
+          // font-family: ProximaNova-Light;
+          font-size: 70px;
+          color: $light;
+          letter-spacing: 0px;
+          line-height: 60px;
+          margin-bottom: 41px;
+          padding-left: 20px;
+          padding-right: 20px;
+          
+          @include tablet {
+            font-size: 40px;
+          }
+          
+          @include smalldesktop {
+            font-size: 50px;
+          }
+          
+          @include phone {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+            line-height: 28px;
+          }
+          
+          @include smallphone {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+            line-height: 28px;
+          }
+        }
+        .loyalty-hero-lead {
+          @extend %font-proxima-nova-thin;
+          // font-family: ProximaNovaT-Thin;
+          font-size: 48px;
+          color: $light;
+          letter-spacing: 0px;
+          line-height: 42px;
+          padding-left: 20px;
+          padding-right: 20px;
+          
+          @include tablet {
+            font-size: 16px;
+          }
+          
+          @include smalldesktop {
+            font-size: 24px;
+          }
+          
+          @include phone {
+            font-size: 16px;
+            text-align: center;
+            line-height: 16px;
+          }
+          
+          @include smallphone {
+            font-size: 16px;
+            text-align: center;
+            line-height: 16px;
+          }
+        }
+      }
+      
+      .loyalty-sign-up-form {
+        padding: 55px;
+        padding-top: 30px;
+        background-color: $light;
+        border-radius: 25px;
+        text-align: center;
+        max-width: 440px;
+        min-width: 350px;
+        margin: 0px;
+        margin-bottom: 20px;
+        
+        @include tablet {
+          padding: 20px;
+          padding-top: 20px;
+          margin: 20px;
+        }
+        
+        @include smalldesktop {
+          padding: 20px;
+          padding-top: 20px;
+          margin: 20px;
+        }
+        
+        @include phone {
+          padding: 20px;
+          padding-top: 20px;
+          margin: 20px;
+          min-width: 280px;
+        }
+        
+        @include smallphone {
+          padding: 20px;
+          padding-top: 20px;
+          margin: 20px;
+          min-width: 280px;
+        }
+        
+        .loyalty-sign-up-header {
+          @extend %font-proxima-nova-bold;
+          // font-family: ProximaNova-Bold;
+          font-size: 36px;
+          color: $grey-8;
+          margin-top: 0px;
+          margin-bottom: 32px;
+          
+          @include tablet {
+            font-size: 25px;
+          }
+          
+          @include smalldesktop {
+            font-size: 30px;
+          }
+          
+          @include phone {
+            font-size: 20px;
+            margin-bottom: 16px;
+          }
+          
+          @include smallphone {
+            font-size: 20px;
+            margin-bottom: 16px;
+          }
+        }
+        
+        .input-group {
+          @extend %font-proxima-nova-rg;
+          width: 100%;
+          margin-bottom: 15px;
+          
+          input {
+            width: 100%;
+          }
+        }
+        
+        .loyalty-sign-up-button-container {
+          margin-top: 40px;
+        }
+      }
+    }
+  }
+  
+  .block-section {
+    &.block-section-family-perks {
+      
+      .family-perk-box-group {
+        margin-bottom: 253px;  
+      }
+      
+      .family-perk-box {
+        margin: 16px;
+        min-width: 300px;
+        
+        .family-perk-box-container {
+          padding: 54px;
+          height: 500px;
+          
+          .image-box-header {
+            @extend %font-proxima-nova-light;
+            text-align: center;
+            margin-top: 8px;
+            height: 60px;
+          }
+          
+          .block-section-divider {
+            border-top: 1px solid $light;
+            // margin-top: 51px;
+          }
+          
+          .image-box-text {
+            @extend %font-proxima-nova-light;
+            text-align: center;
+          }
+        }
+        
+        
+      }
+    }
+  }
+}

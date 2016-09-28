@@ -14,35 +14,164 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/app-layout/app-box/app-box.html">
 <link rel="import" href="../core-styles.html">
 
+<link rel="import" href="../components/organisms/hero-section.html">
 <link rel="import" href="../components/organisms/block-section.html">
 <link rel="import" href="../components/organisms/footer-section.html">
 
 <link rel="import" href="../components/atoms/content-align.html">
+<link rel="import" href="../components/atoms/selector-align.html">
+<link rel="import" href="../components/molecules/hero-wrapper.html">
+<link rel="import" href="../components/molecules/image-box.html">
+
 
 <dom-module id="app-loyalty-page">
   <template strip-whitespace>
-    <style include="core-styles polymer-bootstrap iron-flex iron-flex-alignment app-grid-style">
+    <style include="core-styles polymer-bootstrap iron-flex iron-flex-alignment iron-flex-factors">
       :host {
         display: block;
       }
     </style>
     
     <div class="app-loyalty-page">
-      <block-section 
-        class="block-section block-section-jumbo" 
-        block-image="/images/assets/image(1).png"
-        class-background-image="block-section-jumbo-background-image">
-        <div class="vertical layout block-section-jumbo-container">
-          <div class="flex"></div>
-          <content-align center>
-            <h1 class="app-hero-title">
-              WELCOME TO OUR HOME
-            </h1>
-          </content-align>
-          <div class="flex"></div>
+      <hero-section class="hero-section">
+        <hero-wrapper hero-image="/images/assets/Hero_image.png" no-vertical-center parallax>
+          <div class="vertical layout" style="height: 100%">
+            <div class="flex"></div>
+            <div class="loyalty-hero-container">
+              <content-align center wrap vertical-center>
+                <div class="flex-3 loyalty-hero-text">
+                  <h1 class="loyalty-hero-header">
+                    JOIN THE GRAZIE FAMILY
+                  </h1>
+                  <div class="loyalty-hero-lead">
+                    Get the full Grazie experience with updates with the latest offers and events.
+                  </div>
+                </div>
+                
+                <div class="flex visibility phone-only small-phone-only"></div>
+                <div class="wrapper visibility phone-only small-phone-only"></div>
+                <div class="flex visibility phone-only small-phone-only"></div>
+                
+                <div class="flex-3 loyalty-sign-up-form">
+                  <h2 class="loyalty-sign-up-header">
+                    SIGN UP
+                  </h2>
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="First Name" id="first-name" name="first-name">
+                  </div>
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Last Name" id="last-name" name="last-name">
+                  </div>
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Email" id="email" name="email">
+                  </div>
+                  
+                  <content-algin center class="loyalty-sign-up-button-container">
+                    <a href="#">
+                      <paper-button class="app-button">
+                        JOIN
+                      </paper-button>
+                    </a>
+                  </content-algin>
+                </div>
+              </content-align>  
+            </div>
+          </div>
+        </hero-wrapper>
+      </hero-section>
+      
+      <block-section class="block-section block-section-family-perks">
+        <content-align center>
+          <h1 class="app-headings">
+            THE FAMILY PERKS
+          </h1>
+        </content-align>
+        
+        <content-align center>
+          <div class="block-section-divider"></div>
+        </content-align>
+        
+        <content-align center>
+          <div class="app-lead-text">
+            As part of the Grazie family, you can enjoy all the perks for special occasions, 
+            secret menu updates, exclusive events and much more!
+          </div>
+        </content-align>
+        
+        <div class="family-perk-box-group wrap horizontal layout">
+          <div class="flex visibility hide-on-phone hide-on-small-phone  hide-on-tablet"></div>
+          <image-box class="flex-2 image-box family-perk-box">
+            <div class="family-perk-box-container">
+              <h3 class=" image-box-header">
+                BIRTHDAYS
+              </h3>
+              <content-align  center>
+                <div class="block-section-divider"></div>
+              </content-align>
+              <div class=" image-box-text">
+                Our loyalty program brings you an unforgettable birthday with the ultimate Grazie experience.
+              </div>  
+            </div>
+            
+          </image-box>
+          
+          <!--<div class="flex visibility phone-only small-phone-only"></div>-->
+          <div class="wrapper visibility phone-only small-phone-only"></div>
+          <!--<div class="flex visibility phone-only small-phone-only"></div>-->
+          
+          <image-box class="flex-2 image-box family-perk-box">
+            <div class="family-perk-box-container">
+              <h3 class=" image-box-header">
+                ANNIVERSARYS
+              </h3>
+              <content-align  center>
+                <div class="block-section-divider"></div>
+              </content-align>
+              <div class=" image-box-text">
+                Celebrate your special life milestones with the warmth and ambiance of Grazie.
+              </div>
+            </div>
+            
+          </image-box>
+          
+          <!--<div class="flex visibility phone-only small-phone-only"></div>-->
+          <div class="wrapper visibility phone-only small-phone-only"></div>
+          <!--<div class="flex visibility phone-only small-phone-only"></div>-->
+          
+          <image-box class="flex-2 image-box family-perk-box">
+            <div class="family-perk-box-container">
+              <h3 class=" image-box-header">
+                SPECIAL NEWS AND EVENTS
+              </h3>
+              <content-align  center>
+                <div class="block-section-divider"></div>
+              </content-align>
+              <div class=" image-box-text">
+                Stay updated with our latest news and events, inviting you to grow with the Grazie family. 
+              </div>
+            </div>
+            
+          </image-box>
+          
+          <div class="flex visibility hide-on-phone hide-on-small-phone hide-on-tablet"></div>
+          <!--<app-box class="flex-2 family-perk">-->
+          <!--  <img background src="picture.png" style="width: 100%; height: 600px;">-->
+          <!--</app-box>-->
+          
+          <!--<app-box class="flex-2 family-perk">-->
+            
+          <!--</app-box>-->
+          
+          <!--<app-box class="flex-2 family-perk">-->
+            
+          <!--</app-box>-->
+          
         </div>
+          
+        
       </block-section>
      
       
