@@ -4,7 +4,7 @@ var concat = require('gulp-concat-util');
 // var replace = require('gulp-replace');
 var tap = require('gulp-tap');
 var path = require('path');
-var polymer = '../../bower_components/polymer/polymer.html';
+var polymer = '../bower_components/polymer/polymer.html';
 
 gulp.task('default', ['css-index-compile', 'css-compile']);
 
