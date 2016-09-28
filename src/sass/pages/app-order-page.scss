@@ -5,23 +5,28 @@
 
 .app-order-page {
   .block-section {
+    
+    &.block-section-special-opt-in {
+      background: $brand-color-6;
+      
+      .block-section-special-opt-in-container {
+        margin-top: 25px;
+        margin-bottom: 30px;
+      }
+    }
+    
     &.block-section-takeout-order {
       padding: 0px;
       
       .takeout-header {
-        margin-top: 127px;
+        margin-top: 119px;
         width: 557px;
         text-align: center;
       }
       
       .app-headings-dark {
-        font-size: 32px;
+        font-size: 45px;
         
-      }
-      
-      .app-lead-text {
-        font-size: 30px;
-        margin-top: 71px;
       }
       
       .selector-location {
@@ -30,7 +35,13 @@
         .location-tab-divider {
           height: 45px;
           border-right: 1px solid $light;
-        }  
+        }
+        
+        .selector-location-tab {
+          &.app-headings-dark {
+            font-size: 32px;
+          }
+        }
       }
       
       

@@ -6,6 +6,18 @@
   &.block-section-special-opt-in {
     padding: 0px;
     
+    .left-image {
+      margin-right: 69px;
+      
+      @include phone {
+        margin-right: 0px;
+      }
+      
+      @include smallphone {
+        margin-right: 0px;
+      }
+    }
+    
     .block-section-special-opt-in-container {
       margin-top: 32px;
       margin-bottom: 45px;
@@ -19,6 +31,7 @@
       line-height: 20px;
       text-align: center;
       margin-bottom: 29px;
+      margin-top: 0px;
       
     }
     
