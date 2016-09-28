@@ -15,6 +15,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../core-styles.html">
 
+<link rel="import" href="../molecules/nav-toolbar.html">
+<link rel="import" href="../atoms/content-align.html">
+
 <dom-module id="footer-section">
   <template>
     <style is="custom-style" include="core-styles polymer-bootstrap iron-flex iron-flex-alignment">
@@ -23,16 +26,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     
-    <footer class="footer horizontal layout center">
+    <footer class="footer vertical layout center">
       <div class="flex">
         
       </div>
-      <div class="footer-text">
-        FOOTER
-      </div>
-      <div class="flex">
-        
-      </div>
+      <content-align center>
+        <nav-toolbar></nav-toolbar>
+      </content-align>
+      
+      <content-align center vertical-center>
+        <a href="#" class="footer-anchor">
+          PRIVACY
+        </a>
+        <div class="footer-divider">
+          
+        </div>
+        <a href="#" class="footer-anchor">
+          LEGAL
+        </a>
+      </content-align>
+      
+      <content-align center class="footer-copyright">
+        Copyright Grazie Ristorate
+      </content-align>
     </footer>
       
   </template>
