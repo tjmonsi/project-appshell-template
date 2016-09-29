@@ -2,6 +2,50 @@
 
 
 .visibility {
+  
+  &.tablet-only {
+    display: none;
+    
+    @include tablet {
+      display: block;
+    }
+    
+    &.phone-only {
+      display: none;
+      
+      @include tablet {
+        display: block;
+      }
+      
+      @include phone {
+        display: block;
+      }
+      &.small-phone-only {
+        
+        @include tablet {
+          display: block;
+        }
+        
+        @include phone {
+          display: block;
+        }
+        @include smallphone {
+          display: block;
+        }
+      }
+    }
+    
+    &.hide-on-small-phone {
+      @include tablet {
+        display: block;
+      }
+      
+      @include smallphone {
+        display: none;
+      }
+    }
+  }
+  
   &.phone-only {
     display: none;
     @include phone {

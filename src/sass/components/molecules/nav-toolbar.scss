@@ -46,11 +46,6 @@ nav-toolbar {
     margin-right: 10px;
     margin-left: 10px;
   }
-  
-  .core-header-toolbar-primary & {
-    @include smallphone {
-      display: none;
-    }
-  }
+
 }
 

@@ -51,24 +51,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <core-shell 
       id="core-shell" 
       default-page="[[defaultPage]]"
-      pages="[[pages]]"
+      default-not-found="[[default404]]"
+      navigation-list="{{navigationList}}"
+      scroll-progress="{{scrollProgress}}"
       >
-      <core-nav id="core-nav">
-        <app-logo
-          main-title
-          logo-url="/"
-          logo-image="/images/assets/Brand_Logo.png">
-        </app-logo>
-        
-        <core-nav-list navigation nav-class-header="app-nav-link" ></core-nav-list>
-        
-        <nav-toolbar scroll-progress></nav-toolbar>
-        <div class="nav-right-spacer"></div>
-      </core-nav>
+      <app-logo
+        main-title
+        logo-url="/"
+        logo-image="/images/assets/Brand_Logo.png">
+      </app-logo>
       
-      <core-content id="core-content">
-        <!-- put pages here that is 'static' or not being loaded dynamically from pages.json -->
-      </core-content>
+      <core-nav-list
+        navigation
+        navigation-list="[[navigationList]]" 
+        nav-class-header="app-nav-link" 
+        primary-toolbar 
+        drawer-content
+        scroll-progress="[[scrollProgress]]">
+        
+      </core-nav-list>
+      
+      <nav-toolbar 
+        class="visibility hide-on-small-phone hide-on-phone"
+        primary-toolbar 
+        drawer-content>
+      </nav-toolbar>
+      <div class="nav-right-spacer"></div>
     </core-shell>
   </template>
 
@@ -87,8 +95,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         navigationList: {
           type: Array,
-          value: []
+          value: [],
+          observer: '_check'
+        },
+        finishLoadingPages: {
+          type: Boolean,
+          value: false
+        },
+        default404: {
+          type: String
+        },
+        scrollProgress: {
+          type: Number,
+          reflectToAttribute: true
         }
+      },
+      
+      _check: function(e) {
+        console.log(e);
       },
       
       handleResponse: function(e) {
@@ -99,17 +123,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.defaultPage = data['default-page'];
           }
           
+          if(data['default-404']) {
+            this.default404 = data['default-404'];
+          }
+          
           if (data.pages) {
             this.pages = data.pages;
             for (var i in data.pages) {
               var el = document.createElement(data.pages[i]['element-tag']);
               el.setAttribute('name', data.pages[i]['url-slug']);
               el.setAttribute('label', data.pages[i].label);
-              this.$$('#core-content').appendChild(el);
+              el.setAttribute('source', data.pages[i]['source-file']);
+              if (data.pages[i]['not-included-in-links']) {
+                el.setAttribute('not-included-in-links', '');
+              }
+              el.setAttribute('page', '');
+              this.$$('#core-shell').appendChild(el);
             }
+            
           }
+          
         }
-        this.$$('#core-shell').finishLoadingPages = true;
+        
       }
     });
   </script>

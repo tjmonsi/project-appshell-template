@@ -326,6 +326,35 @@ h1.app-hero-title {
   width: 14px;
   height: 19px; }
 
+.visibility.tablet-only {
+  display: none; }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .visibility.tablet-only {
+      display: block; } }
+  .visibility.tablet-only.phone-only {
+    display: none; }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .visibility.tablet-only.phone-only {
+        display: block; } }
+    @media (min-width: 350px) and (max-width: 767px) {
+      .visibility.tablet-only.phone-only {
+        display: block; } }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .visibility.tablet-only.phone-only.small-phone-only {
+        display: block; } }
+    @media (min-width: 350px) and (max-width: 767px) {
+      .visibility.tablet-only.phone-only.small-phone-only {
+        display: block; } }
+    @media (max-width: 349px) {
+      .visibility.tablet-only.phone-only.small-phone-only {
+        display: block; } }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .visibility.tablet-only.hide-on-small-phone {
+      display: block; } }
+  @media (max-width: 349px) {
+    .visibility.tablet-only.hide-on-small-phone {
+      display: none; } }
+
 .visibility.phone-only {
   display: none; }
   @media (min-width: 350px) and (max-width: 767px) {
@@ -487,9 +516,6 @@ nav-toolbar {
     nav-toolbar {
       margin-right: 10px;
       margin-left: 10px; } }
-  @media (max-width: 349px) {
-    .core-header-toolbar-primary nav-toolbar {
-      display: none; } }
 
 hero-wrapper .app-hero-title {
   margin-left: 20px;
@@ -723,11 +749,17 @@ image-box .image-box-text {
   padding: 0px; }
   .block-section.block-section-special-opt-in .left-image {
     margin-right: 69px; }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .block-section.block-section-special-opt-in .left-image {
+        margin-top: 20px;
+        margin-right: 0px; } }
     @media (min-width: 350px) and (max-width: 767px) {
       .block-section.block-section-special-opt-in .left-image {
+        margin-top: 20px;
         margin-right: 0px; } }
     @media (max-width: 349px) {
       .block-section.block-section-special-opt-in .left-image {
+        margin-top: 20px;
         margin-right: 0px; } }
   .block-section.block-section-special-opt-in .block-section-special-opt-in-container {
     margin-top: 32px;

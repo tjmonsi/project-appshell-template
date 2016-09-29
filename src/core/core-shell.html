@@ -89,13 +89,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <neon-animated-pages
       selected$="[[page]]"
       attr-for-selected="name"
-      fallback-selection="[[default404]]"
+      fallback-selection="[[defaultNotFound]]"
       role="main"
       id="core-content"
       entry-animation="[[entryAnimation]]" 
       exit-animation="[[exitAnimation]]">
-      <page-404 name$="[[default404]]" id="default-404" not-included-in-links></page-404>
-      
+      <!--<page-404 name$="[[default404]]" id="default-404" not-included-in-links></page-404>-->
+      <content select="[page]"></content>
     </neon-animated-pages>
     
     <app-header fixed$="[[headerFixed]]" id="core-header" class="core-header" effects$="[[headerEffects]]">
@@ -107,8 +107,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             id="drawer-toggle-button"
             on-tap="toggleDrawer" 
             class$="drawer-toggle-button [[_scrollProgressChangedForDrawerToggleButton(scrollProgress)]]">
-          </paper-icon-button>  
+          </paper-icon-button>
         </div>
+        <content select="[main-title]"></content>
+        <content select="[primary-toolbar]"></content>
       </app-toolbar>
     </app-header>
     
@@ -150,13 +152,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: String,
           value: 'app-home'
         },
-        default404: {
+        defaultNotFound: {
           type: String,
           value: 'page-404'
         },
         scrollProgress: {
           type: Number,
-          value: 0
+          value: 0,
+          notify: true
         },
         scrollProgressThreshold: {
           type: Number,
@@ -174,6 +177,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: Object,
           notify: true,
           value: {}
+        },
+        navigationList: {
+          type: Array,
+          notify: true,
+          value: []
         },
         navigationElements: {
           type: Array,
@@ -210,23 +218,50 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * 
        * */
       attached: function() {
-        var elements = Polymer.dom(this).getEffectiveChildNodes();
-        for (var i in elements) {
-          if (elements[i].tagName && elements[i].tagName === 'CORE-NAV') {
-            var navelarr = Polymer.dom(elements[i]).getEffectiveChildNodes();
-            this._addToCoreNav(navelarr);
-          } else if (elements[i].tagName && elements[i].tagName === 'CORE-CONTENT') {
-            var pages = Polymer.dom(elements[i]).getEffectiveChildNodes();
-            this._addToCoreContent(pages);
-            Polymer.dom(elements[i]).observeNodes(function(info) {
-              if (this.pages && this.pages.length > 0) {
-                this.finishLoadingPages = true;
+        this._observer = Polymer.dom(this).observeNodes(function(info) {
+          var array = [];
+          for (var i in info.addedNodes) {
+            var el = info.addedNodes[i];
+            if (el && el.hasAttribute) {
+              if (el.hasAttribute('page')) {
+                array.push(el);
+                if (!el.hasAttribute('not-included-in-links')) {
+                  var name = el.getAttribute('name');
+                  var label = el.getAttribute('label');
+                  this.set('navigationObject.' + name, {
+                    url: name ? '/' + name : '#',
+                    label: label ? label : 'Link',
+                    name: name ? name : 'name'
+                  });  
+                }
+              } else if (el.hasAttribute('main-title')) {
+                var clone = el.cloneNode(true);
+                this.$$('#core-drawer-toolbar').appendChild(clone)
+              } else if (el.hasAttribute('drawer-content')) {
+                var clone = el.cloneNode(true);
+                if (clone.hasAttribute('navigation')) {
+                  this.navigationElements.push(clone);
+                }
+                clone.setAttribute('is-drawer', '');
+                this.$$('#core-drawer').appendChild(clone);
               }
-              
-              this._addToCoreContent(info.addedNodes);
-            }.bind(this));
+            } 
+            
           }
-        }
+          if (array.length) {
+            var navigationList = [];
+            for (var l in this.navigationObject) {
+              navigationList.push(this.navigationObject[l]);
+            }
+            this.set('navigationList', navigationList);
+            for (var m in this.navigationElements) {
+              this.navigationElements[m].navigationList = navigationList;
+            }
+            
+            
+            this._setupPages(array);
+          }
+        }.bind(this));
         window.addEventListener('scroll', this.scrollHeaderEffect.bind(this));
         this.scrollHeaderEffect();
       },
@@ -237,101 +272,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         window.removeEventListener('scroll', this.scrollHeaderEffect.bind(this));
       },
       
-      _addToCoreNav: function(navelarr) {
-        for (var j in navelarr) {
-          var navel = navelarr[j];
-          var navelheader = Polymer.dom(navel).cloneNode(true);
-          var naveldrawer = Polymer.dom(navel).cloneNode(true);
-          
-          if (navel.hasAttribute && navel.hasAttribute('navigation')) {
-            this.push('navigationElements', navelheader);
-            this.push('navigationElements', naveldrawer);
-            navelheader.page = this.page;
-            naveldrawer.page = this.page;
-            naveldrawer.isDrawer = true;
-          }
-          
-          if ((navel.tagName && navel.tagName === 'APP-TOOLBAR')) {
-            
-            if (navel.hasAttribute && navel.hasAttribute('primary')) {
-              var toolelarr = Polymer.dom(navel).getEffectiveChildNodes();
-              for (var k in toolelarr) {
-                var toolel = toolelarr[k];
-                var toolelheader = Polymer.dom(toolel).cloneNode(true);
-                var tooleldrawer = Polymer.dom(toolel).cloneNode(true);
-                
-                if (toolel.hasAttribute && toolel.hasAttribute('navigation')) {
-                  this.push('navigationElements', toolelheader);
-                  this.push('navigationElements', tooleldrawer);
-                  toolelheader.page = this.page;
-                  tooleldrawer.page = this.page;
-                  tooleldrawer.isDrawer = true;
-                }
-                
-                this.$$('#core-header-toolbar-primary').appendChild(toolelheader);
-                
-                if (toolel[k].hasAttribute && toolel[k].hasAttribute('main-title')) {
-                  this.$$('#core-drawer-toolbar').appendChild(tooleldrawer);
-                } else if (toolel[k].hasAttribute && !toolel[k].hasAttribute('not-include-in-drawer')) {
-                  this.$$('#core-drawer').appendChild(tooleldrawer);
-                }
-              }
-            } else {
-              
-              if (navel.hasAttribute && !navel.hasAttribute('not-include-in-drawer')) {
-                this.$$('#core-drawer').appendChild(naveldrawer);
-              }
-              if (navel.hasAttribute && !navel.hasAttribute('not-include-in-header')) {
-                this.$$('#core-header').appendChild(navelheader);
-              }
-            }
-          } else {
-            if (navel.hasAttribute && navel.hasAttribute('main-title')) {
-              this.$$('#core-drawer-toolbar').appendChild(naveldrawer);
-            } else if (navel.hasAttribute && !navel.hasAttribute('not-include-in-drawer')) {
-              this.$$('#core-drawer').appendChild(naveldrawer);
-            }
-            if (navel.hasAttribute && !navel.hasAttribute('not-include-in-header')) {
-              this.$$('#core-header-toolbar-primary').appendChild(navelheader);
-            }
-          }
-        }
+      _loadPage: function() {
+        this.finishLoadingPages = true;
       },
       
-      _addToCoreContent: function(pages) {
-        var core = this.$$('#core-content');
-        for (var j in pages) {
-          if (pages[j].getAttribute) {
-            Polymer.dom(core).appendChild(pages[j]);  
-          }
-        }
-        var list = core.getEffectiveChildNodes();
-        for (var k in list) {
-          if (list[k].getAttribute) {
-            var name = list[k].getAttribute('name');
-            var label = list[k].getAttribute('label');
-            if (!list[k].hasAttribute('not-included-in-links')) {
-              this.set('navigationObject.' + name, {
-                url: name ? '/' + name : '#',
-                label: label ? label : 'Link',
-                name: name ? name : 'name'
-              });  
-            }  
-          }
-          
-        }
-        var navigationList = [];
-        for (var l in this.navigationObject) {
-          navigationList.push(this.navigationObject[l]);
-        }
-        for (var m in this.navigationElements) {
-          this.navigationElements[m].navigationList = navigationList;
-        }
+      _setupPages: function(pages) {
+        this.finishLoadingPages = true;
+
+        setTimeout(function(){
+          this.$$('#core-content').select(this.page);
+          this._pageChanged(this.page);
+        }.bind(this), 500)
         
-        // render page
-        this._routePageChanged(this.page);
-        this._pageChanged(this.page);
-        core.select(this.page);
       },
       
       scrollHeaderEffect: function() {
@@ -343,18 +295,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         fadeBackgroundEffect.run(isCondensed ? 1 : 0);
         appHeader.shadow = isCondensed;
         this.scrollProgress = progress;
-        var children = appHeader.getEffectiveChildNodes();
-
-        for (var i in children) {
-          var el = children[i];
-          el.scrollProgress = progress;
-          el.scrollProgressThreshold = this.scrollProgressThreshold;
-          var childel = Polymer.dom(el).getEffectiveChildNodes();
-          for (var j in childel) {
-            childel[j].scrollProgress = progress;
-            childel[j].scrollProgressThreshold = this.scrollProgressThreshold;
-          }
-        }
+        
         
       },
 
@@ -366,25 +307,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _pageChanged: function(page) {
-        // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('../pages/' + page + '.html');
-        // console.log(this.pages)
-        if (this.pages && this.pages.length > 0) {
-          // console.log(this.pages)
-          var obj = _.findWhere(this.pages, {'url-slug': page});
-          if (obj && obj['source-file']) {
-            // console.log(obj['so'])
-            resolvedPageUrl = this.resolveUrl(obj['source-file']);
-          }
-        }
-        // console.log(resolvedPageUrl)
-        if (this.finishLoadingPages) {
-          this.importHref(resolvedPageUrl, null, this._showPage404, true);  
+        var el = this.$$('#core-content').selectedItem;
+        if (el) {
+          console.log(el.getAttribute('source'))
+          var resolvedPageUrl = this.resolveUrl(el.getAttribute('source'));
+          this.importHref(resolvedPageUrl, null, this._showPage404, true);
+        } else if (this.finishLoadingPages) {
+          this._showPage404()
         }
       },
 
       _showPage404: function() {
-        this.page = this.default404;
+        this.page = this.defaultNotFound;
       },
       
       _computeMediaTabletQuery: function() {

@@ -1,11 +1,12 @@
 {
   "default-page": "app-home",
+  "default-404": "page-404",
   "pages" : [
     {  
       "label" : "Home",
       "element-tag": "app-home-page",
       "source-file" : "/src/pages/app-home.html",
-      "url-slug": "app-home",
+      "url-slug": "home",
       "description" : "string",
       "keywords" : []
     },
@@ -13,7 +14,7 @@
       "label" : "About",
       "element-tag": "app-about-page",
       "source-file" : "/src/pages/app-about.html",
-      "url-slug": "app-about",
+      "url-slug": "about",
       "description" : "string",
       "keywords" : []
     },
@@ -21,7 +22,7 @@
       "label" : "Menu",
       "element-tag": "app-menu-page",
       "source-file" : "/src/pages/app-menu.html",
-      "url-slug": "app-menu",
+      "url-slug": "menu",
       "description" : "string",
       "keywords" : []
     },
@@ -29,7 +30,7 @@
       "label" : "Booking",
       "element-tag": "app-booking-page",
       "source-file" : "/src/pages/app-booking.html",
-      "url-slug": "app-booking",
+      "url-slug": "booking",
       "description" : "string",
       "keywords" : []
     },
@@ -37,7 +38,7 @@
       "label" : "Order",
       "element-tag": "app-order-page",
       "source-file" : "/src/pages/app-order.html",
-      "url-slug": "app-order",
+      "url-slug": "order",
       "description" : "string",
       "keywords" : []
     },
@@ -45,9 +46,18 @@
       "label" : "Loyalty",
       "element-tag": "app-loyalty-page",
       "source-file" : "/src/pages/app-loyalty.html",
-      "url-slug": "app-loyalty",
+      "url-slug": "loyalty",
       "description" : "string",
       "keywords" : []
+    },
+    {  
+      "label" : "Page 404",
+      "element-tag": "page-404",
+      "source-file" : "/src/pages/page-404.html",
+      "url-slug": "page-404",
+      "description" : "string",
+      "keywords" : [],
+      "not-included-in-links": true
     }
   ]
 } 

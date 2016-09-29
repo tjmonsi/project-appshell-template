@@ -9,11 +9,18 @@
     .left-image {
       margin-right: 69px;
       
+      @include tablet {
+        margin-top: 20px;
+        margin-right: 0px;
+      }
+      
       @include phone {
+        margin-top: 20px;
         margin-right: 0px;
       }
       
       @include smallphone {
+        margin-top: 20px;
         margin-right: 0px;
       }
     }
