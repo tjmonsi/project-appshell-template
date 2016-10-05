@@ -17,6 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../bower_components/app-layout/app-box/app-box.html">
 <link rel="import" href="../../../bower_components/iron-icons/av-icons.html">
 <link rel="import" href="../../../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../core-styles.html">
@@ -59,6 +60,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
     
     <paper-dialog id="dialog" class="gallery-box" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
+      <div class="horizontal layout">
+        <div class="flex"></div>
+        <div class="">
+          <paper-icon-button icon="close" on-tap="_closeDialog"></paper-icon-button>
+        </div>
+      </div>
       <div class="gallery-box-container">
         <template is="dom-if" if="[[_isImage(type)]]">
           <img src$="[[galleryFullImage]]" style="width: 100%">
@@ -152,6 +159,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this._resize();
         this.$$('#dialog').open();
       },
+      
+      _closeDialog: function() {
+        this.$$('#dialog').close();
+      }
 
     });
   </script>

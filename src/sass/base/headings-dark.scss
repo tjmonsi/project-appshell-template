@@ -31,7 +31,7 @@
   &.active, &.iron-selected {
     @extend %nav-link-body;
     font-weight: bold;
-    border-bottom: 1px solid $light;
+    border-bottom: 3px solid $light;
     padding-bottom: 12px;
     text-decoration: none;
     font-size: 18px;

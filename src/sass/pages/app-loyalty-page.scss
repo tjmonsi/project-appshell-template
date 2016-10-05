@@ -168,9 +168,14 @@
           @extend %font-proxima-nova-rg;
           width: 100%;
           margin-bottom: 15px;
+          z-index: 0 !important;
           
           input {
             width: 100%;
+          }
+          
+          &.last-input-group {
+            margin-bottom: 40px;
           }
         }
         

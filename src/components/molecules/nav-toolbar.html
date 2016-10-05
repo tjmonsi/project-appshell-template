@@ -25,11 +25,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     
     <div class="horizontal layout">
-      <a href="#" tabindex="-1" class="nav-toolbar-anchor">
-        <paper-icon-button src="/images/assets/facebook_F@2x.png" class="nav-toolbar-icon facebook-icon"></paper-icon-button>
+      <a href="#" tabindex="-1" class="nav-toolbar-anchor ">
+        <paper-icon-button src="/images/assets/facebook_F@2x.png" class$="nav-toolbar-icon facebook-icon [[_checkFooter(footer)]]"></paper-icon-button>
       </a>
       <a href="#" tabindex="-1" class="nav-toolbar-anchor">
-        <paper-icon-button src="/images/assets/twitter_F@2x.png" class="nav-toolbar-icon twitter-icon"></paper-icon-button>
+        <paper-icon-button src="/images/assets/twitter_F@2x.png" class$="nav-toolbar-icon twitter-icon [[_checkFooter(footer)]]"></paper-icon-button>
       </a>
     </div>
       
@@ -39,7 +39,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({
       is: 'nav-toolbar',
 
-      properties: {},
+      properties: {
+        footer: {
+          type: Boolean,
+          value: false
+        }
+      },
       
       attached: function() {
         this._updateGridStyles = this._updateGridStyles || function() {
@@ -50,6 +55,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       detached: function() {
         window.removeEventListener('resize', this._updateGridStyles);
       },
+      _checkFooter: function(f) {
+        return f ? 'nav-toolbar-anchor-footer' : ''
+      }
+      
 
     });
   </script>
