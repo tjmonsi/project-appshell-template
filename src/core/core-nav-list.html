@@ -35,7 +35,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <a
               name$="[[item.name]]"
               href$="[[item.url]]" 
-              class$="core-nav-item-header [[navClassHeader]]"
+              class$="core-nav-item-header [[navClassHeader]] [[_checkScrollProgress(scrollProgress, scrollProgressThreshold)]]"
               >
               [[item.label]]
             </a>

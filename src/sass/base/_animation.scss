@@ -1,0 +1,8 @@
+$animation-sec: 0.3s;
+
+%animated {
+  -webkit-transition: all $animation-sec ease-in-out;
+  -moz-transition: all $animation-sec ease-in-out;
+  -ms-transition: all $animation-sec ease-in-out;
+  transition: all $animation-sec ease-in-out;
+}

@@ -76,9 +76,19 @@
     
     &.block-section-options {
       .selector-option {
+        margin-top: 50px;
+        
+        @include phone {
+          margin-top: 20px;
+        }
+        
+        @include smallphone {
+          margin-top: 20px;
+        }
         .selector-option-tab {
           .app-headings {
-            opacity: 0.5; 
+            opacity: 0.5;
+            margin-top: 20px;
             
             @include phone {
               margin-top: 20px;

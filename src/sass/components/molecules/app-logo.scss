@@ -1,8 +1,10 @@
 @import '../../base/media-queries';
+@import '../../base/animation';
 
 .app-logo-image {
   // width: 179px;
-  height: 80%;
+  @extend %animated;
+  height: 80px;
   margin-top: 24px;
   margin-bottom: 24px;
   margin-left: 186px;

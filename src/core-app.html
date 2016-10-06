@@ -78,8 +78,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         navigation-list="[[navigationList]]" 
         nav-class-header="app-nav-link" 
         primary-toolbar 
-        scroll-progress="[[scrollProgress]]">
-        
+        scroll-progress="{{scrollProgress}}"
+        scroll-progress-threshold="{{scrollProgressThreshold}}">
       </core-nav-list>
       
       <core-nav-list
@@ -87,8 +87,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         navigation-list="[[navigationList]]" 
         nav-class-header="app-nav-link" 
         primary-drawer
-        is-drawer
-        scroll-progress="[[scrollProgress]]">
+        is-drawer>
       </core-nav-list>
       
       <nav-toolbar 

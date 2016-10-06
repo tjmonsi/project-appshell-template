@@ -1,6 +1,7 @@
 @import '_colors';
 @import '_typography-proxima-nova';
 @import '_typography-open-sans';
+@import '_animation';
 
 %headline-dark-body {
   color: $light;
@@ -21,12 +22,17 @@
 .app-nav-link {
   @extend %font-open-sans;
   @extend %nav-link-body;
+  @extend %animated;
   font-weight: 300;
   margin-right: 11px;
   margin-left: 11px;
   font-size: 18px;
   text-transform: uppercase;
   text-decoration: none;
+  
+  &.core-nav-item-header-scrolled {
+    font-size: 14px;
+  }
   
   &.active, &.iron-selected {
     @extend %nav-link-body;
