@@ -1,4 +1,5 @@
 @import '../../base/media-queries';
+@import '../../base/colors';
 
 .core-nav-list-header {
   margin-top: 10px;
@@ -13,5 +14,17 @@
   
   @include smallphone {
     display: none;
+  }
+}
+
+.core-nav-list-drawer {
+  .core-nav-list-drawer-container {
+    a.core-nav-item-drawer {
+      color: $brand-color-1;
+      
+      &:hover, &:focus {
+        text-decoration: none;
+      }
+    }
   }
 }

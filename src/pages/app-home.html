@@ -10,6 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/polymer-bootstrap/polymer-bootstrap.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
@@ -17,6 +18,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/google-map/google-map.html">
 <link rel="import" href="../../bower_components/google-map/google-map-poly.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/communication-icons.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
@@ -220,6 +223,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           class="home-google-map"
           api-key="AIzaSyBgrH5R9m2GG2H666ofVyKuQoFcdElPr_o"
           fit-to-markers
+          disable-zoom
           zoom="15">
         </google-map>
         
@@ -240,8 +244,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   </h2>  
                 </content-align>
                 
+                <!-- ADD CTA ANCHOR HERE -->
+                <div class="visibility phone-only small-phone-only">
+                  <div class="horizontal layout">
+                    <div class="flex"></div>
+                    <a href="#">
+                      <paper-icon-button icon="communication:call" class="cta-icon"></paper-icon-button>  
+                    </a>
+                    
+                    <div class="flex"></div>
+                    <a href="#">
+                      <paper-icon-button icon="communication:mail-outline" class="cta-icon"></paper-icon-button>  
+                    </a>
+                    
+                    <div class="flex"></div>
+                    <a href="#">
+                      <paper-icon-button icon="maps:map" class="cta-icon"></paper-icon-button>  
+                    </a>
+                    
+                    <div class="flex"></div>
+                  </div>
+                </div>
                 
-                <ul class="list-block">
+                
+                <ul class="list-block visibility hide-on-phone hide-on-small-phone">
                   <li class="horizontal layout list-item">
                     <div class="icon-container">
                       <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
@@ -262,7 +288,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   
                   <li class="horizontal layout list-item">
                     <div class="icon-container">
-                      <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
+                      <iron-icon icon="maps:place" class="map-icon"></iron-icon>  
                     </div>
                     <div class="contact-list-text app-body-2 flex">
                       2373 Yonge Street, Toronto
@@ -271,7 +297,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   
                   <li class="horizontal layout list-item">
                     <div class="icon-container">
-                      <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
+                      <iron-icon icon="maps:local-parking" class="parking-icon"></iron-icon>  
                     </div>
                     <div class="contact-list-text app-body-2 flex">
                       Paid Parking on Yonge Street<br/>
@@ -390,8 +416,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   </h2>  
                 </content-align>
                 
+                <!-- ADD CTA ANCHOR HERE -->
+                <div class="visibility phone-only small-phone-only">
+                  <div class="horizontal layout">
+                    <div class="flex"></div>
+                    <a href="#">
+                      <paper-icon-button icon="communication:call" class="cta-icon"></paper-icon-button>  
+                    </a>
+                    
+                    <div class="flex"></div>
+                    <a href="#">
+                      <paper-icon-button icon="communication:mail-outline" class="cta-icon"></paper-icon-button>  
+                    </a>
+                    
+                    <div class="flex"></div>
+                    <a href="#">
+                      <paper-icon-button icon="maps:map" class="cta-icon"></paper-icon-button>  
+                    </a>
+                    
+                    <div class="flex"></div>
+                  </div>
+                </div>
                 
-                <ul class="list-block">
+                <ul class="list-block visibility hide-on-phone hide-on-small-phone">
                   <li class="horizontal layout list-item">
                     <div class="icon-container">
                       <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
@@ -412,7 +459,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   
                   <li class="horizontal layout list-item">
                     <div class="icon-container">
-                      <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
+                      <iron-icon icon="maps:place" class="map-icon"></iron-icon>  
                     </div>
                     <div class="contact-list-text app-body-2 flex">
                       2373 Yonge Street, Toronto
@@ -421,7 +468,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   
                   <li class="horizontal layout list-item">
                     <div class="icon-container">
-                      <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
+                      <iron-icon icon="maps:local-parking" class="parking-icon"></iron-icon>  
                     </div>
                     <div class="contact-list-text app-body-2 flex">
                       Paid Parking on Yonge Street<br/>

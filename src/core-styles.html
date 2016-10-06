@@ -211,19 +211,17 @@ h6.app-headings {
   text-transform: uppercase;
   text-decoration: none; }
   .app-nav-link.core-nav-item-header-scrolled {
-    font-size: 14px; }
+    font-size: 14px;
+    color: #417505; }
   .app-nav-link.active, .app-nav-link.iron-selected {
     font-weight: bold;
     border-bottom: 3px solid #FFFFFF;
     padding-bottom: 12px;
-    text-decoration: none;
-    font-size: 18px; }
+    text-decoration: none; }
   .app-nav-link:hover {
-    text-decoration: none;
-    font-size: 18px; }
+    text-decoration: none; }
   .app-nav-link:focus {
-    text-decoration: none;
-    font-size: 18px; }
+    text-decoration: none; }
 
 .page-404 .block-section.block-section-404 .heading-404, .app-button.text-inverse, .app-headings-dark, .app-lead-text, .app-body-3, .app-home-page .block-section.block-section-blockquote .blockquote-cta-container .blockquote-cta .blockquote-cta-anchor, .app-booking-page .block-section.block-section-booking .booking-header, .app-loyalty-page .hero-section .loyalty-hero-container .loyalty-hero-text .loyalty-hero-lead {
   font-family: "Proxima Nova Th", sans-serif; }
@@ -352,6 +350,19 @@ h1.app-hero-title {
   width: 14px;
   height: 19px; }
 
+.map-icon {
+  color: #423D3D;
+  width: 20px;
+  margin-left: -3px; }
+
+.parking-icon {
+  color: #423D3D;
+  width: 20px;
+  margin-left: -3px; }
+
+.cta-icon {
+  color: #423D3D; }
+
 .visibility.tablet-only {
   display: none; }
   @media (min-width: 768px) and (max-width: 1023px) {
@@ -453,7 +464,7 @@ h1.app-hero-title {
   transition: all 0.3s ease-in-out; }
 
 :host {
-  --core-header-rear-background: rgba(255, 255, 255, 0.65);
+  --core-header-rear-background: white;
   --core-drawer-width: 280px; }
 
 .core-header-toolbar-primary {
@@ -498,6 +509,11 @@ h1.app-hero-title {
   @media (max-width: 349px) {
     .core-nav-list-header {
       display: none; } }
+
+.core-nav-list-drawer .core-nav-list-drawer-container a.core-nav-item-drawer {
+  color: #417505; }
+  .core-nav-list-drawer .core-nav-list-drawer-container a.core-nav-item-drawer:hover, .core-nav-list-drawer .core-nav-list-drawer-container a.core-nav-item-drawer:focus {
+    text-decoration: none; }
 
 .app-nav-link, .core-header-toolbar-primary, .core-drawer-container .core-drawer .core-drawer-toolbar, .app-logo-image {
   -webkit-transition: all 0.3s ease-in-out;
