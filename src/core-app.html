@@ -56,9 +56,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       scroll-progress="{{scrollProgress}}"
       >
       <app-logo
+        main-title-header
         main-title
         logo-url="/"
-        logo-image="/images/assets/Brand_Logo.png">
+        logo-image="/images/assets/Brand_Logo.png"
+        class="visibility hide-on-phone hide-on-small-phone">
+      </app-logo>
+      
+      <app-logo
+        main-title-drawer
+        main-title
+        logo-url="/"
+        logo-image="/images/assets/Brand_Logo.png"
+        class="">
       </app-logo>
       
       <core-nav-list
@@ -66,15 +76,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         navigation-list="[[navigationList]]" 
         nav-class-header="app-nav-link" 
         primary-toolbar 
-        drawer-content
         scroll-progress="[[scrollProgress]]">
         
       </core-nav-list>
       
+      <core-nav-list
+        navigation
+        navigation-list="[[navigationList]]" 
+        nav-class-header="app-nav-link" 
+        primary-drawer
+        is-drawer
+        scroll-progress="[[scrollProgress]]">
+      </core-nav-list>
+      
       <nav-toolbar 
         class="visibility hide-on-small-phone hide-on-phone"
-        primary-toolbar 
-        drawer-content>
+        primary-toolbar>
+      </nav-toolbar>
+      
+      <nav-toolbar 
+        class=""
+        primary-drawer>
       </nav-toolbar>
       <div class="nav-right-spacer"></div>
     </core-shell>

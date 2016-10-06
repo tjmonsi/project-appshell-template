@@ -187,7 +187,7 @@ h6.app-headings {
 .app-nav-link {
   font-family: "Open Sans", sans-serif; }
 
-.app-nav-link, .app-nav-link.active, .app-nav-link.iron-selected, .app-headings-dark, .app-nav-link:hover {
+.app-nav-link, .app-nav-link.active, .app-nav-link.iron-selected, .app-headings-dark, .app-nav-link:hover, .app-nav-link:focus {
   color: #FFFFFF;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); }
 
@@ -211,6 +211,9 @@ h6.app-headings {
     text-decoration: none;
     font-size: 18px; }
   .app-nav-link:hover {
+    text-decoration: none;
+    font-size: 18px; }
+  .app-nav-link:focus {
     text-decoration: none;
     font-size: 18px; }
 
@@ -970,6 +973,9 @@ image-box .image-box-text {
 .app-home-page .block-section.block-section-location .location-spacer {
   width: 30px; }
 
+.app-home-page .block-section.block-section-location .list-with-title-block {
+  width: 245px; }
+
 .app-home-page .block-section.block-section-blockquote {
   padding-left: 0px;
   padding-right: 0px; }
@@ -1118,7 +1124,8 @@ image-box .image-box-text {
     padding-right: 100px;
     padding-bottom: 135px; }
     .app-about-page .block-section.block-section-about-location .about-location-text-container .app-headings {
-      margin-top: 0px; }
+      margin-top: 0px;
+      padding: 0px; }
     @media (max-width: 349px) {
       .app-about-page .block-section.block-section-about-location .about-location-text-container {
         padding: 20px;
@@ -1179,9 +1186,14 @@ image-box .image-box-text {
         color: #373A39;
         line-height: 24px;
         font-size: 16px;
-        display: none; }
+        height: 0px;
+        overflow: hidden;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out; }
       .app-about-page .block-section.block-section-faq .faq-list .faq-item.faq-reveal .faq-answer {
-        display: block; }
+        height: 270px; }
 
 .page-404 .block-section.block-section-404 .heading-404, .app-button.text-inverse, .app-headings-dark, .app-lead-text, .app-body-3, .app-home-page .block-section.block-section-blockquote .blockquote-cta-container .blockquote-cta .blockquote-cta-anchor, .app-booking-page .block-section.block-section-booking .booking-header, .app-loyalty-page .hero-section .loyalty-hero-container .loyalty-hero-text .loyalty-hero-lead {
   font-family: "Proxima Nova Th", sans-serif; }
@@ -1324,6 +1336,10 @@ image-box .image-box-text {
   padding-left: 20px;
   padding-right: 20px; }
 
+.app-booking-page .block-section.block-section-give-gift .booking-opt-in-header {
+  padding-left: 20px;
+  padding-right: 20px; }
+
 .app-booking-page .block-section.block-section-give-gift .booking-gift {
   height: 100%;
   width: 498px;
@@ -1392,10 +1408,14 @@ image-box .image-box-text {
     margin-right: 0px; }
     @media (min-width: 350px) and (max-width: 767px) {
       .app-order-page .block-section.block-section-order.block-section-order-2 .option-content {
-        margin-left: 0; } }
+        margin-left: 0; }
+        .app-order-page .block-section.block-section-order.block-section-order-2 .option-content .app-headings {
+          margin-top: 60px; } }
     @media (max-width: 349px) {
       .app-order-page .block-section.block-section-order.block-section-order-2 .option-content {
-        margin-left: 0; } }
+        margin-left: 0; }
+        .app-order-page .block-section.block-section-order.block-section-order-2 .option-content .app-headings {
+          margin-top: 60px; } }
   .app-order-page .block-section.block-section-order .order-content {
     margin-top: 58px;
     margin-bottom: 54px; }

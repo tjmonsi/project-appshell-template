@@ -109,7 +109,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             class$="drawer-toggle-button [[_scrollProgressChangedForDrawerToggleButton(scrollProgress)]]">
           </paper-icon-button>
         </div>
-        <content select="[main-title]"></content>
+        <content select="[main-title-header]"></content>
         <content select="[primary-toolbar]"></content>
       </app-toolbar>
     </app-header>
@@ -117,7 +117,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-drawer id="core-drawer-container" class="core-drawer-container">
       <div class="core-drawer" id="core-drawer">
         <app-toolbar id="core-drawer-toolbar" class="core-drawer-toolbar">
+          <content select="[main-title-drawer]"></content>
         </app-toolbar>
+        <content select="[primary-drawer]"></content>
       </div>
     </app-drawer>
     
@@ -235,15 +237,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   });  
                 }
               } else if (el.hasAttribute('main-title')) {
-                var clone = el.cloneNode(true);
-                this.$$('#core-drawer-toolbar').appendChild(clone)
+                // var clone = el.cloneNode(true);
+                // this.$$('#core-drawer-toolbar').appendChild(clone)
               } else if (el.hasAttribute('drawer-content')) {
-                var clone = el.cloneNode(true);
-                if (clone.hasAttribute('navigation')) {
-                  this.navigationElements.push(clone);
-                }
-                clone.setAttribute('is-drawer', '');
-                this.$$('#core-drawer').appendChild(clone);
+                // var clone = el.cloneNode(true);
+                // if (clone.hasAttribute('navigation')) {
+                //   this.navigationElements.push(clone);
+                // }
+                // clone.setAttribute('is-drawer', '');
+                // this.$$('#core-drawer').appendChild(clone);
               }
             } 
             

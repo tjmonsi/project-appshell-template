@@ -43,6 +43,12 @@
     font-size: 18px;
   }
   
+  &:focus {
+    @extend %headline-dark-body;
+    text-decoration: none;  
+    font-size: 18px;
+  }
+  
 }
 
 

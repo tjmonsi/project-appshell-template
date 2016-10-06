@@ -61,12 +61,22 @@
           
           @include phone {
             margin-left: 0;
+            
+            .app-headings {
+              margin-top: 60px;
+            }
           }
           
           @include smallphone {
             margin-left: 0;
+            
+            .app-headings {
+              margin-top: 60px;
+            }
           }
         }
+        
+        
       }
       
       .order-content {
