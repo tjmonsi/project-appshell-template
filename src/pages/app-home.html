@@ -15,6 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/app-layout/app-grid/app-grid-style.html">
 <link rel="import" href="../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../bower_components/google-map/google-map-poly.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
@@ -214,162 +215,323 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         
         <!-- GOOGLE MAP PLUGIN MOLECULE -->
         
-        
         <google-map 
           id="google-map"
           class="home-google-map"
           api-key="AIzaSyBgrH5R9m2GG2H666ofVyKuQoFcdElPr_o"
-          disable-map-type-control
-          disable-zoom>
+          fit-to-markers
+          zoom="15">
         </google-map>
         
-        <content-align center wrap>
-          <div class="list-with-title-block">
-            <content-align center>
-              <h2 class="app-headings">
-                CONTACT
-              </h2>  
+        <neon-animated-pages
+          selected$="[[locationIndex]]"
+          attr-for-selected="data-index"
+          id="locations-viewer"
+          class="locations-viewer"
+          entry-animation="fade-in-animation" 
+          exit-animation="fade-out-animation">
+          
+          <div data-index="0">
+            <content-align center wrap>
+              <div class="list-with-title-block">
+                <content-align center>
+                  <h2 class="app-headings">
+                    CONTACT
+                  </h2>  
+                </content-align>
+                
+                
+                <ul class="list-block">
+                  <li class="horizontal layout list-item">
+                    <div class="icon-container">
+                      <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
+                    </div>
+                    <div class="contact-list-text app-body-2 flex">
+                      infotoronto@grazie.ca
+                    </div>
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="icon-container">
+                      <iron-icon src="/images/assets/call.png" class="phone-icon"></iron-icon>   
+                    </div>
+                    <div class="contact-list-text app-body-2 flex">
+                      (416) 488-0088
+                    </div>
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="icon-container">
+                      <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
+                    </div>
+                    <div class="contact-list-text app-body-2 flex">
+                      2373 Yonge Street, Toronto
+                    </div>
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="icon-container">
+                      <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
+                    </div>
+                    <div class="contact-list-text app-body-2 flex">
+                      Paid Parking on Yonge Street<br/>
+                      Paid Parking at 11 Broadway Ave<br/>
+                      Street Parking in Area
+                    </div>
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="icon-container">
+                      <iron-icon src="/images/assets/transit_icon.png" class="transport-icon"></iron-icon>    
+                    </div>
+                    <div class="contact-list-text app-body-2 flex">
+                      1 Block North of Eglinton<br/>
+                      1 min of Stop #8961 on 97 Bus
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              
+              <div class="flex visibility phone-only small-phone-only"></div>
+              <div class="wrapper visibility phone-only small-phone-only"></div>
+              <div class="flex visibility phone-only small-phone-only"></div>
+              <div class="location-spacer visibility hide-on-phone hide-on-small-phone"></div>
+              
+              <div class="list-with-title-block">
+                <content-align center>
+                  <h2 class="app-headings">
+                    HOURS
+                  </h2>  
+                </content-align>
+                
+                
+                <ul class="list-block">
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Monday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Tuesday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Wednesday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Thursday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Friday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Saturday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Sunday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                </ul>
+              </div>
             </content-align>
-            
-            
-            <ul class="list-block">
-              <li class="horizontal layout list-item">
-                <div class="icon-container">
-                  <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
-                </div>
-                <div class="contact-list-text app-body-2 flex">
-                  infotoronto@grazie.ca
-                </div>
-              </li>
-              
-              <li class="horizontal layout list-item">
-                <div class="icon-container">
-                  <iron-icon src="/images/assets/call.png" class="phone-icon"></iron-icon>   
-                </div>
-                <div class="contact-list-text app-body-2 flex">
-                  (416) 488-0088
-                </div>
-              </li>
-              
-              <li class="horizontal layout list-item">
-                <div class="icon-container">
-                  <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
-                </div>
-                <div class="contact-list-text app-body-2 flex">
-                  2373 Yonge Street, Toronto
-                </div>
-              </li>
-              
-              <li class="horizontal layout list-item">
-                <div class="icon-container">
-                  <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
-                </div>
-                <div class="contact-list-text app-body-2 flex">
-                  Paid Parking on Yonge Street<br/>
-                  Paid Parking at 11 Broadway Ave<br/>
-                  Street Parking in Area
-                </div>
-              </li>
-              
-              <li class="horizontal layout list-item">
-                <div class="icon-container">
-                  <iron-icon src="/images/assets/transit_icon.png" class="transport-icon"></iron-icon>    
-                </div>
-                <div class="contact-list-text app-body-2 flex">
-                  1 Block North of Eglinton<br/>
-                  1 min of Stop #8961 on 97 Bus
-                </div>
-              </li>
-            </ul>
           </div>
           
-          <div class="flex visibility phone-only small-phone-only"></div>
-          <div class="wrapper visibility phone-only small-phone-only"></div>
-          <div class="flex visibility phone-only small-phone-only"></div>
-          <div class="location-spacer visibility hide-on-phone hide-on-small-phone"></div>
-          
-          <div class="list-with-title-block">
-            <content-align center>
-              <h2 class="app-headings">
-                HOURS
-              </h2>  
+          <div data-index="1">
+            <content-align center wrap>
+              <div class="list-with-title-block">
+                <content-align center>
+                  <h2 class="app-headings">
+                    CONTACT
+                  </h2>  
+                </content-align>
+                
+                
+                <ul class="list-block">
+                  <li class="horizontal layout list-item">
+                    <div class="icon-container">
+                      <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
+                    </div>
+                    <div class="contact-list-text app-body-2 flex">
+                      infotoronto@grazie.ca
+                    </div>
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="icon-container">
+                      <iron-icon src="/images/assets/call.png" class="phone-icon"></iron-icon>   
+                    </div>
+                    <div class="contact-list-text app-body-2 flex">
+                      (416) 488-0088
+                    </div>
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="icon-container">
+                      <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
+                    </div>
+                    <div class="contact-list-text app-body-2 flex">
+                      2373 Yonge Street, Toronto
+                    </div>
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="icon-container">
+                      <iron-icon src="/images/assets/email.png" class="email-icon"></iron-icon>  
+                    </div>
+                    <div class="contact-list-text app-body-2 flex">
+                      Paid Parking on Yonge Street<br/>
+                      Paid Parking at 11 Broadway Ave<br/>
+                      Street Parking in Area
+                    </div>
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="icon-container">
+                      <iron-icon src="/images/assets/transit_icon.png" class="transport-icon"></iron-icon>    
+                    </div>
+                    <div class="contact-list-text app-body-2 flex">
+                      1 Block North of Eglinton<br/>
+                      1 min of Stop #8961 on 97 Bus
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              
+              <div class="flex visibility phone-only small-phone-only"></div>
+              <div class="wrapper visibility phone-only small-phone-only"></div>
+              <div class="flex visibility phone-only small-phone-only"></div>
+              <div class="location-spacer visibility hide-on-phone hide-on-small-phone"></div>
+              
+              <div class="list-with-title-block">
+                <content-align center>
+                  <h2 class="app-headings">
+                    HOURS
+                  </h2>  
+                </content-align>
+                
+                
+                <ul class="list-block">
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Monday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Tuesday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Wednesday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Thursday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Friday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Saturday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                  <li class="horizontal layout list-item">
+                    <div class="day-container app-body-2 flex">
+                      Sunday
+                    </div>
+                    
+                    <div class="time-container app-body-2 flex">
+                      12AM - 11PM
+                    </div>  
+                  </li>
+                  
+                </ul>
+              </div>
             </content-align>
-            
-            
-            <ul class="list-block">
-              <li class="horizontal layout list-item">
-                <div class="day-container app-body-2 flex">
-                  Monday
-                </div>
-                
-                <div class="time-container app-body-2 flex">
-                  12AM - 11PM
-                </div>  
-              </li>
-              
-              <li class="horizontal layout list-item">
-                <div class="day-container app-body-2 flex">
-                  Tuesday
-                </div>
-                
-                <div class="time-container app-body-2 flex">
-                  12AM - 11PM
-                </div>  
-              </li>
-              
-              <li class="horizontal layout list-item">
-                <div class="day-container app-body-2 flex">
-                  Wednesday
-                </div>
-                
-                <div class="time-container app-body-2 flex">
-                  12AM - 11PM
-                </div>  
-              </li>
-              
-              <li class="horizontal layout list-item">
-                <div class="day-container app-body-2 flex">
-                  Thursday
-                </div>
-                
-                <div class="time-container app-body-2 flex">
-                  12AM - 11PM
-                </div>  
-              </li>
-              
-              <li class="horizontal layout list-item">
-                <div class="day-container app-body-2 flex">
-                  Friday
-                </div>
-                
-                <div class="time-container app-body-2 flex">
-                  12AM - 11PM
-                </div>  
-              </li>
-              
-              <li class="horizontal layout list-item">
-                <div class="day-container app-body-2 flex">
-                  Saturday
-                </div>
-                
-                <div class="time-container app-body-2 flex">
-                  12AM - 11PM
-                </div>  
-              </li>
-              
-              <li class="horizontal layout list-item">
-                <div class="day-container app-body-2 flex">
-                  Sunday
-                </div>
-                
-                <div class="time-container app-body-2 flex">
-                  12AM - 11PM
-                </div>  
-              </li>
-              
-            </ul>
           </div>
-        </content-align>
+        </neon-animated-pages>
+        
         
       </block-section>
       
@@ -486,12 +648,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         location: {
           type: Number,
           value: 0
+        },
+        locationIndex: {
+          type: Number,
+          value: 0
         }
       },
       
       _setLocationActive: function(e) {
         var el = e.target;
-        this.$$('#selector-location').select(parseInt(el.getAttribute('data-index'), 10));
+        var locationIndex = parseInt(el.getAttribute('data-index'), 10);
+        this.$$('#selector-location').select(locationIndex);
+        this.$$('#locations-viewer').select(locationIndex);
+        this._setMap(locationIndex)
+        
+        this._setOptionsViewerHeight();
+      },
+      
+      _setMap: function(locationIndex) {
+        console.log(window.location)
+        if (locationIndex === 0) {
+          this.$$('#google-map').kml = window.location.protocol + '//' + window.location.hostname + '/kml/Grazie_Midtown.kml'
+        } else if (locationIndex === 1) {
+          this.$$('#google-map').kml = window.location.protocol + '//' + window.location.hostname + '/kml/Grazie_Vaughan.kml'
+        }
+        this.$$('#google-map').resize();
       },
       
       attached: function() {
@@ -499,10 +680,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.updateStyles();
         }.bind(this);
         window.addEventListener('resize', this._updateGridStyles);
+        this._setMap(0);
+        this._setOptionsViewerHeight();
       },
       detached: function() {
         window.removeEventListener('resize', this._updateGridStyles);
       },
+      
+      _setOptionsViewerHeight: function() {
+        setTimeout(function(){
+          var el = this.$$('#locations-viewer').selectedItem;
+          var height = 0;
+          console.log(el.children)
+          for (var i in el.children) {
+            if (el.children[i].getBoundingClientRect && !isNaN(i)) {
+              console.log(el.children[i])
+              height += el.children[i].getBoundingClientRect().height;
+            }
+          }
+          // var height = this.$$('#locations-viewer').selectedItem.getBoundingClientRect().height;
+          console.log(height, this.$$('#locations-viewer').selectedItem.getBoundingClientRect().height)
+          this.$$('#locations-viewer').style.height = height + 'px';
+        }.bind(this), 500)
+        
+      }
       
        
     });

@@ -23,7 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     
     <a href="[[logo-url]]" class$="app-logo-anchor [[anchorClass]]">
       <img 
-        class$="app-logo-image [[imageClass]]" 
+        class$="app-logo-image [[imageClass]] [[_changeSize(scrollProgress, scrollProgressThreshold)]]" 
         src="[[logo-image]]"
       />
     </a>
@@ -48,6 +48,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         imageClass: {
           type: String
+        },
+        scrollProgress: {
+          type: Number,
+          observer: '_check'
+        },
+        scrollProgressThreshold: {
+          type: Number
         }
       },
       
@@ -60,6 +67,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       detached: function() {
         window.removeEventListener('resize', this._updateGridStyles);
       },
+      
+      _check: function(e) {
+        console.log(e)
+      },
+      
+      _changeSize: function(s, st) {
+        return s >= st ? 'app-logo-image-small' : ''
+      }
 
     });
   </script>

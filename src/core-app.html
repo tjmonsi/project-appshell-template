@@ -54,13 +54,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       default-not-found="[[default404]]"
       navigation-list="{{navigationList}}"
       scroll-progress="{{scrollProgress}}"
-      >
+      scroll-progress-threshold="{{scrollProgressThreshold}}">
       <app-logo
         main-title-header
         main-title
         logo-url="/"
         logo-image="/images/assets/Brand_Logo.png"
-        class="visibility hide-on-phone hide-on-small-phone">
+        class="visibility hide-on-phone hide-on-small-phone"
+        scroll-progress="{{scrollProgress}}"
+        scroll-progress-threshold="{{scrollProgressThreshold}}">
       </app-logo>
       
       <app-logo
@@ -128,6 +130,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: String
         },
         scrollProgress: {
+          type: Number,
+          reflectToAttribute: true
+        },
+        scrollProgressThreshold: {
           type: Number,
           reflectToAttribute: true
         }

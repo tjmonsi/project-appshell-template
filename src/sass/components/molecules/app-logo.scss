@@ -22,4 +22,8 @@
   @include smallphone {
     margin-left: 10px;
   }
+  
+  &.app-logo-image-small {
+    height: 60px;
+  }
 }

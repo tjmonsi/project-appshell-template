@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://www.opengis.net/kml/2.2'>
+	<Document>
+		<name>Grazie Midtown</name>
+		<description><![CDATA[]]></description>
+		<Folder>
+			<name>Restaurant</name>
+			<Placemark>
+				<name>Grazie Ristorante</name>
+				<styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+				<Point>
+					<coordinates>-79.3986246,43.7093279,0.0</coordinates>
+				</Point>
+			</Placemark>
+		</Folder>
+		<Folder>
+			<name>Parking</name>
+			<Placemark>
+				<name>Parking Lot: 11 Broadway</name>
+				<styleUrl>#icon-1644-097138-nodesc</styleUrl>
+				<Point>
+					<coordinates>-79.3979641,43.7096269,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Parking Lot: 8 Broadway</name>
+				<styleUrl>#icon-1644-097138-nodesc</styleUrl>
+				<Point>
+					<coordinates>-79.3977334,43.7098751,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Parking Lot: Best Buy</name>
+				<styleUrl>#icon-1644-097138-nodesc</styleUrl>
+				<Point>
+					<coordinates>-79.3992497,43.7102374,0.0</coordinates>
+				</Point>
+			</Placemark>
+		</Folder>
+		<Style id='icon-1644-097138-nodesc-normal'>
+			<IconStyle>
+				<color>ff387109</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0.0</scale>
+			</LabelStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<Style id='icon-1644-097138-nodesc-highlight'>
+			<IconStyle>
+				<color>ff387109</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>1.0</scale>
+			</LabelStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<StyleMap id='icon-1644-097138-nodesc'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#icon-1644-097138-nodesc-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#icon-1644-097138-nodesc-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id='icon-1899-DB4436-nodesc-normal'>
+			<IconStyle>
+				<color>ff3644DB</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0.0</scale>
+			</LabelStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<Style id='icon-1899-DB4436-nodesc-highlight'>
+			<IconStyle>
+				<color>ff3644DB</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>1.0</scale>
+			</LabelStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<StyleMap id='icon-1899-DB4436-nodesc'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#icon-1899-DB4436-nodesc-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#icon-1899-DB4436-nodesc-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+	</Document>
+</kml>
